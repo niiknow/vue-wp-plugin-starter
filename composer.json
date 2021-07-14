@@ -1,0 +1,47 @@
+{
+    "name": "niiknow/vue-wp-plugin-starter",
+    "description": "A WordPress Vue.js starter plugin",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0",
+    "type": "project",
+    "require": {
+        "php": "^7.3|^8.0"
+    },
+    "require-dev": {
+        "brain/monkey": "^2.6",
+        "phpunit/phpunit": "^9.5.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Baseapp\\": "includes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "phpcs": "phpcs",
+        "phpcs:fix": "phpcbf -w",
+        "app:package": [
+            "npm run production",
+            "composer update",
+            "deployStash=`git stash create`; git archive --worktree-attributes --format=zip -o dist.zip ${deployStash:-HEAD}",
+            "zip -ur dist.zip ./vendor"
+        ],
+        "app:production": [
+            "echo 'composer install --no-dev --optimize-autoloader && php artisan queue:restart'"
+        ],
+        "test": [
+          "phpunit tests/*.php"
+        ]
+    }
+}
