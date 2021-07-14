@@ -1,15 +1,1 @@
-
-module.exports = {
-  presets: [
-    [
-      "@vue/app",
-      {
-        "useBuiltIns": "entry",
-        polyfills: [
-          'es6.promise',
-          'es6.symbol'
-        ]
-      }
-    ]
-  ],
-}
+module.exports = { presets: ['@babel/preset-env'] }

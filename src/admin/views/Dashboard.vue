@@ -5,13 +5,15 @@
 </template>
 
 <script>
-import { defineComponent } from "vue"
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'Dashboard',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js Admin App'
+  props: {
+    msg: {
+      type: String,
+      required: false,
+      default: 'Welcome to Your Vue.js Backend App'
     }
   }
 })

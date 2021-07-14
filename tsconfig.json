@@ -1,40 +1,33 @@
 {
   "compilerOptions": {
-    "target": "esnext",
     "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
+    "target": "esnext",
     "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "strictFunctionTypes": false,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-     "typeRoots": [
-      "node_modules/@types"
-    ],
+    "jsx": "preserve",
+    "outDir": "./dist",
+    "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "types": ["@types/jest"],
+    /* Additional Options */
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "importsNotUsedAsValues": "error",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "allowJs": true
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "src",
+    "tests/jsunit"
   ],
   "exclude": [
-    "node_modules"
+    ".git",
+    "node_modules",
+    "dist"
   ]
 }
