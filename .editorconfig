@@ -22,6 +22,6 @@ indent_size = 4
 indent_style = tab
 
 # Rest
-[*.{js,ts,scss,vue,yml,json}]
+[*.{js,ts,scss,vue,yml,json.html}]
 indent_style = space
 indent_size = 2
