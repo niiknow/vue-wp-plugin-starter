@@ -35,28 +35,31 @@ const webpackConfig = {
  | file for the application as well as bundling up all the JS files.
  |
  */
+mix.setPublicPath('public/');
+
+mix.ts('src/admin/admin.ts', 'js/')
+ .vue({
+    version: 3,
+    // extractStyles: true,
+    // globalStyles: false
+  });
+
+mix.ts('src/frontend/frontend.ts', 'js/')
+ .vue({
+    version: 3,
+    // extractStyles: true,
+    // globalStyles: false
+  });
+
+mix.sass('assets/admin.scss', 'css/')
+   .sass('assets/frontend.scss', 'css/');
+
+/*
 
 const postcssPlugins = [
   require('postcss-import'),
   require('autoprefixer'),
 ];
-
-mix.setPublicPath('public/');
-
-mix.ts('src/admin/admin.ts', 'js')
- .vue({
-    version: 3,
-    // extractStyles: true,
-    // globalStyles: false
-  })
- .sourceMaps();
-mix.ts('src/frontend/frontend.ts', 'js')
- .vue({
-    version: 3,
-    // extractStyles: true,
-    // globalStyles: false
-  })
- .sourceMaps();
 
 mix.options({
     postCss: postcssPlugins
@@ -69,16 +72,17 @@ mix.options({
     'assets/frontend.css',
     'css'
   )
-  .webpackConfig(webpackConfig);
+*/
 
 if (mix.inProduction()) {
   mix.version().sourceMaps();
 }
 
-mix.browserSync({
-  serveStatic: ['./public'],
-  serveStaticOptions: {
-    extensions: ['html'] // pretty urls
-  }
-})
+mix.webpackConfig(webpackConfig)
+   .browserSync({
+      serveStatic: ['./public'],
+      serveStaticOptions: {
+        extensions: ['html'] // pretty urls
+      }
+   });
 
