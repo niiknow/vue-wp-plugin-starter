@@ -3,6 +3,10 @@ import App from './App.vue'
 import router from './router/index'
 import '@/shared/index'
 
+// @ts-ignore
+import masonry from 'vue-next-masonry'
+
 const app = createApp(App)
 app.use(router)
-app.mount('#vue-admin-app')
+   .use(masonry)
+   .mount('#vue-admin-app')
