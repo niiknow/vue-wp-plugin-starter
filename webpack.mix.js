@@ -58,16 +58,16 @@ mix.ts('src/frontend/frontend.ts', 'js')
   })
  .sourceMaps();
 
-
-mix.postCss(
+mix.options({
+    postCss: postcssPlugins
+  })
+  .postCss(
     'assets/admin.css',
-    'css',
-    postcssPlugins
+    'css'
   )
   .postCss(
     'assets/frontend.css',
-    'css',
-    postcssPlugins
+    'css'
   )
   .webpackConfig(webpackConfig);
 
