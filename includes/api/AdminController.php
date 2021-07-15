@@ -14,8 +14,8 @@ class AdminController extends WP_REST_Controller
      */
     public function __construct()
     {
-        $this->namespace = 'myapp/v1';
-        $this->rest_base = 'test';
+        $this->namespace = 'pluginprefix/v1';
+        $this->rest_base = 'backend';
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-namespace BaseApp;
+namespace Baseapp;
 
 /**
  * Frontend Pages Handler

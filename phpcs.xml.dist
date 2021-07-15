@@ -4,6 +4,8 @@
   <description>Coding Standards</description>
   <file>includes</file>
   <file>plugin.php</file>
+  <file>tests/phpunit</file>
+
   <!--
    * Exclude files and folders.
    *
@@ -12,6 +14,7 @@
   -->
   <exclude-pattern>*/node_modules/*</exclude-pattern>
   <exclude-pattern>*/vendor/*</exclude-pattern>
+  <exclude-pattern>*/tests/phpunit/inc/class-wp-rest-controller.php</exclude-pattern>
 
   <!-- PSR1 rules -->
   <rule ref="PSR1"/>

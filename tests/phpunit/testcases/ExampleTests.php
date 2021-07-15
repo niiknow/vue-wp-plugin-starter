@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests;
+
 use \Brain\Monkey\Functions;
 
 defined('ABSPATH') or die();

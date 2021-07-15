@@ -23,3 +23,10 @@ require_once __DIR__ . '/inc/PluginTestCase.php';
 
 // Since our plugin files are loaded with composer, we should be good to go
 // https://swas.io/blog/wordpress-plugin-unit-test-with-brainmonkey/
+
+/**
+ * WP_REST_Controller class.
+ */
+if (! class_exists( 'WP_REST_Controller' )) {
+	require_once __DIR__ . '/inc/class-wp-rest-controller.php';
+}
