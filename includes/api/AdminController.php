@@ -6,12 +6,14 @@ use WP_REST_Controller;
 /**
  * REST_API Handler
  */
-class AdminController extends WP_REST_Controller {
+class AdminController extends WP_REST_Controller
+{
 
     /**
      * [__construct description]
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->namespace = 'myapp/v1';
         $this->rest_base = 'test';
     }
@@ -21,7 +23,8 @@ class AdminController extends WP_REST_Controller {
      *
      * @return void
      */
-    public function register_routes() {
+    public function register_routes()
+    {
         register_rest_route(
             $this->namespace,
             '/' . $this->rest_base,
@@ -43,12 +46,13 @@ class AdminController extends WP_REST_Controller {
      *
      * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
      */
-    public function get_items( $request ) {
+    public function get_items($request)
+    {
         $items = [
             'foo' => 'bar'
         ];
 
-        $response = rest_ensure_response( $items );
+        $response = rest_ensure_response($items);
 
         return $response;
     }
@@ -60,7 +64,8 @@ class AdminController extends WP_REST_Controller {
      *
      * @return true|WP_Error True if the request has read access, WP_Error object otherwise.
      */
-    public function get_items_permissions_check( $request ) {
+    public function get_items_permissions_check($request)
+    {
         return true;
     }
 
@@ -69,7 +74,8 @@ class AdminController extends WP_REST_Controller {
      *
      * @return array Collection parameters.
      */
-    public function get_collection_params() {
+    public function get_collection_params()
+    {
         return [];
     }
 }

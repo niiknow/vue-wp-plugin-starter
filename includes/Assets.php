@@ -4,14 +4,16 @@ namespace Baseapp;
 /**
  * Scripts and Styles Class
  */
-class Assets {
+class Assets
+{
 
-    function __construct() {
+    function __construct()
+    {
 
-        if ( is_admin() ) {
-            add_action( 'admin_enqueue_scripts', [ $this, 'register' ], 5 );
+        if (is_admin()) {
+            add_action('admin_enqueue_scripts', [ $this, 'register' ], 5);
         } else {
-            add_action( 'wp_enqueue_scripts', [ $this, 'register' ], 5 );
+            add_action('wp_enqueue_scripts', [ $this, 'register' ], 5);
         }
     }
 
@@ -20,9 +22,10 @@ class Assets {
      *
      * @return void
      */
-    public function register() {
-        $this->register_scripts( $this->get_scripts() );
-        $this->register_styles( $this->get_styles() );
+    public function register()
+    {
+        $this->register_scripts($this->get_scripts());
+        $this->register_styles($this->get_styles());
     }
 
     /**
@@ -32,13 +35,14 @@ class Assets {
      *
      * @return void
      */
-    private function register_scripts( $scripts ) {
-        foreach ( $scripts as $handle => $script ) {
-            $deps      = isset( $script['deps'] ) ? $script['deps'] : false;
-            $in_footer = isset( $script['in_footer'] ) ? $script['in_footer'] : false;
-            $version   = isset( $script['version'] ) ? $script['version'] : BASEPLUGINCONST_VERSION;
+    private function register_scripts($scripts)
+    {
+        foreach ($scripts as $handle => $script) {
+            $deps      = isset($script['deps']) ? $script['deps'] : false;
+            $in_footer = isset($script['in_footer']) ? $script['in_footer'] : false;
+            $version   = isset($script['version']) ? $script['version'] : BASEPLUGINCONST_VERSION;
 
-            wp_register_script( $handle, $script['src'], $deps, $version, $in_footer );
+            wp_register_script($handle, $script['src'], $deps, $version, $in_footer);
         }
     }
 
@@ -49,11 +53,12 @@ class Assets {
      *
      * @return void
      */
-    public function register_styles( $styles ) {
-        foreach ( $styles as $handle => $style ) {
-            $deps = isset( $style['deps'] ) ? $style['deps'] : false;
+    public function register_styles($styles)
+    {
+        foreach ($styles as $handle => $style) {
+            $deps = isset($style['deps']) ? $style['deps'] : false;
 
-            wp_register_style( $handle, $style['src'], $deps, BASEPLUGINCONST_VERSION );
+            wp_register_style($handle, $style['src'], $deps, BASEPLUGINCONST_VERSION);
         }
     }
 
@@ -62,8 +67,9 @@ class Assets {
      *
      * @return array
      */
-    public function get_scripts() {
-        $prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.min' : '';
+    public function get_scripts()
+    {
+        $prefix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.min' : '';
 
         $scripts = [
             'vuejs' => [
@@ -73,19 +79,19 @@ class Assets {
             ],
             'pluginprefix-vendor' => [
                 'src'       => BASEPLUGINCONST_ASSETS . '/js/vendors.js',
-                'version'   => filemtime( BASEPLUGINCONST_ASSETS . '/js/vendors.js' ),
+                'version'   => filemtime(BASEPLUGINCONST_ASSETS . '/js/vendors.js'),
                 'in_footer' => true
             ],
             'pluginprefix-frontend' => [
                 'src'       => BASEPLUGINCONST_ASSETS . '/js/frontend.js',
                 'deps'      => [ 'jquery', 'vuejs', 'pluginprefix-vendor'],
-                'version'   => filemtime( BASEPLUGINCONST_ASSETS . '/js/frontend.js' ),
+                'version'   => filemtime(BASEPLUGINCONST_ASSETS . '/js/frontend.js'),
                 'in_footer' => true
             ],
             'pluginprefix-admin' => [
                 'src'       => BASEPLUGINCONST_ASSETS . '/js/admin.js',
                 'deps'      => [ 'jquery', 'vuejs', 'pluginprefix-vendor' ],
-                'version'   => filemtime( BASEPLUGINCONST_ASSETS . '/js/admin.js' ),
+                'version'   => filemtime(BASEPLUGINCONST_ASSETS . '/js/admin.js'),
                 'in_footer' => true
             ]
         ];
@@ -98,7 +104,8 @@ class Assets {
      *
      * @return array
      */
-    public function get_styles() {
+    public function get_styles()
+    {
 
         $styles = [
             'baseplugin-frontend' => [
@@ -111,5 +118,4 @@ class Assets {
 
         return $styles;
     }
-
 }

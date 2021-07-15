@@ -39,7 +39,7 @@ Domain Path: /languages
  */
 
 // don't call the file directly
-if ( !defined( 'ABSPATH' ) ) exit;
+if (! defined( 'ABSPATH' )) exit;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,7 +100,7 @@ final class Base_Plugin {
     public static function init() {
         static $instance = false;
 
-        if ( ! $instance ) {
+        if (! $instance) {
             $instance = new Base_Plugin();
         }
 
@@ -115,7 +115,7 @@ final class Base_Plugin {
      * @return mixed
      */
     public function __get( $prop ) {
-        if ( array_key_exists( $prop, $this->container ) ) {
+        if (array_key_exists( $prop, $this->container )) {
             return $this->container[ $prop ];
         }
 
@@ -166,7 +166,7 @@ final class Base_Plugin {
 
         $installed = get_option( 'pluginprefix_installed' );
 
-        if ( ! $installed ) {
+        if (! $installed) {
             update_option( 'pluginprefix_installed', time() );
         }
 
@@ -191,15 +191,15 @@ final class Base_Plugin {
 
         require_once BASEPLUGINCONST_INCLUDES . '/Assets.php';
 
-        if ( $this->is_request( 'admin' ) ) {
+        if ($this->is_request( 'admin' )) {
             require_once BASEPLUGINCONST_INCLUDES . '/Admin.php';
         }
 
-        if ( $this->is_request( 'frontend' ) ) {
+        if ($this->is_request( 'frontend' )) {
             require_once BASEPLUGINCONST_INCLUDES . '/Frontend.php';
         }
 
-        if ( $this->is_request( 'ajax' ) ) {
+        if ($this->is_request( 'ajax' )) {
             // require_once BASEPLUGINCONST_INCLUDES . '/class-ajax.php';
         }
 
@@ -226,15 +226,15 @@ final class Base_Plugin {
      */
     public function init_classes() {
 
-        if ( $this->is_request( 'admin' ) ) {
+        if ($this->is_request( 'admin' )) {
             $this->container['admin'] = new Baseapp\Admin();
         }
 
-        if ( $this->is_request( 'frontend' ) ) {
+        if ($this->is_request( 'frontend' )) {
             $this->container['frontend'] = new Baseapp\Frontend();
         }
 
-        if ( $this->is_request( 'ajax' ) ) {
+        if ($this->is_request( 'ajax' )) {
             // $this->container['ajax'] =  new BaseApp\Ajax();
         }
 
@@ -259,7 +259,7 @@ final class Base_Plugin {
      * @return bool
      */
     private function is_request( $type ) {
-        switch ( $type ) {
+        switch ($type) {
             case 'admin' :
                 return is_admin();
 

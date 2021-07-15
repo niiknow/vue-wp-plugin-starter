@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<ruleset name="SGCS-WP">
+
+  <description>Coding Standards</description>
+  <file>includes</file>
+  <file>plugin.php</file>
+  <!--
+   * Exclude files and folders.
+   *
+   * <exclude-pattern>/index.php</exclude-pattern>
+   * <exclude-pattern>*/resources/views/*</exclude-pattern>
+  -->
+  <exclude-pattern>*/node_modules/*</exclude-pattern>
+  <exclude-pattern>*/vendor/*</exclude-pattern>
+
+  <!-- PSR1 rules -->
+  <rule ref="PSR1"/>
+
+  <!-- PSR2 rules -->
+  <rule ref="PSR2">
+    <exclude name="PSR1.Methods.CamelCapsMethodName"/>
+  </rule>
+
+  <!-- PSR12 rules -->
+  <rule ref="PSR12">
+    <exclude name="PSR12" />
+    <exclude name="PSR12.Files.DeclareStatement" />
+  </rule>
+
+  <!-- Code MUST use an indent of 4 spaces, and MUST NOT use tabs for indenting. -->
+  <rule ref="Generic.WhiteSpace.ScopeIndent">
+    <properties>
+      <property name="indent" value="4" />
+      <property name="tabIndent" value="false" />
+    </properties>
+  </rule>
+
+  <!-- All PHP files MUST use the Unix LF (linefeed) line ending. -->
+  <rule ref="Generic.Files.LineEndings">
+    <properties>
+      <property name="eolChar" value="\n"/>
+    </properties>
+  </rule>
+
+
+  <!-- All PHP files MUST end with a single blank line. -->
+  <rule ref="PSR2.Files.EndFileNewline" />
+  <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+
+  <!-- Generic rules, excluding some -->
+  <rule ref="Generic">
+    <exclude name="Generic.PHP.RequireStrictTypes"/>
+    <exclude name="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+    <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" />
+    <exclude name="Generic.Formatting.NoSpaceAfterCast.SpaceFound"/>
+    <exclude name="Generic.Arrays.ArrayIndent.KeyIncorrect"/>
+    <exclude name="Generic.Arrays.DisallowLongArraySyntax.Found"/>
+    <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+    <exclude name="Generic.Files.EndFileNoNewline.Found"/>
+    <exclude name="Generic.Files.InlineHTML.Found"/>
+    <exclude name="Generic.Files.LineLength.TooLong"/>
+    <exclude name="Generic.Files.LowercasedFilename.NotFound"/>
+    <exclude name="Generic.Functions.OpeningFunctionBraceBsdAllman.BraceOnSameLine"/>
+    <exclude name="Generic.NamingConventions.CamelCapsFunctionName"/>
+    <exclude name="PSR1.Methods.CamelCapsMethodName"/>
+    <exclude name="Generic.PHP.ClosingPHPTag.NotFound"/>
+    <exclude name="Generic.PHP.UpperCaseConstant.Found"/>
+    <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" />
+    <exclude name="Generic.Classes.OpeningBraceSameLine"/>
+    <exclude name="Generic.ControlStructures.DisallowYodaConditions.Found"/>
+    <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie.BraceOnNewLine"/>
+    <exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceAfterOpen"/>
+    <exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceBeforeClose"/>
+  </rule>
+
+  <!-- Exclude all PEAR rules -->
+  <rule ref="PEAR">
+    <exclude name="PEAR"/>
+  </rule>
+
+  <!-- Exclude all Squiz rules -->
+  <rule ref="Squiz">
+    <exclude name="Squiz"/>
+  </rule>
+
+</ruleset>
