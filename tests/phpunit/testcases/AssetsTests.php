@@ -6,7 +6,7 @@ use \Brain\Monkey\Functions;
 
 defined('ABSPATH') or die();
 
-class ExampleTests extends PluginTestCase {
+class AssetsTests extends PluginTestCase {
 
     public function test_construct() {
         //echo PLUGIN_DIR;
