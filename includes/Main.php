@@ -16,7 +16,7 @@ final class Main
 	const VERSION = '0.1.0';
 
 	/**
-	 * Plugin prefix
+	 * A unique plugin prefix to use throughout your plugin
 	 *
 	 * @var string
 	 */

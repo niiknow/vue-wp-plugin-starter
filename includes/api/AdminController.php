@@ -8,9 +8,9 @@ use WP_REST_Controller;
  */
 class AdminController extends WP_REST_Controller
 {
-    /**
-     * [__construct description]
-     */
+	/**
+	 * Initialize this class
+	 */
     public function __construct()
     {
         $this->namespace = \Baseapp\Main::PREFIX . '/v1';
@@ -29,7 +29,7 @@ class AdminController extends WP_REST_Controller
             '/' . $this->rest_base,
             array(
                 array(
-                    'methods'             => 'GET',
+                    'methods'             => 'GET/POST/PUT/DELETE/etc...',
                     'callback'            => array( $this, 'get_items' ),
                     'permission_callback' => array( $this, 'get_items_permissions_check' ),
                     'args'                => $this->get_collection_params(),

@@ -42,7 +42,8 @@ mix.ts('src/admin/admin.ts', 'js/')
     version: 3,
     // extractStyles: true,
     // globalStyles: false
-  });
+  })
+ .extract(['vue-next-masonry']);
 
 mix.ts('src/frontend/frontend.ts', 'js/')
  .vue({

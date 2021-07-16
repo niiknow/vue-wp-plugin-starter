@@ -79,20 +79,26 @@ class Assets
                 'version'   => '3.1.4',
                 'in_footer' => true
             ],
+            \Baseapp\Main::PREFIX . '-manifest' => [
+                'src'       => $assetUrl . '/js/manifest.js',
+                'version'   => filemtime($assetUrl . '/js/manifest.js'),
+                'in_footer' => true
+            ],
             \Baseapp\Main::PREFIX . '-vendor' => [
                 'src'       => $assetUrl . '/js/vendors.js',
+                'deps'      => [ 'jquery', 'vuejs', \Baseapp\Main::PREFIX . '-manifest' ],
                 'version'   => filemtime($assetUrl . '/js/vendors.js'),
                 'in_footer' => true
             ],
             \Baseapp\Main::PREFIX . '-frontend' => [
                 'src'       => $assetUrl . '/js/frontend.js',
-                'deps'      => [ 'jquery', 'vuejs', \Baseapp\Main::PREFIX . '-vendor'],
+                'deps'      => [ \Baseapp\Main::PREFIX . '-vendor' ],
                 'version'   => filemtime($assetUrl . '/js/frontend.js'),
                 'in_footer' => true
             ],
             \Baseapp\Main::PREFIX . '-admin' => [
                 'src'       => $assetUrl . '/js/admin.js',
-                'deps'      => [ 'jquery', 'vuejs', \Baseapp\Main::PREFIX . '-vendor' ],
+                'deps'      => [ \Baseapp\Main::PREFIX . '-vendor' ],
                 'version'   => filemtime($assetUrl . '/js/admin.js'),
                 'in_footer' => true
             ]
