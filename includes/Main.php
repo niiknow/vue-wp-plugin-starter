@@ -160,15 +160,6 @@ final class Main
 	}
 
 	/**
-	 * Register shortcodes
-	 *
-	 */
-	public function register_shortcodes()
-	{
-		flush_rewrite_rules();
-	}
-
-	/**
 	 * init hook handler
 	 *
 	 * @return void

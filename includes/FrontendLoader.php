@@ -33,7 +33,7 @@ class FrontendLoader
 	        'postfix' => 'frontend'
 	    ), $atts );
 
-		$postfix = esc_attr($a['frontend']);
+		$postfix = esc_attr($a['postfix']);
         wp_enqueue_style(\Baseapp\Main::PREFIX . '-' . $postfix);
         wp_enqueue_script(\Baseapp\Main::PREFIX . '-' . $postfix);
 
