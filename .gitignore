@@ -69,4 +69,7 @@ Thumbs.db
 
 
 .phpunit.result.cache
+package-lock.json
+composer.lock
+
 
