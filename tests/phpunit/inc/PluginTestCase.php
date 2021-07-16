@@ -10,6 +10,7 @@ class PluginTestCase extends TestCase {
     protected function setUp():void {
         parent::setUp();
         Monkey\setUp();
+        \Baseapp\Main::get_instance( __FILE__ );
     }
 
     protected function tearDown():void {

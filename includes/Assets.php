@@ -6,10 +6,11 @@ namespace Baseapp;
  */
 class Assets
 {
-
+	/**
+	 * Initialize Assets class
+	 */
     function __construct()
     {
-
         if (is_admin()) {
             add_action('admin_enqueue_scripts', [ $this, 'register' ], 5);
         } else {
@@ -40,7 +41,7 @@ class Assets
         foreach ($scripts as $handle => $script) {
             $deps      = isset($script['deps']) ? $script['deps'] : false;
             $in_footer = isset($script['in_footer']) ? $script['in_footer'] : false;
-            $version   = isset($script['version']) ? $script['version'] : BASEPLUGINCONST_VERSION;
+            $version   = isset($script['version']) ? $script['version'] : \Baseapp\Main::VERSION;
 
             wp_register_script($handle, $script['src'], $deps, $version, $in_footer);
         }
@@ -58,7 +59,7 @@ class Assets
         foreach ($styles as $handle => $style) {
             $deps = isset($style['deps']) ? $style['deps'] : false;
 
-            wp_register_style($handle, $style['src'], $deps, BASEPLUGINCONST_VERSION);
+            wp_register_style($handle, $style['src'], $deps, \Baseapp\Main::VERSION);
         }
     }
 
@@ -69,7 +70,8 @@ class Assets
      */
     public function get_scripts()
     {
-        $prefix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.min' : '';
+        $prefix   = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.min' : '';
+        $assetUrl = plugins_url( '', \Baseapp\Main::$PLUGINFILE ) . '/public';
 
         $scripts = [
             'vuejs' => [
@@ -77,21 +79,21 @@ class Assets
                 'version'   => '3.1.4',
                 'in_footer' => true
             ],
-            'pluginprefix-vendor' => [
-                'src'       => BASEPLUGINCONST_ASSETS . '/js/vendors.js',
-                'version'   => filemtime(BASEPLUGINCONST_ASSETS . '/js/vendors.js'),
+            \Baseapp\Main::PREFIX . '-vendor' => [
+                'src'       => $assetUrl . '/js/vendors.js',
+                'version'   => filemtime($assetUrl . '/js/vendors.js'),
                 'in_footer' => true
             ],
-            'pluginprefix-frontend' => [
-                'src'       => BASEPLUGINCONST_ASSETS . '/js/frontend.js',
-                'deps'      => [ 'jquery', 'vuejs', 'pluginprefix-vendor'],
-                'version'   => filemtime(BASEPLUGINCONST_ASSETS . '/js/frontend.js'),
+            \Baseapp\Main::PREFIX . '-frontend' => [
+                'src'       => $assetUrl . '/js/frontend.js',
+                'deps'      => [ 'jquery', 'vuejs', \Baseapp\Main::PREFIX . '-vendor'],
+                'version'   => filemtime($assetUrl . '/js/frontend.js'),
                 'in_footer' => true
             ],
-            'pluginprefix-admin' => [
-                'src'       => BASEPLUGINCONST_ASSETS . '/js/admin.js',
-                'deps'      => [ 'jquery', 'vuejs', 'pluginprefix-vendor' ],
-                'version'   => filemtime(BASEPLUGINCONST_ASSETS . '/js/admin.js'),
+            \Baseapp\Main::PREFIX . '-admin' => [
+                'src'       => $assetUrl . '/js/admin.js',
+                'deps'      => [ 'jquery', 'vuejs', \Baseapp\Main::PREFIX . '-vendor' ],
+                'version'   => filemtime($assetUrl . '/js/admin.js'),
                 'in_footer' => true
             ]
         ];
@@ -106,13 +108,14 @@ class Assets
      */
     public function get_styles()
     {
+        $assetUrl = plugins_url( '', \Baseapp\Main::$PLUGINFILE ) . '/public';
 
         $styles = [
-            'baseplugin-frontend' => [
-                'src' =>  BASEPLUGINCONST_ASSETS . '/css/frontend.css'
+            \Baseapp\Main::PREFIX . '-frontend' => [
+                'src' =>  $assetUrl . '/css/frontend.css'
             ],
-            'baseplugin-admin' => [
-                'src' =>  BASEPLUGINCONST_ASSETS . '/css/admin.css'
+            \Baseapp\Main::PREFIX . '-admin' => [
+                'src' =>  $assetUrl . '/css/admin.css'
             ],
         ];
 

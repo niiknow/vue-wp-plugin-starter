@@ -51,8 +51,8 @@ class Admin
      */
     public function enqueue_scripts()
     {
-        wp_enqueue_style('pluginprefix-admin');
-        wp_enqueue_script('pluginprefix-admin');
+        wp_enqueue_style(\Baseapp\Main::PREFIX . '-admin');
+        wp_enqueue_script(\Baseapp\Main::PREFIX . '-admin');
     }
 
     /**

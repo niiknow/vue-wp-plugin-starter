@@ -22,8 +22,8 @@ class Frontend
      */
     public function render_frontend($atts, $content = '')
     {
-        wp_enqueue_style('pluginprefix-frontend');
-        wp_enqueue_script('pluginprefix-frontend');
+        wp_enqueue_style(\Baseapp\Main::PREFIX . '-frontend');
+        wp_enqueue_script(\Baseapp\Main::PREFIX . '-frontend');
 
         $content .= '<div id="vue-frontend-app"></div>';
 

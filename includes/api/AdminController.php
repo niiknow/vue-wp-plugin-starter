@@ -14,7 +14,7 @@ class AdminController extends WP_REST_Controller
      */
     public function __construct()
     {
-        $this->namespace = 'pluginprefix/v1';
+        $this->namespace = \Baseapp\Main::PREFIX . '/v1';
         $this->rest_base = 'backend';
     }
 
@@ -30,7 +30,7 @@ class AdminController extends WP_REST_Controller
             '/' . $this->rest_base,
             array(
                 array(
-                    'methods'             => \WP_REST_Server::READABLE,
+                    'methods'             => 'GET',
                     'callback'            => array( $this, 'get_items' ),
                     'permission_callback' => array( $this, 'get_items_permissions_check' ),
                     'args'                => $this->get_collection_params(),

@@ -13,7 +13,7 @@ class AdminControllerTests extends PluginTestCase {
         $controller = new \Baseapp\Api\AdminController();
 
 		$actual   = $this->accessNonPublicProperty($controller, 'namespace');
-		$expected = 'pluginprefix/v1';
+		$expected = \Baseapp\Main::PREFIX . '/v1';
         $this->assertEquals($expected, $actual);
 
 		$actual   = $this->accessNonPublicProperty($controller, 'rest_base');
