@@ -42,8 +42,7 @@ mix.ts('src/admin/admin.ts', 'js/')
     version: 3,
     // extractStyles: true,
     // globalStyles: false
-  })
-  .extract(['es6-promise', 'core-js', 'babel-polyfill']);
+  });
 
 mix.ts('src/frontend/frontend.ts', 'js/')
   .vue({
@@ -51,6 +50,12 @@ mix.ts('src/frontend/frontend.ts', 'js/')
     // extractStyles: true,
     // globalStyles: false
   });
+
+mix.extract([
+    'core-js',
+    'vue-router',
+    '@vue/devtools-api']
+  );
 
 mix.sass('assets/admin.scss', 'css/')
    .sass('assets/frontend.scss', 'css/');
