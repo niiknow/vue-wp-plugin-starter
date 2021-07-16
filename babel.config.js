@@ -5,7 +5,7 @@ module.exports = {
       "useBuiltIns": "usage",
       "corejs": 3,
       "targets": "> 1%, last 2 versions, ie >= 11",
-      "debug": false
+      "debug": true
     }]
   ],
   "plugins": [
