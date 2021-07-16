@@ -12,6 +12,7 @@ For limited local debug, run (also see package.json scripts):
 ```shell
 npm run watch
 ```
+Limited client-side demo: https://niiknow.github.io/vue-wp-plugin-starter/public/
 
 To build `dist.zip` for deployment:
 ```shell

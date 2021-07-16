@@ -42,3 +42,4 @@ assets/**/* export-ignore
 src/ export-ignore
 src/**/* export-ignore
 index.html export-ignore
+public/*.html export-ignore
