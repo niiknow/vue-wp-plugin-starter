@@ -196,7 +196,7 @@ final class Main
 	 */
 	public function localization_setup()
 	{
-		load_plugin_textdomain(self::PREFIX . '_textdomain',
+		load_plugin_textdomain(self::PREFIX,
 			false, dirname( plugin_basename( self::PLUGINFILE ) ) . '/languages/' );
 	}
 

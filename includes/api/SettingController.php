@@ -16,13 +16,24 @@ class SettingController extends \WP_REST_Controller
     }
 
     /**
+     * get the endpoint
+     *
+     * @return string the full endpoint
+     */
+    public function get_endpoint()
+    {
+    	// example: myplugin/v1/settings
+    	return  $this->namespace . '/' . $this->rest_base;
+    }
+
+    /**
      * Register the routes
      *
      * @return void
      */
     public function register_routes()
     {
-    	// Register the /wp-json/myplugin/v1/settings route
+    	// Register the /wp-json/ + get_endpoint() route
         register_rest_route(
             $this->namespace,
             '/' . $this->rest_base,
@@ -56,7 +67,8 @@ class SettingController extends \WP_REST_Controller
         $data = get_option( \Baseapp\Main::PREFIX . '_settings', false );
 
 		$response = array(
-			'data' => $data
+			'data' => $data,
+			'nonce' => wp_create_nonce('wp_rest')
 		);
 
 	    return rest_ensure_response($response);
@@ -79,7 +91,8 @@ class SettingController extends \WP_REST_Controller
     		update_option( \Baseapp\Main::PREFIX . '_settings', $data );
 
 			$response = array(
-				'data' => $data
+				'data' => $data,
+				'nonce' => wp_create_nonce('wp_rest')  // another nonce to use later
 			);
 
 	        return rest_ensure_response($response);
@@ -97,6 +110,12 @@ class SettingController extends \WP_REST_Controller
      */
     public function get_items_permissions_check($request)
     {
+    	// optional: check nonce
+    	// https://via.studio/journal/wordpress-rest-api-secure-ajax-calls-custom-endpoints
+    	// example: /wp-json/me/v1/endpoint/?_wpnonce=${nonce}
+    	// check_ajax_referer('wp_rest', '_wpnonce', true)
+    	// 3rd parameter (die=true) to kill rest of execution
+
         if (current_user_can('editor') || current_user_can('administrator')) {
         	return true;
         }

@@ -64,6 +64,19 @@ class AdminLoader
      */
     public function plugin_page()
     {
+    	$settingController = new SettingController();
+
+    	// output data for use on client-side
+    	wp_localize_script( \Baseapp\Main::PREFIX . '-data', 'vuePluginData', [
+		    'rest' => [
+		        'endpoints' => [
+		            'settings' => esc_url_raw( rest_url( $settingController->get_endpoint() ) ),
+		        ],
+		        'nonce'     => wp_create_nonce( 'wp_rest' ),
+		        // 'action_nonce'     => wp_create_nonce( 'action_nonce' ),
+		    ],
+		] );
+
         echo '<div class="admin-app-wrapper"><div id="vue-admin-app"></div></div>';
     }
 }
