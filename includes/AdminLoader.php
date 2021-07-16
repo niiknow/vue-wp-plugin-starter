@@ -2,9 +2,9 @@
 namespace Baseapp;
 
 /**
- * Admin Pages Handler
+ * Admin pages loader
  */
-class Admin
+class AdminLoader
 {
 	/**
 	 * Initialize this class
@@ -64,6 +64,6 @@ class Admin
      */
     public function plugin_page()
     {
-        echo '<div class="wrap"><div id="vue-admin-app"></div></div>';
+        echo '<div class="admin-app-wrapper"><div id="vue-admin-app"></div></div>';
     }
 }

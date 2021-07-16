@@ -2,7 +2,7 @@
 namespace Baseapp;
 
 /**
- * Scripts and Styles Class
+ * Scripts and styles helper
  */
 class Assets
 {
@@ -70,36 +70,36 @@ class Assets
      */
     public function get_scripts()
     {
-        $prefix   = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.min' : '';
-        $assetUrl = plugins_url( '', \Baseapp\Main::$PLUGINFILE ) . '/public';
+    	$assets_url = \Baseapp\Main::$BASEURL . '/public';
+        $prefix     = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.min' : '';
 
         $scripts = [
             'vuejs' => [
-                'src'       => 'https://unpkg.com/vue@3.1.4/dist/vue.global.js',
+                'src'       => 'https://cdn.jsdelivr.net/npm/vue@3.1.4/dist/vue.global.prod.js',
                 'version'   => '3.1.4',
                 'in_footer' => true
             ],
             \Baseapp\Main::PREFIX . '-manifest' => [
-                'src'       => $assetUrl . '/js/manifest.js',
-                'version'   => filemtime($assetUrl . '/js/manifest.js'),
+                'src'       => $assets_url . '/js/manifest.js',
+                'version'   => filemtime($assets_url . '/js/manifest.js'),
                 'in_footer' => true
             ],
             \Baseapp\Main::PREFIX . '-vendor' => [
-                'src'       => $assetUrl . '/js/vendors.js',
+                'src'       => $this->$assets_url . '/js/vendors.js',
                 'deps'      => [ 'jquery', 'vuejs', \Baseapp\Main::PREFIX . '-manifest' ],
-                'version'   => filemtime($assetUrl . '/js/vendors.js'),
+                'version'   => filemtime($assets_url . '/js/vendors.js'),
                 'in_footer' => true
             ],
             \Baseapp\Main::PREFIX . '-frontend' => [
-                'src'       => $assetUrl . '/js/frontend.js',
+                'src'       => $assets_url . '/js/frontend.js',
                 'deps'      => [ \Baseapp\Main::PREFIX . '-vendor' ],
-                'version'   => filemtime($assetUrl . '/js/frontend.js'),
+                'version'   => filemtime($assets_url . '/js/frontend.js'),
                 'in_footer' => true
             ],
             \Baseapp\Main::PREFIX . '-admin' => [
-                'src'       => $assetUrl . '/js/admin.js',
+                'src'       => $assets_url . '/js/admin.js',
                 'deps'      => [ \Baseapp\Main::PREFIX . '-vendor' ],
-                'version'   => filemtime($assetUrl . '/js/admin.js'),
+                'version'   => filemtime($assets_url . '/js/admin.js'),
                 'in_footer' => true
             ]
         ];
@@ -114,14 +114,14 @@ class Assets
      */
     public function get_styles()
     {
-        $assetUrl = plugins_url( '', \Baseapp\Main::$PLUGINFILE ) . '/public';
+        $assets_url = \Baseapp\Main::$BASEURL . '/public';
 
         $styles = [
             \Baseapp\Main::PREFIX . '-frontend' => [
-                'src' =>  $assetUrl . '/css/frontend.css'
+                'src' =>  $assets_url . '/css/frontend.css'
             ],
             \Baseapp\Main::PREFIX . '-admin' => [
-                'src' =>  $assetUrl . '/css/admin.css'
+                'src' =>  $assets_url . '/css/admin.css'
             ],
         ];
 

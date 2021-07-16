@@ -3,7 +3,6 @@
 
   <description>Coding Standards</description>
   <file>includes</file>
-  <file>plugin.php</file>
   <file>tests/phpunit</file>
 
   <!--

@@ -1,12 +1,10 @@
 <?php
 namespace Baseapp;
 
-use WP_REST_Controller;
-
 /**
- * REST_API Handler
+ * API routes loader
  */
-class Api extends WP_REST_Controller
+class ApiRoutes
 {
     /**
      * [__construct description]
@@ -19,10 +17,14 @@ class Api extends WP_REST_Controller
     /**
      * Register the API routes
      *
+     * Keep register_routes in API separate so it's easier to test and
+     * we have a single place/method to load all API routes
+     *
      * @return void
      */
     public function register_routes()
     {
+    	// instantiate and load all api routes
         (new Api\AdminController())->register_routes();
     }
 }

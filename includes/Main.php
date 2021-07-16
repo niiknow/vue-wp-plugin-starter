@@ -39,7 +39,14 @@ final class Main
 	 * The filename
 	 * @var string
 	 */
-	public static $PLUGINFILE;
+	public static $PLUGINFILE = '';
+
+	/**
+	 * The base url, default '.'
+	 *
+	 * @var string
+	 */
+	public static $BASEURL = '.';
 
 	/**
 	 * Constructor for the Main class
@@ -73,15 +80,17 @@ final class Main
 	}
 
 	/**
-	 * initialize this plugin
+	 * Activate and initialize this plugin
 	 *
 	 */
-	public function init()
+	public function startPlugin()
 	{
-		register_activation_hook( __FILE__, array( $this, 'activate' ) );
-		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
+        self::$BASEURL = plugins_url('', $filename);
 
-		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
+		register_activation_hook( __FILE__, array( $this, 'activate_plugin' ) );
+		register_deactivation_hook( __FILE__, array( $this, 'deactivate_plugin' ) );
+
+		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
 	}
 
 	/**
@@ -114,13 +123,13 @@ final class Main
 	}
 
 	/**
-	 * Load the plugin after all plugin are loaded
+	 * Register hooks after all plugins are loaded
 	 *
 	 * @return void
 	 */
-	public function init_plugin()
+	public function plugins_loaded()
 	{
-		$this->init_hooks();
+		add_action( 'init', array( $this, 'init_hook_handler' ) );
 	}
 
 	/**
@@ -128,7 +137,7 @@ final class Main
 	 *
 	 * Nothing being called here yet.
 	 */
-	public function activate()
+	public function activate_plugin()
 	{
 		$installed = get_option( self::PREFIX . '_installed' );
 
@@ -141,52 +150,51 @@ final class Main
 	}
 
 	/**
-	 * Placeholder for deactivation function
+	 * Do stuff during plugin deactivation
 	 *
-	 * Nothing being called here yet.
 	 */
-	public function deactivate()
+	public function deactivate_plugin()
 	{
 		flush_rewrite_rules();
 	}
 
 	/**
-	 * Initialize the hooks
+	 * Register shortcodes
 	 *
-	 * @return void
 	 */
-	public function init_hooks()
+	public function register_shortcodes()
 	{
-		add_action( 'init', array( $this, 'init_classes' ) );
-
-		// Localize our plugin
-		add_action( 'init', array( $this, 'localization_setup' ) );
+		flush_rewrite_rules();
 	}
 
 	/**
-	 * Instantiate the required classes
+	 * init hook handler
 	 *
 	 * @return void
 	 */
-	public function init_classes()
+	public function init_hook_handler()
 	{
+		// initialize assets
+		$this->container['assets'] = new \Baseapp\Assets();
+
+		// initialize the various loader classes
 		if ($this->is_request( 'admin' ))
 		{
-			$this->container['admin'] = new \Baseapp\Admin();
+			$this->container['admin'] = new \Baseapp\AdminLoader();
 		}
 
 		if ($this->is_request( 'frontend' ))
 		{
-			$this->container['frontend'] = new \Baseapp\Frontend();
+			$this->container['frontend'] = new \Baseapp\FrontendLoader();
 		}
 
 		if ($this->is_request( 'ajax' ))
 		{
-			// $this->container['ajax'] =  new \BaseApp\Ajax();
+			// $this->container['ajax'] =  new \BaseApp\AjaxLoader();
 		}
 
-		$this->container['api'] = new \Baseapp\Api();
-		$this->container['assets'] = new \Baseapp\Assets();
+		// finally load api routes
+		$this->container['api'] = new \Baseapp\ApiRoutes();
 	}
 
 	/**
