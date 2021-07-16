@@ -85,7 +85,7 @@ class Assets
                 'in_footer' => true
             ],
             \Baseapp\Main::PREFIX . '-vendor' => [
-                'src'       => $this->$assets_url . '/js/vendors.js',
+                'src'       => $assets_url . '/js/vendors.js',
                 'deps'      => [ 'jquery', 'vuejs', \Baseapp\Main::PREFIX . '-manifest' ],
                 'version'   => filemtime($assets_url . '/js/vendors.js'),
                 'in_footer' => true

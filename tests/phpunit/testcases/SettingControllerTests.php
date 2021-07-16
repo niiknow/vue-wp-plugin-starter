@@ -7,17 +7,17 @@ use Baseapp\Api;
 
 defined('ABSPATH') or die();
 
-class AdminControllerTests extends PluginTestCase {
+class SettingControllerTests extends PluginTestCase {
 
     public function test_construct() {
-        $controller = new \Baseapp\Api\AdminController();
+        $controller = new \Baseapp\Api\SettingController();
 
 		$actual   = $this->accessNonPublicProperty($controller, 'namespace');
 		$expected = \Baseapp\Main::PREFIX . '/v1';
         $this->assertEquals($expected, $actual);
 
 		$actual   = $this->accessNonPublicProperty($controller, 'rest_base');
-		$expected = 'backend';
+		$expected = 'settings';
         $this->assertEquals($expected, $actual);
 
     }
