@@ -81,7 +81,7 @@ if (mix.inProduction()) {
 
 mix.webpackConfig(webpackConfig)
    .browserSync({
-      serveStatic: ['./public'],
+      serveStatic: ['./'],
       serveStaticOptions: {
         extensions: ['html'] // pretty urls
       }
