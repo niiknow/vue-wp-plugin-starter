@@ -43,7 +43,7 @@ mix.ts('src/admin/admin.ts', 'js/')
     // extractStyles: true,
     // globalStyles: false
   })
-  .extract(['vue-next-masonry']);
+  .extract(['es6-promise', 'core-js', 'babel-polyfill']);
 
 mix.ts('src/frontend/frontend.ts', 'js/')
   .vue({

@@ -26,11 +26,26 @@ class AdminLoader
         $capability = 'manage_options';
         $slug       = 'vue-app';
 
-        $hook = add_menu_page(__('Vue App', 'textdomain'), __('Vue App', 'textdomain'), $capability, $slug, [ $this, 'plugin_page' ], 'dashicons-text');
+        $hook = add_menu_page(
+        	__('Vue App', \Baseapp\Main::PREFIX),
+        	__('Vue App', \Baseapp\Main::PREFIX),
+        	$capability,
+        	$slug,
+        	[ $this, 'plugin_page' ],
+        	'dashicons-text'  // tip: https://developer.wordpress.org/resource/dashicons
+        );
 
         if (current_user_can($capability)) {
-            $submenu[ $slug ][] = array( __('Dashboard', 'textdomain'), $capability, 'admin.php?page=' . $slug . '#/' );
-            $submenu[ $slug ][] = array( __('Settings', 'textdomain'), $capability, 'admin.php?page=' . $slug . '#/settings' );
+            $submenu[ $slug ][] = array(
+            	__('Dashboard',  \Baseapp\Main::PREFIX),
+            	$capability, 'admin.php?page=' .
+            	$slug . '#/'
+            );
+            $submenu[ $slug ][] = array(
+            	__('Settings',  \Baseapp\Main::PREFIX),
+            	$capability,
+            	'admin.php?page=' . $slug . '#/settings'
+            );
         }
 
         add_action('load-' . $hook, [ $this, 'init_hooks']);
