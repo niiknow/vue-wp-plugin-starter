@@ -67,12 +67,13 @@ class AdminLoader
     	$settingController = new SettingController();
 
     	// output data for use on client-side
+    	// https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
     	wp_localize_script( \Baseapp\Main::PREFIX . '-data', 'vuePluginData', [
 		    'rest' => [
 		        'endpoints' => [
 		            'settings' => esc_url_raw( rest_url( $settingController->get_endpoint() ) ),
 		        ],
-		        'nonce'     => wp_create_nonce( 'wp_rest' ),
+		        'nonce'     => wp_create_nonce( 'wp_rest' ),  // add header X-WP-Nonce to authenticate
 		        // 'action_nonce'     => wp_create_nonce( 'action_nonce' ),
 		    ],
 		] );

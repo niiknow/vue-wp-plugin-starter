@@ -25,6 +25,6 @@ class ApiRoutes
     public function register_routes()
     {
     	// instantiate and load all api routes
-        (new Api\AdminController())->register_routes();
+        (new Api\SettingController())->register_routes();
     }
 }
