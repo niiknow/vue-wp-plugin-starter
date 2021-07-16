@@ -54,5 +54,5 @@ if (! defined( 'ABSPATH' )) exit;
 
 require __DIR__ . '/vendor/autoload.php';
 
-// simply initialize the plugin
-\Baseapp\Main::get_instance( __FILE__ )->startPlugin();
+// instantiate and run the plugin
+\Baseapp\Main::get_instance( __FILE__ )->run();

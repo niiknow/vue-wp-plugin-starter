@@ -80,12 +80,13 @@ final class Main
 	}
 
 	/**
-	 * Activate and initialize this plugin
+	 * Activate and initialize the plugin
 	 *
 	 */
-	public function startPlugin()
+	public function run()
 	{
-        self::$BASEURL = plugins_url('', $filename);
+		// set base url from plugin file name
+        self::$BASEURL = plugins_url('', self::$PLUGINFILE);
 
 		register_activation_hook( __FILE__, array( $this, 'activate_plugin' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate_plugin' ) );
