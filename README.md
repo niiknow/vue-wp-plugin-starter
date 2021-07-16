@@ -3,11 +3,11 @@ Vue Wordpress Plugin Starter with Vue3, Typescript, and Laravel Mix (Webpack wra
 
 # Folders
 
-- assets:     image, css, and sass files
-- includes:   php stuff
-- languages:  translation files
-- public:     compiled code
-- src:        uncompiled/raw sources
+- **assets/** image, css, and sass files
+- **includes/**  php stuff
+- **languages/** translation files
+- **public/** compiled script source and static contents
+- **src/** typescript, javascript, and vue sources
 
 # To get started
 1. Decide on YOUR_PLUGIN_NAME and namespace and replace all `Baseapp` namespace
