@@ -3,7 +3,6 @@
     "description": "A WordPress Vue.js starter plugin",
     "type": "wordpress-plugin",
     "license": "GPL-3.0",
-    "type": "project",
     "require": {
         "php": "^7.3|^8.0"
     },
@@ -34,11 +33,10 @@
         "app:package": [
             "npm run production",
             "composer update",
+            "composer install --no-dev --optimize-autoloader",
             "deployStash=`git stash create`; git archive --worktree-attributes --format=zip -o dist.zip ${deployStash:-HEAD}",
-            "zip -ur dist.zip ./vendor"
-        ],
-        "app:production": [
-            "echo 'composer install --no-dev --optimize-autoloader && php artisan queue:restart'"
+            "zip -ur dist.zip ./vendor",
+            "composer update"
         ],
         "test": [
           "phpunit tests/*.php"
