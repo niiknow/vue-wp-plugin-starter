@@ -46,9 +46,12 @@ final class Main
 	 *
 	 * Sets up all the appropriate hooks and actions
 	 * within our plugin.
+	 *
+	 * @param $filename the plugin file name
 	 */
-    private function __construct()
+    private function __construct($filename)
     {
+        self::$PLUGINFILE = $filename;
     }
 
 	/**
@@ -63,8 +66,7 @@ final class Main
 	public static function get_instance($filename)
 	{
 		if (! self::$instance) {
-        	self::$instance = new Main();
-        	self::$PLUGINFILE = $filename;
+        	self::$instance = new self($filename);
 		}
 
     	return self::$instance;
