@@ -6,7 +6,8 @@ namespace Baseapp;
  *
  * @class Main The class that holds initialize this plugin
  */
-final class Main {
+final class Main
+{
 	/**
 	 * Plugin version
 	 *
@@ -46,7 +47,8 @@ final class Main {
 	 * Sets up all the appropriate hooks and actions
 	 * within our plugin.
 	 */
-    private function __construct() {
+    private function __construct()
+    {
     }
 
 	/**
@@ -58,7 +60,8 @@ final class Main {
 	 *
 	 * @return Main the singleton instance
 	 */
-	public static function get_instance($filename) {
+	public static function get_instance($filename)
+	{
 		if (! self::$instance) {
         	self::$instance = new Main();
         	self::$PLUGINFILE = $filename;
@@ -71,7 +74,8 @@ final class Main {
 	 * initialize this plugin
 	 *
 	 */
-	public function init() {
+	public function init()
+	{
 		register_activation_hook( __FILE__, array( $this, 'activate' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
 
@@ -85,8 +89,10 @@ final class Main {
 	 *
 	 * @return mixed
 	 */
-	public function __get( $prop ) {
-		if (array_key_exists( $prop, $this->container )) {
+	public function __get( $prop )
+	{
+		if (array_key_exists( $prop, $this->container ))
+		{
 			return $this->container[ $prop ];
 		}
 
@@ -100,7 +106,8 @@ final class Main {
 	 *
 	 * @return mixed
 	 */
-	public function __isset( $prop ) {
+	public function __isset( $prop )
+	{
 		return isset( $this->{$prop} ) || isset( $this->container[ $prop ] );
 	}
 
@@ -109,8 +116,8 @@ final class Main {
 	 *
 	 * @return void
 	 */
-	public function init_plugin() {
-		$this->includes();
+	public function init_plugin()
+	{
 		$this->init_hooks();
 	}
 
@@ -119,11 +126,12 @@ final class Main {
 	 *
 	 * Nothing being called here yet.
 	 */
-	public function activate() {
-
+	public function activate()
+	{
 		$installed = get_option( self::PREFIX . '_installed' );
 
-		if (! $installed) {
+		if (! $installed)
+		{
 			update_option( self::PREFIX . '_installed', time() );
 		}
 
@@ -135,32 +143,9 @@ final class Main {
 	 *
 	 * Nothing being called here yet.
 	 */
-	public function deactivate() {
+	public function deactivate()
+	{
 		flush_rewrite_rules();
-	}
-
-	/**
-	 * Include the required files
-	 *
-	 * @return void
-	 */
-	public function includes() {
-
-		require_once 'Assets.php';
-
-		if ($this->is_request( 'admin' )) {
-			require_once 'Admin.php';
-		}
-
-		if ($this->is_request( 'frontend' )) {
-			require_once 'Frontend.php';
-		}
-
-		if ($this->is_request( 'ajax' )) {
-			// require_once 'class-ajax.php';
-		}
-
-		require_once 'Api.php';
 	}
 
 	/**
@@ -168,8 +153,8 @@ final class Main {
 	 *
 	 * @return void
 	 */
-	public function init_hooks() {
-
+	public function init_hooks()
+	{
 		add_action( 'init', array( $this, 'init_classes' ) );
 
 		// Localize our plugin
@@ -181,17 +166,20 @@ final class Main {
 	 *
 	 * @return void
 	 */
-	public function init_classes() {
-
-		if ($this->is_request( 'admin' )) {
+	public function init_classes()
+	{
+		if ($this->is_request( 'admin' ))
+		{
 			$this->container['admin'] = new \Baseapp\Admin();
 		}
 
-		if ($this->is_request( 'frontend' )) {
+		if ($this->is_request( 'frontend' ))
+		{
 			$this->container['frontend'] = new \Baseapp\Frontend();
 		}
 
-		if ($this->is_request( 'ajax' )) {
+		if ($this->is_request( 'ajax' ))
+		{
 			// $this->container['ajax'] =  new \BaseApp\Ajax();
 		}
 
@@ -204,7 +192,8 @@ final class Main {
 	 *
 	 * @uses load_plugin_textdomain()
 	 */
-	public function localization_setup() {
+	public function localization_setup()
+	{
 		load_plugin_textdomain(self::PREFIX . '_textdomain',
 			false, dirname( plugin_basename( self::PLUGINFILE ) ) . '/languages/' );
 	}
@@ -216,7 +205,8 @@ final class Main {
 	 *
 	 * @return bool
 	 */
-	private function is_request( $type ) {
+	private function is_request( $type )
+	{
 		switch ($type) {
 			case 'admin' :
 				return is_admin();
@@ -234,5 +224,4 @@ final class Main {
 				return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
 		}
 	}
-
 }

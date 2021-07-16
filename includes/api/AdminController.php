@@ -8,7 +8,6 @@ use WP_REST_Controller;
  */
 class AdminController extends WP_REST_Controller
 {
-
     /**
      * [__construct description]
      */

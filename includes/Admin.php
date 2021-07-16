@@ -6,7 +6,9 @@ namespace Baseapp;
  */
 class Admin
 {
-
+	/**
+	 * Initialize this class
+	 */
     public function __construct()
     {
         add_action('admin_menu', [ $this, 'admin_menu' ]);

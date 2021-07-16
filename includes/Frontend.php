@@ -6,7 +6,9 @@ namespace Baseapp;
  */
 class Frontend
 {
-
+	/**
+	 * Initialize this class
+	 */
     public function __construct()
     {
         add_shortcode('vue-app', [ $this, 'render_frontend' ]);

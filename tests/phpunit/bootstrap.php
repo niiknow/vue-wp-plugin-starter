@@ -8,11 +8,11 @@
 define( 'PLUGIN_PHPUNIT', true );
 
 // define fake ABSPATH
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined( 'ABSPATH' )) {
     define( 'ABSPATH', sys_get_temp_dir() );
 }
 // define fake PLUGIN_ABSPATH
-if ( ! defined( 'PLUGIN_ABSPATH' ) ) {
+if (! defined( 'PLUGIN_ABSPATH' )) {
     define( 'PLUGIN_ABSPATH', sys_get_temp_dir() . '/wp-content/plugins/my-plugin/' );
 }
 

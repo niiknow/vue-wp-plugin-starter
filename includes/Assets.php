@@ -7,7 +7,7 @@ namespace Baseapp;
 class Assets
 {
 	/**
-	 * Initialize Assets class
+	 * Initialize this class
 	 */
     function __construct()
     {
