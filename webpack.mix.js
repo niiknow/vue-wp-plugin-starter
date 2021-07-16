@@ -38,15 +38,15 @@ const webpackConfig = {
 mix.setPublicPath('public/');
 
 mix.ts('src/admin/admin.ts', 'js/')
- .vue({
+  .vue({
     version: 3,
     // extractStyles: true,
     // globalStyles: false
   })
- .extract(['vue-next-masonry']);
+  .extract(['vue-next-masonry']);
 
 mix.ts('src/frontend/frontend.ts', 'js/')
- .vue({
+  .vue({
     version: 3,
     // extractStyles: true,
     // globalStyles: false
@@ -80,10 +80,10 @@ if (mix.inProduction()) {
 }
 
 mix.webpackConfig(webpackConfig)
-   .browserSync({
-      serveStatic: ['./'],
-      serveStaticOptions: {
-        extensions: ['html'] // pretty urls
-      }
-   });
+  .browserSync({
+    serveStatic: ['./public'],
+    serveStaticOptions: {
+      extensions: ['html'] // pretty urls
+    }
+  });
 
