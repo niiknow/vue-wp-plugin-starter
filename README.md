@@ -2,7 +2,7 @@
 Vue Wordpress Plugin Starter with Vue3, Typescript, and Laravel Mix (Webpack wrapper)
 
 # to get started
-1. Decide on YOUR_PLUGIN_NAME and namespace, then replace all `Baseapp` namespace
+1. Decide your plugin prefix, name, and namespace; then search & replace all `Baseapp` namespace
 2. Update **all appropriate values** in ``vue-wp-plugin-starter.php` and rename with YOUR_PLUGIN_NAME.php
 3. Update VERSION and PREFIX constants in `includes/Main.php`
 
