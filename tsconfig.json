@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "esnext",
+    "module": "commonjs",
     "target": "esnext",
     "moduleResolution": "node",
     "jsx": "preserve",
@@ -28,6 +28,7 @@
   "exclude": [
     ".git",
     "node_modules",
-    "dist"
+    "dist",
+    "public"
   ]
 }
