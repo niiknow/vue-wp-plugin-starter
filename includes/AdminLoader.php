@@ -35,13 +35,15 @@ class AdminLoader
         	'dashicons-text'  // tip: https://developer.wordpress.org/resource/dashicons
         );
 
-        if (current_user_can($capability)) {
-            $submenu[ $slug ][] = array(
+        if ( current_user_can( $capability ) ) {
+           add_submenu_page( $slug,
             	__('Dashboard',  \Baseapp\Main::PREFIX),
-            	$capability, 'admin.php?page=' .
-            	$slug . '#/'
+            	__('Dashboard',  \Baseapp\Main::PREFIX),
+            	$capability,
+            	'admin.php?page=' . $slug . '#/'
             );
-            $submenu[ $slug ][] = array(
+            add_submenu_page( $slug,
+            	__('Settings',  \Baseapp\Main::PREFIX),
             	__('Settings',  \Baseapp\Main::PREFIX),
             	$capability,
             	'admin.php?page=' . $slug . '#/settings'

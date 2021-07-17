@@ -55,11 +55,8 @@ mix.ts('src/frontend/frontend.ts', 'js/')
     // globalStyles: false
   });
 
-mix.extract([
-    'core-js',
-    'vue-router',
-    '@vue/devtools-api']
-  );
+// bare minimum packages: ['core-js', 'vue-router', '@vue/devtools-api']
+mix.extract(); // empty to extract all
 
 mix.sass('assets/admin.scss', 'css/')
    .sass('assets/frontend.scss', 'css/');

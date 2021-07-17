@@ -18,9 +18,9 @@
     "test": "jest"
   },
   "browserslist": [
-      "> 1%",
-      "last 2 versions",
-      "ie >= 11"
+    "> 1%",
+    "last 2 versions",
+    "ie >= 11"
   ],
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
@@ -33,6 +33,7 @@
     "axios": "^0.21.1",
     "browser-sync": "^2.27.4",
     "browser-sync-webpack-plugin": "^2.3.0",
+    "core-js": "^2.6.12",
     "css-loader": "5.2.7",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
