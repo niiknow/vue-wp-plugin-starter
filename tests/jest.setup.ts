@@ -26,7 +26,3 @@ Object.keys(document.defaultView).forEach(property => {
 global.navigator = {
   userAgent: 'node'
 };
-
-const $ = require('jquery')(window);
-global.jQuery = $;
-global.$ = $;

@@ -17,8 +17,10 @@ function menuFix(slug) {
         }
       }
     })
-
-    menuRoot.querySelector(`.wp-submenu a[href="${currentPath}"`).parentElement.classList.add('current')
+    const menu = menuRoot.querySelector(`.wp-submenu a[href="${currentPath}"`)
+    if (menu) {
+      menu.parentElement.classList.add('current')
+    }
   }
 }
 

@@ -1,4 +1,3 @@
-// @ts-ignore
 import axios from './axios'
 
 export default function(win: any) {

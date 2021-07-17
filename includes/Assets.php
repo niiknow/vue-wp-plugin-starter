@@ -86,7 +86,7 @@ class Assets
             ],
             \Baseapp\Main::PREFIX . '-vendor' => [
                 'src'       => $assets_url . '/js/vendors.js',
-                'deps'      => [ 'jquery', 'vuejs', \Baseapp\Main::PREFIX . '-manifest' ],
+                'deps'      => [ 'vuejs', \Baseapp\Main::PREFIX . '-manifest' ],
                 'version'   => filemtime($assets_url . '/js/vendors.js'),
                 'in_footer' => true
             ],

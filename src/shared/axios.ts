@@ -1,12 +1,11 @@
-// @ts-ignore
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
 const Axios: AxiosInstance = axios.create({
   baseURL: '/',
   withCredentials: false,
   headers: {
-        Accept: "application/json; charset=utf-8",
-        "Content-Type": "application/json; charset=utf-8",
+    'Accept': 'application/json; charset=utf-8',
+    'Content-Type': 'application/json; charset=utf-8',
     'X-Requested-With': 'XMLHttpRequest'
   }
 })
@@ -22,8 +21,6 @@ Axios.interceptors.response.use((response: AxiosResponse) => {
 
   return response
 })
-
-Axios.defaults.headers.common["Content-Type"] = "application/json";
 
 Axios.interceptors.request.use((config: any) => {
 
