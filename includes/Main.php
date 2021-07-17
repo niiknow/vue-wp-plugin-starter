@@ -145,9 +145,20 @@ final class Main
 		if (! $installed)
 		{
 			update_option( self::PREFIX . '_installed', time() );
+
+			// TIP: this is where you can add your database init
+			// create tables etc...
+			// update_option( self::PREFIX . '_dbmigrate', 1 );
 		}
 
 		update_option( self::PREFIX . '_version', self::VERSION );
+
+		// NOTE: this is where you can add your database migrate script
+		// based on version in the _dbmigrate version
+		//
+		// $version = get_option( self::PREFIX . '_dbmigrate');
+		// for: $version ... current_dbversion, run sql migrate ($version)
+		// $update_option( self::PREFIX . '_dbmigrate', current_dbversion);
 	}
 
 	/**
