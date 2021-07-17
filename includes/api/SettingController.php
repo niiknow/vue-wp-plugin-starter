@@ -147,7 +147,7 @@ class SettingController extends \WP_REST_Controller
      */
     public function get_settings_structure()
     {
-    	return [];
+    	return include( \Baseapp\Main::$PLUGINDIR . '/config/settings.php' );
     }
 
 	/**

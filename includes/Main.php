@@ -59,6 +59,7 @@ final class Main
     private function __construct($filename)
     {
         self::$PLUGINFILE = $filename;
+        self::$PLUGINDIR  = dirname( $filename );
     }
 
 	/**
@@ -153,7 +154,7 @@ final class Main
 
 		update_option( self::PREFIX . '_version', self::VERSION );
 
-		// NOTE: this is where you can add your database migrate script
+		// TIP: this is where you can add your database migrate script
 		// based on version in the _dbmigrate version
 		//
 		// $version = get_option( self::PREFIX . '_dbmigrate');
@@ -168,6 +169,9 @@ final class Main
 	public function deactivate_plugin()
 	{
 		flush_rewrite_rules();
+
+		// TIP: check settings if need to remove data upon plugin deactivation
+		// remove data from options table and database
 	}
 
 	/**
