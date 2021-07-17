@@ -85,7 +85,7 @@ class AdminLoader
 
     	// output data for use on client-side
     	// https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
-    	wp_localize_script( \Baseapp\Main::PREFIX . '-data', 'vuePluginData', [
+    	wp_localize_script( \Baseapp\Main::PREFIX . '-data', 'vue_wp_plugin_config', [
 		    'rest' => [
 		        'endpoints' => [
 		            'settings' => esc_url_raw( rest_url( $settingController->get_endpoint() ) ),

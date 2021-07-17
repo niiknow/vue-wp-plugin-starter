@@ -26,5 +26,12 @@ class ApiRoutes
     {
     	// instantiate and load all api routes
         (new Api\SettingController())->register_routes();
+        /*
+        // return new nonce
+        add_filter( 'rest_post_dispatch', function( WP_REST_Response $response) {
+			$response->header('X-WP-Nonce', wp_create_nonce( 'wp_rest' ));
+			return $response;
+		}, PHP_INT_MAX);?>
+		*/
     }
 }
