@@ -49,6 +49,12 @@ final class Main
 	public static $BASEURL = '.';
 
 	/**
+	 * The plugin dir
+	 * @var string
+	 */
+	public static $PLUGINDIR = '';
+
+	/**
 	 * Constructor for the Main class
 	 *
 	 * Sets up all the appropriate hooks and actions
@@ -93,6 +99,11 @@ final class Main
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate_plugin' ) );
 
 		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
+
+		// setup cli
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			$this->container['cli'] = new \Baseapp\CliLoader();
+		}
 	}
 
 	/**

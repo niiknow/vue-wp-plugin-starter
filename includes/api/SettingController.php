@@ -157,7 +157,7 @@ class SettingController extends \WP_REST_Controller
 	 */
 	public function sanitize_settings( $settings ) {
 		$sanitized_settings = array();
-		$settings_details = $this->get_settings_structure());
+		$settings_details = $this->get_settings_structure();
 
 		foreach ( $settings as $id => $value ) {
 			if ( array_key_exists( $id, $settings_details ) ) {
