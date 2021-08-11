@@ -22,7 +22,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\phpunit\\testcases\\": "tests/"
         }
     },
     "minimum-stability": "dev",
