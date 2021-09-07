@@ -67,9 +67,5 @@ Thumbs.db
 *.sql
 *.sqlite
 
-
 .phpunit.result.cache
-package-lock.json
-composer.lock
-
 
