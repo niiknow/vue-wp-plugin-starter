@@ -14,7 +14,7 @@ class SettingController extends \WP_REST_Controller
     public function __construct()
     {
         $this->prefix = \Baseapp\Main::PREFIX;
-        $this->namespace = $orefix . '/v1';
+        $this->namespace = $this->prefix . '/v1';
         $this->rest_base = 'settings';
     }
 
