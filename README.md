@@ -2,10 +2,12 @@
 Vue Wordpress Plugin Starter with Vue3, Typescript, and Laravel Mix (Webpack wrapper)
 
 # to get started
-* Decide your plugin `name`, `prefix`, and `namespace`; then search & replace all `Baseapp` namespace
-    * Remember to update `composer.json` and `package.json`
-* Update **all appropriate values** in `vue-wp-plugin-starter.php` and rename with `YOUR_PLUGIN_NAME.php`
-* Update `VERSION` and `PREFIX` constants in `includes/Main.php`
+1. Decide your plugin `name` and `namespace`
+    * `name` to update package.json `name` property
+    * `namespace` this is to rename `Baseapp` and can also becomes your `PREFIX` (application domain) in `includes/Main.php`
+2. Search & replace all `Baseapp` namespace (case-sensitive) to your new namespace. Also update all lowercase `baseapp` as your application domain.
+    * Remember to update `composer.json`, `readme.txt`, and `package.json` with appropriate values.
+3. Rename `vue-wp-plugin-starter.php` to your plugin filename.  Update **all appropriate values** in your new file.
 
 Use composer with `composer install` and `npm install` for Vue.
 
@@ -24,8 +26,11 @@ Also, don't forget to update readme.txt with your plugin details.
 
 # folder structures
 
-- **assets/** image, css, and sass files
-- **includes/**  php stuff
+- **assets/** image, css, and sass/scss files
+- **config/** php type configuration file similar to laravel
+- **includes/**  php source files
 - **languages/** translation files
-- **public/** compiled script source and static contents
+- **public/** compiled script and static contents
 - **src/** typescript, javascript, and vue sources
+- **tests/** unit tests files
+
