@@ -34,6 +34,6 @@ Also, don't forget to update readme.txt with your plugin details.
 - **languages/** translation files
 - **public/** compiled script and static contents.  Support limited local test of compiled `vue` assets.
 - **src/** typescript, javascript, and vue sources
-  * using laravel mix to support multiple admin or frontends `vue` app.  This support is also support inside of `includes/Frontend.php`
+  * using laravel-mix to support multiple admin or frontends `vue` app.  This support is also translate inside of `includes/Frontend.php`
 - **tests/** unit tests files
   * support both php and javascript unit testing
