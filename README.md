@@ -24,13 +24,16 @@ composer app:package
 
 Also, don't forget to update readme.txt with your plugin details.
 
-# folder structures
+# Folder structures / Features
 
 - **assets/** image, css, and sass/scss files
+  * `sass` support but can easily convert to `postcss` for use with Tailwind CSS
 - **config/** php type configuration file similar to laravel
 - **includes/**  php source files
+  * structural layout on how to: DB Migration, Admin pages, Frontend pages, WP_CLI setup, REST API, and Assets management.
 - **languages/** translation files
-- **public/** compiled script and static contents
+- **public/** compiled script and static contents.  Support limited local test of compiled `vue` assets.
 - **src/** typescript, javascript, and vue sources
+  * using laravel mix to support multiple admin or frontends `vue` app.  This support is also support inside of `includes/Frontend.php`
 - **tests/** unit tests files
-
+  * support both php and javascript unit testing
