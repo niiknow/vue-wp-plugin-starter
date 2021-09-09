@@ -7,29 +7,35 @@ namespace Baseapp;
  */
 class FrontendLoader
 {
+	/**
+	 * The application domain
+	 *
+	 * @var string
+	 */
     private $prefix;
 
     /**
-     * Initialize this class
+     * Initialize this class.
+     *
+     * @param string $prefix
      */
-    public function __construct($prefix)
+    public function __construct( $prefix )
     {
         $this->prefix = $prefix;
 
     	// let say your prefix is wp-awesome-plugin, then it will be wp-awesome-plugin-vue-app
         add_shortcode( $this->prefix . '-vue-app', [ $this, 'render_frontend' ]);
-
     }
 
     /**
-     * Render frontend app
+     * Render frontend app.
      *
      * @param  array  $atts
      * @param  string $content
      *
      * @return string
      */
-    public function render_frontend($atts, $content = '')
+    public function render_frontend( $atts, $content = '' )
     {
     	// use postfix to handle multiple frontend app
     	// See Assets.php to add additional frontend js and css

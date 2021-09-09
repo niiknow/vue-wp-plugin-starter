@@ -3,6 +3,7 @@ namespace Baseapp;
 
 /**
  * API routes loader
+ *
  */
 class ApiRoutes
 {

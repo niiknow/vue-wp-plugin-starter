@@ -2,27 +2,32 @@
 namespace Baseapp;
 
 /**
- * Scripts and styles helper
+ * Scripts and styles helper.
+ *
  */
 class Assets
 {
+	/**
+	 * The application domain
+	 *
+	 * @var string
+	 */
 	private $prefix;
 
 	/**
-	 * Initialize this class
+	 * Initialize this class.
+	 *
+	 * @param string $prefix
 	 */
     function __construct($prefix)
     {
     	$this->prefix = $prefix;
-        if (is_admin()) {
-            add_action('admin_enqueue_scripts', [ $this, 'register' ]);
-        } else {
-            add_action('wp_enqueue_scripts', [ $this, 'register' ]);
-        }
+
+        add_action( is_admin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts', [ $this, 'register' ] );
     }
 
     /**
-     * Register our app scripts and styles
+     * Register our app scripts and styles.
      *
      * @return void
      */
@@ -33,13 +38,13 @@ class Assets
     }
 
     /**
-     * Register scripts
+     * Register scripts.
      *
      * @param  array $scripts
      *
      * @return void
      */
-    private function register_scripts($scripts)
+    private function register_scripts( $scripts )
     {
         foreach ($scripts as $handle => $script) {
             $deps      = isset($script['deps']) ? $script['deps'] : false;
@@ -59,10 +64,11 @@ class Assets
      */
     public function register_styles($styles)
     {
-        foreach ($styles as $handle => $style) {
-            $deps = isset($style['deps']) ? $style['deps'] : false;
+        foreach ($styles as $handle => $style)
+        {
+            $deps = isset( $style['deps'] ) ? $style['deps'] : false;
 
-            wp_register_style($handle, $style['src'], $deps, \Baseapp\Main::VERSION);
+            wp_register_style( $handle, $style['src'], $deps, \Baseapp\Main::VERSION );
         }
     }
 
@@ -74,7 +80,7 @@ class Assets
     public function get_scripts()
     {
     	$assets_url = \Baseapp\Main::$BASEURL . '/public';
-    	$plugin_dir =\Baseapp\Main::$PLUGINDIR .  '/public';
+    	$plugin_dir = \Baseapp\Main::$PLUGINDIR .  '/public';
         $prefix     = ''; // defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.min' : '';
 
         $scripts = [
@@ -117,7 +123,7 @@ class Assets
     }
 
     /**
-     * Get registered styles
+     * Get registered styles.
      *
      * @return array
      */

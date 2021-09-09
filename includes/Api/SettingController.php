@@ -2,14 +2,21 @@
 namespace Baseapp\Api;
 
 /**
- * Backend controller
+ * Backend settings controller
+ *
  */
 class SettingController extends \WP_REST_Controller
 {
+	/**
+	 * The application domain
+	 *
+	 * @var string
+	 */
 	private $prefix;
 
     /**
-     * Initialize this class
+     * Initialize this class.
+     *
      */
     public function __construct()
     {

@@ -3,9 +3,15 @@ namespace Baseapp;
 
 /**
  * Admin pages loader
+ *
  */
 class AdminLoader
 {
+	/**
+	 * The application domain
+	 *
+	 * @var string
+	 */
 	protected $prefix;
 
 	/**
@@ -27,7 +33,7 @@ class AdminLoader
         global $submenu;
 
         $capability = 'manage_options';
-        $slug       = 'vue-app';
+        $slug       = $this->prefix;
 
         $hook = add_menu_page(
         	esc_html__('SLS Grid', $this->prefix),
@@ -50,7 +56,7 @@ class AdminLoader
             	esc_html__('Settings',  $this->prefix),
             	esc_html__('Settings',  $this->prefix),
             	$capability,
-            	'admin.php?page=vue-app#/settings'
+            	"admin.php?page={$slug}#/settings"
             );
         }
     }

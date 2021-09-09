@@ -3,6 +3,7 @@ namespace Baseapp;
 
 /**
  * Implements example command.
+ *
  */
 class ExampleCommand {
 

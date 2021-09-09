@@ -29,7 +29,7 @@ final class Migrations
 	 * @param  string $currentVersion the current version
 	 * @return Migrations
 	 */
-	public function run($prefix, $currentVersion)
+	public function run( $prefix, $currentVersion )
 	{
 		if (! current_user_can('activate_plugins')) {
 			return;
@@ -38,7 +38,6 @@ final class Migrations
 		// Explicitly set the character set and collation when creating the tables
 		$this->db_charset = ( defined( 'DB_CHARSET' && '' !== DB_CHARSET ) ) ? DB_CHARSET : 'utf8';
 		$this->db_collate = ( defined( 'DB_COLLATE' && '' !== DB_COLLATE ) ) ? DB_COLLATE : 'utf8_general_ci';
-
 
 		$lastVersion = get_option( $prefix . '_last_migrated_version', '0.0.0' );
 
@@ -55,6 +54,14 @@ final class Migrations
 	    return $this;
 	}
 
+	/**
+	 * Function that help apply application migration.
+	 *
+	 * @param  string $lastVersion    the migrated version
+	 * @param  string $applyVersion   the migration to apply version
+	 * @param  string $migration_func the migration function
+	 * @return void
+	 */
 	public function applyMigration($lastVersion, $applyVersion, $migration_func)
 	{
 	    if (version_compare( $lastVersion, $applyVersion, '>=' )) {
@@ -64,8 +71,15 @@ final class Migrations
 	    call_user_func(array($this, $migration_func));
 	}
 
-	public function cleanUp($prefix, $settings) {
-
+	/**
+	 * Database cleanup to run during plugin uninstall.
+	 *
+	 * @param  string $prefix
+	 * @param  array  $settings
+	 * @return void
+	 */
+	public function cleanUp($prefix, $settings)
+	{
 		// don't do anything if configured to not cleanup db
 		if (! isset($settings['cleanup_db_on_plugin_uninstall']) || ! $settings['cleanup_db_on_plugin_uninstall']) {
 			return;
@@ -81,10 +95,21 @@ final class Migrations
 		delete_option($prefix . '_settings');
 	}
 
-	public function migration_0_0_0() {
+	/**
+	 * DB Migration for v0.0.0
+	 *
+	 * @return void
+	 */
+	public function migration_0_0_0()
+	{
 		// dummy method to demonstrate migration
 	}
 
+	/**
+	 * DB Migration for v0.0.1
+	 *
+	 * @return void
+	 */
 	public function migration_0_0_1() {
 		global $wpdb;
 

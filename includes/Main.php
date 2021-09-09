@@ -9,21 +9,22 @@ namespace Baseapp;
 final class Main
 {
 	/**
-	 * Plugin version
+	 * Plugin version.
 	 *
 	 * @var string
 	 */
 	const VERSION = '0.1.0';
 
 	/**
-	 * A unique plugin prefix to use throughout your plugin
+	 * A unique plugin prefix to use throughout your plugin.
+	 * This is also your application domain.
 	 *
 	 * @var string
 	 */
 	const PREFIX = 'baseapp';
 
 	/**
-	 * Holds various class instances
+	 * Holds various class instances.
 	 *
 	 * @var array
 	 */
@@ -31,12 +32,14 @@ final class Main
 
 	/**
 	 * The singleton instance.
+	 *
 	 * @var Main
 	 */
 	private static $instance;
 
 	/**
-	 * The filename
+	 * The plugin filename.
+	 *
 	 * @var string
 	 */
 	public static $PLUGINFILE = '';
@@ -49,7 +52,7 @@ final class Main
 	public static $BASEURL = '.';
 
 	/**
-	 * The plugin dir, default ''
+	 * The plugin dir, default to empty string
 	 * @var string
 	 */
 	public static $PLUGINDIR = '';
@@ -62,7 +65,7 @@ final class Main
 	 *
 	 * @param $filename the plugin file name
 	 */
-    private function __construct($filename)
+    private function __construct( $filename )
     {
         self::$PLUGINFILE = $filename;
         self::$PLUGINDIR  = dirname( $filename );
@@ -77,23 +80,36 @@ final class Main
 	 *
 	 * @return Main the singleton instance
 	 */
-	public static function get_instance($filename)
+	public static function get_instance( $filename )
 	{
 		if (! self::$instance) {
-        	self::$instance = new self($filename);
+        	self::$instance = new self( $filename );
 		}
 
     	return self::$instance;
 	}
 
 	/**
-	 * Activate and initialize the plugin
+	 * Do stuff during plugin uninstall.
+	 *
+	 */
+	public static function uninstall_plugin()
+	{
+		flush_rewrite_rules();
+
+		$setting_key = self::PREFIX . '_settings';
+		$settings    = get_option($setting_key, []);
+		(new \Baseapp\Migrations())->cleanUp( self::PREFIX, $settings);
+	}
+
+	/**
+	 * Activate and initialize the plugin.
 	 *
 	 */
 	public function run()
 	{
 		// set base url from plugin file name
-        self::$BASEURL = plugins_url('', self::$PLUGINFILE);
+        self::$BASEURL = plugins_url( '', self::$PLUGINFILE );
 
 		register_activation_hook( self::$PLUGINFILE, array( $this, 'activate_plugin' ) );
 		register_deactivation_hook( self::$PLUGINFILE, array( $this, 'deactivate_plugin' ) );
@@ -102,7 +118,7 @@ final class Main
 		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
 
 		// setup cli
-		if (defined( 'WP_CLI' ) && \WP_CLI) {
+		if ( defined( 'WP_CLI' ) && \WP_CLI ) {
 			$this->container['cli'] = new \Baseapp\CliLoader( self::PREFIX );
 		}
 
@@ -150,9 +166,8 @@ final class Main
 	}
 
 	/**
-	 * Placeholder for activation function
+	 * Plugin activation function.
 	 *
-	 * Nothing being called here yet.
 	 */
 	public function activate_plugin()
 	{
@@ -163,7 +178,7 @@ final class Main
 	}
 
 	/**
-	 * Do stuff during plugin deactivation
+	 * Do stuff during plugin deactivation.
 	 *
 	 */
 	public function deactivate_plugin()
@@ -176,30 +191,22 @@ final class Main
 		delete_option( self::PREFIX . '_version' );
 	}
 
+	/**
+	 * Register settings link that display on the plugins listing page.
+	 *
+	 * @param  array $links
+	 * @return array
+	 */
 	public function register_settings_link($links)
 	{
-		$settings_link = '<a href="admin.php?page=vue-app#/settings"">Settings</a>';
+		$settings_link = '<a href="admin.php?page=' . $this->prefix . '#/settings">Settings</a>';
     	array_unshift($links, $settings_link);
 
     	return $links;
 	}
 
-
 	/**
-	 * Do stuff during plugin uninstall
-	 *
-	 */
-	public static function uninstall_plugin()
-	{
-		flush_rewrite_rules();
-
-		$setting_key = self::PREFIX . '_settings';
-		$settings    = get_option($setting_key, []);
-		(new \Baseapp\Migrations())->cleanUp( self::PREFIX, $settings);
-	}
-
-	/**
-	 * init hook handler
+	 * Handler for init_hook
 	 *
 	 * @return void
 	 */
@@ -213,7 +220,6 @@ final class Main
 		{
 			$ctx = new \Baseapp\AdminLoader( self::PREFIX );
 			$this->container['admin'] = $ctx;
-
 		}
 
 		if ($this->is_request( 'frontend' ))
@@ -231,7 +237,7 @@ final class Main
 	}
 
 	/**
-	 * Initialize plugin for localization
+	 * Initialize plugin for localization.
 	 *
 	 * @uses load_plugin_textdomain()
 	 */

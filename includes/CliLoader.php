@@ -2,7 +2,8 @@
 namespace Baseapp;
 
 /**
- * Cli commands loader
+ * Cli commands loader.
+ *
  */
 class CliLoader
 {
@@ -13,6 +14,8 @@ class CliLoader
     {
     	// this is where you can load Cli
     	\WP_CLI::add_command( $prefix, \Baseapp\ExampleCommand::class );
+
+    	// additional command can be registered here
     	// \WP_CLI::add_command( $prefix, \Baseapp\IndexerCommand::class );
     }
 }
