@@ -20,7 +20,7 @@ final class Main
 	 *
 	 * @var string
 	 */
-	const PREFIX = 'my_unique_plugin_prefix';
+	const PREFIX = 'baseapp';
 
 	/**
 	 * Holds various class instances
@@ -49,7 +49,7 @@ final class Main
 	public static $BASEURL = '.';
 
 	/**
-	 * The plugin dir
+	 * The plugin dir, default ''
 	 * @var string
 	 */
 	public static $PLUGINDIR = '';
@@ -95,15 +95,19 @@ final class Main
 		// set base url from plugin file name
         self::$BASEURL = plugins_url('', self::$PLUGINFILE);
 
-		register_activation_hook( __FILE__, array( $this, 'activate_plugin' ) );
-		register_deactivation_hook( __FILE__, array( $this, 'deactivate_plugin' ) );
+		register_activation_hook( self::$PLUGINFILE, array( $this, 'activate_plugin' ) );
+		register_deactivation_hook( self::$PLUGINFILE, array( $this, 'deactivate_plugin' ) );
+		register_uninstall_hook( self::$PLUGINFILE, array( __CLASS__, 'uninstall_plugin') );
 
 		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
 
 		// setup cli
-		if ( defined( 'WP_CLI' ) && WP_CLI ) {
-			$this->container['cli'] = new \Baseapp\CliLoader();
+		if (defined( 'WP_CLI' ) && \WP_CLI) {
+			$this->container['cli'] = new \Baseapp\CliLoader( self::PREFIX );
 		}
+
+        $plugin = plugin_basename(self::$PLUGINFILE);
+		add_filter("plugin_action_links_$plugin", array( $this, 'register_settings_link' ));
 	}
 
 	/**
@@ -152,25 +156,10 @@ final class Main
 	 */
 	public function activate_plugin()
 	{
-		$installed = get_option( self::PREFIX . '_installed' );
+		(new \Baseapp\Migrations())->run( self::PREFIX, self::VERSION );
 
-		if (! $installed)
-		{
-			update_option( self::PREFIX . '_installed', time() );
-
-			// TIP: this is where you can add your database init
-			// create tables etc...
-			// update_option( self::PREFIX . '_dbmigrate', 1 );
-		}
-
+		// set the current version to activate plugin
 		update_option( self::PREFIX . '_version', self::VERSION );
-
-		// TIP: this is where you can add your database migrate script
-		// based on version in the _dbmigrate version
-		//
-		// $version = get_option( self::PREFIX . '_dbmigrate');
-		// for: $version ... current_dbversion, run sql migrate ($version)
-		// $update_option( self::PREFIX . '_dbmigrate', current_dbversion);
 	}
 
 	/**
@@ -181,8 +170,32 @@ final class Main
 	{
 		flush_rewrite_rules();
 
-		// TIP: check settings if need to remove data upon plugin deactivation
-		// remove data from options table and database
+		// do stuff such as: shut off cron tasks, etc...
+
+		// remove version number to deactivate plugin
+		delete_option( self::PREFIX . '_version' );
+	}
+
+	public function register_settings_link($links)
+	{
+		$settings_link = '<a href="admin.php?page=vue-app#/settings"">Settings</a>';
+    	array_unshift($links, $settings_link);
+
+    	return $links;
+	}
+
+
+	/**
+	 * Do stuff during plugin uninstall
+	 *
+	 */
+	public static function uninstall_plugin()
+	{
+		flush_rewrite_rules();
+
+		$setting_key = self::PREFIX . '_settings';
+		$settings    = get_option($setting_key, []);
+		(new \Baseapp\Migrations())->cleanUp( self::PREFIX, $settings);
 	}
 
 	/**
@@ -193,26 +206,28 @@ final class Main
 	public function init_hook_handler()
 	{
 		// initialize assets
-		$this->container['assets'] = new \Baseapp\Assets();
+		$this->container['assets'] = new \Baseapp\Assets( self::PREFIX );
 
 		// initialize the various loader classes
 		if ($this->is_request( 'admin' ))
 		{
-			$this->container['admin'] = new \Baseapp\AdminLoader();
+			$ctx = new \Baseapp\AdminLoader( self::PREFIX );
+			$this->container['admin'] = $ctx;
+
 		}
 
 		if ($this->is_request( 'frontend' ))
 		{
-			$this->container['frontend'] = new \Baseapp\FrontendLoader();
+			$this->container['frontend'] = new \Baseapp\FrontendLoader( self::PREFIX );
 		}
 
 		if ($this->is_request( 'ajax' ))
 		{
-			// $this->container['ajax'] =  new \BaseApp\AjaxLoader();
+			// $this->container['ajax'] =  new \Baseapp\AjaxLoader( self::PREFIX );
 		}
 
 		// finally load api routes
-		$this->container['api'] = new \Baseapp\ApiRoutes();
+		$this->container['api'] = new \Baseapp\ApiRoutes( self::PREFIX );
 	}
 
 	/**

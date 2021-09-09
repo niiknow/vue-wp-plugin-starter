@@ -7,13 +7,18 @@ namespace Baseapp;
  */
 class FrontendLoader
 {
-	/**
-	 * Initialize this class
-	 */
-    public function __construct()
+    private $prefix;
+
+    /**
+     * Initialize this class
+     */
+    public function __construct($prefix)
     {
+        $this->prefix = $prefix;
+
     	// let say your prefix is wp-awesome-plugin, then it will be wp-awesome-plugin-vue-app
-        add_shortcode(\Baseapp\Main::PREFIX . '-vue-app', [ $this, 'render_frontend' ]);
+        add_shortcode( $this->prefix . '-vue-app', [ $this, 'render_frontend' ]);
+
     }
 
     /**
@@ -34,8 +39,17 @@ class FrontendLoader
 	    ), $atts );
 
 		$postfix = esc_attr($a['postfix']);
-        wp_enqueue_style(\Baseapp\Main::PREFIX . '-' . $postfix);
-        wp_enqueue_script(\Baseapp\Main::PREFIX . '-' . $postfix);
+        wp_enqueue_style( $this->prefix . '-' . $postfix);
+        wp_enqueue_script( $this->prefix . '-' . $postfix);
+
+        $indexer = new SearchIndexer( $this->prefix );
+
+		// output data for use on client-side
+    	// https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
+    	wp_localize_script( $this->prefix . '-frontend', 'vue_wp_plugin_config', [
+		    'taxonomies' => $indexer->taxonomies,
+		    'indexFileUrl' => $indexer->indexFileUrl
+		] );
 
         $content .= '<div id="' . esc_attr($a['id']) . '" ></div>';
 

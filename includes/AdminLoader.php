@@ -6,11 +6,14 @@ namespace Baseapp;
  */
 class AdminLoader
 {
+	protected $prefix;
+
 	/**
 	 * Initialize this class
 	 */
-    public function __construct()
+    public function __construct($prefix)
     {
+    	$this->prefix = $prefix;
         add_action('admin_menu', [ $this, 'admin_menu' ]);
     }
 
@@ -27,40 +30,29 @@ class AdminLoader
         $slug       = 'vue-app';
 
         $hook = add_menu_page(
-        	__('Vue App', \Baseapp\Main::PREFIX),
-        	__('Vue App', \Baseapp\Main::PREFIX),
+        	esc_html__('SLS Grid', $this->prefix),
+        	esc_html__('SLS Grid', $this->prefix),
         	$capability,
         	$slug,
         	[ $this, 'plugin_page' ],
         	'dashicons-text'  // tip: https://developer.wordpress.org/resource/dashicons
         );
 
-        if ( current_user_can( $capability ) ) {
+        if (current_user_can( $capability )) {
            add_submenu_page( $slug,
-            	__('Dashboard',  \Baseapp\Main::PREFIX),
-            	__('Dashboard',  \Baseapp\Main::PREFIX),
+            	esc_html__('Dashboard',  $this->prefix),
+            	esc_html__('Dashboard',  $this->prefix),
             	$capability,
-            	'admin.php?page=' . $slug . '#/'
+            	$slug,
+            	[ $this, 'plugin_page' ]
             );
             add_submenu_page( $slug,
-            	__('Settings',  \Baseapp\Main::PREFIX),
-            	__('Settings',  \Baseapp\Main::PREFIX),
+            	esc_html__('Settings',  $this->prefix),
+            	esc_html__('Settings',  $this->prefix),
             	$capability,
-            	'admin.php?page=' . $slug . '#/settings'
+            	'admin.php?page=vue-app#/settings'
             );
         }
-
-        add_action('load-' . $hook, [ $this, 'init_hooks']);
-    }
-
-    /**
-     * Initialize our hooks for the admin page
-     *
-     * @return void
-     */
-    public function init_hooks()
-    {
-        add_action('admin_enqueue_scripts', [ $this, 'enqueue_scripts' ]);
     }
 
     /**
@@ -70,8 +62,9 @@ class AdminLoader
      */
     public function enqueue_scripts()
     {
-        wp_enqueue_style(\Baseapp\Main::PREFIX . '-admin');
-        wp_enqueue_script(\Baseapp\Main::PREFIX . '-admin');
+        wp_enqueue_style($this->prefix . '-bootstrap');
+        wp_enqueue_style($this->prefix . '-admin');
+        wp_enqueue_script($this->prefix . '-admin');
     }
 
     /**
@@ -81,11 +74,13 @@ class AdminLoader
      */
     public function plugin_page()
     {
-    	$settingController = new SettingController();
+    	$this->enqueue_scripts();
+
+    	$settingController = new Api\SettingController();
 
     	// output data for use on client-side
     	// https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
-    	wp_localize_script( \Baseapp\Main::PREFIX . '-data', 'vue_wp_plugin_config', [
+    	wp_localize_script( $this->prefix . '-admin', 'vue_wp_plugin_config', [
 		    'rest' => [
 		        'endpoints' => [
 		            'settings' => esc_url_raw( rest_url( $settingController->get_endpoint() ) ),
@@ -95,6 +90,7 @@ class AdminLoader
 		    ],
 		] );
 
-        echo '<div class="admin-app-wrapper"><div id="vue-admin-app"></div></div>';
+		$content = '<div class="admin-app-wrapper"><div id="vue-admin-app"></div></div>';
+        echo $content;
     }
 }

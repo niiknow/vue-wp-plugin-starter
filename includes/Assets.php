@@ -6,15 +6,18 @@ namespace Baseapp;
  */
 class Assets
 {
+	private $prefix;
+
 	/**
 	 * Initialize this class
 	 */
-    function __construct()
+    function __construct($prefix)
     {
+    	$this->prefix = $prefix;
         if (is_admin()) {
-            add_action('admin_enqueue_scripts', [ $this, 'register' ], 5);
+            add_action('admin_enqueue_scripts', [ $this, 'register' ]);
         } else {
-            add_action('wp_enqueue_scripts', [ $this, 'register' ], 5);
+            add_action('wp_enqueue_scripts', [ $this, 'register' ]);
         }
     }
 
@@ -71,35 +74,41 @@ class Assets
     public function get_scripts()
     {
     	$assets_url = \Baseapp\Main::$BASEURL . '/public';
-        $prefix     = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.min' : '';
+    	$plugin_dir =\Baseapp\Main::$PLUGINDIR .  '/public';
+        $prefix     = ''; // defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.min' : '';
 
         $scripts = [
             'vuejs' => [
-                'src'       => 'https://cdn.jsdelivr.net/npm/vue@3.1.4/dist/vue.global.prod.js',
-                'version'   => '3.1.4',
+                'src'       => 'https://cdn.jsdelivr.net/npm/vue@3.2.11/dist/vue.global.prod.js',
+                'version'   => '3.2.11',
                 'in_footer' => true
             ],
-            \Baseapp\Main::PREFIX . '-manifest' => [
+            'bootstrap' => [
+                'src'       => 'https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.min.js',
+                'version'   => 'latest',
+                'in_footer' => true
+            ],
+            $this->prefix . '-manifest' => [
                 'src'       => $assets_url . '/js/manifest.js',
-                'version'   => filemtime($assets_url . '/js/manifest.js'),
+                'version'   => filemtime($plugin_dir . '/js/manifest.js'),
                 'in_footer' => true
             ],
-            \Baseapp\Main::PREFIX . '-vendor' => [
-                'src'       => $assets_url . '/js/vendors.js',
-                'deps'      => [ 'vuejs', \Baseapp\Main::PREFIX . '-manifest' ],
-                'version'   => filemtime($assets_url . '/js/vendors.js'),
+            $this->prefix . '-vendor' => [
+                'src'       => $assets_url . '/js/vendor.js',
+                'deps'      => [ 'vuejs', $this->prefix . '-manifest' ],
+                'version'   => filemtime($plugin_dir . '/js/vendor.js'),
                 'in_footer' => true
             ],
-            \Baseapp\Main::PREFIX . '-frontend' => [
+            $this->prefix . '-frontend' => [
                 'src'       => $assets_url . '/js/frontend.js',
-                'deps'      => [ \Baseapp\Main::PREFIX . '-vendor' ],
-                'version'   => filemtime($assets_url . '/js/frontend.js'),
+                'deps'      => [ $this->prefix . '-vendor' ],
+                'version'   => filemtime($plugin_dir . '/js/frontend.js'),
                 'in_footer' => true
             ],
-            \Baseapp\Main::PREFIX . '-admin' => [
+            $this->prefix . '-admin' => [
                 'src'       => $assets_url . '/js/admin.js',
-                'deps'      => [ \Baseapp\Main::PREFIX . '-vendor' ],
-                'version'   => filemtime($assets_url . '/js/admin.js'),
+                'deps'      => [ 'bootstrap', $this->prefix . '-vendor' ],
+                'version'   => filemtime($plugin_dir . '/js/admin.js'),
                 'in_footer' => true
             ]
         ];
@@ -117,10 +126,13 @@ class Assets
         $assets_url = \Baseapp\Main::$BASEURL . '/public';
 
         $styles = [
-            \Baseapp\Main::PREFIX . '-frontend' => [
+            $this->prefix . '-bootstrap' => [
+                'src' =>  'https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css'
+            ],
+            $this->prefix . '-frontend' => [
                 'src' =>  $assets_url . '/css/frontend.css'
             ],
-            \Baseapp\Main::PREFIX . '-admin' => [
+            $this->prefix . '-admin' => [
                 'src' =>  $assets_url . '/css/admin.css'
             ],
         ];

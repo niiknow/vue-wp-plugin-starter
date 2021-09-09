@@ -1,18 +1,27 @@
 <?php
+// don't call the file directly
+if (! defined( 'ABSPATH' )) exit;
 
 return array(
-	'enable_debug_messages' => [
-		'name' => __( 'Enable Debug Messages', \Baseapp\Main::PREFIX ),
+    'enable_debug_messages' => array(
+        'name' => __( 'Enable Debug Messages', \Baseapp\Main::PREFIX ),
 		'description' => __( 'When enabled the plugin will output debug messages in the JavaScript console.', \Baseapp\Main::PREFIX ),
 		'type' => 'toggle',
 		'code' => 'css',
 		'default' => false
-	],
-	'cleanup_db_on_plugin_deactivation' => [
-		'name' => __( 'Cleanup database upon plugin deactivation.', \Baseapp\Main::PREFIX ),
-		'description' => __( 'When enabled the plugin will remove any database data upon plugin deactivation.', \Baseapp\Main::PREFIX ),
+	),
+	'cleanup_db_on_plugin_uninstall' => array(
+		'name' => __( 'Cleanup database upon plugin uninstall.', \Baseapp\Main::PREFIX ),
+		'description' => __( 'When enabled the plugin will remove any database data upon plugin uninstall.', \Baseapp\Main::PREFIX ),
 		'type' => 'toggle',
 		'code' => 'css',
 		'default' => false
-	]
+	),
+	'include_post_types' => array(
+		'name' => __( 'Post Types', \Baseapp\Main::PREFIX ),
+		'description' => __( 'Which post types do you want to index?', \Baseapp\Main::PREFIX ),
+		'type' => 'dropdownMultiselect',
+		'optionsCallback' => function() { return get_post_types( '', 'names' ); },
+		'default' => array( 'post', 'page' ),
+	)
 );

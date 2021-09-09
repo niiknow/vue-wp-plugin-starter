@@ -3,12 +3,12 @@
 Plugin Name: Vue Starter Plugin
 Plugin URI: https://example.com/
 Description: A WordPress Vue.js starter plugin
-Version: 0.1
+Version: 0.1.0
 Author: Your Name
 Author URI: https://example.com/
 License: GPL3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Text Domain: baseplugin
+Text Domain: baseapp
 Domain Path: /languages
 */
 

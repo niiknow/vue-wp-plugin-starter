@@ -43,6 +43,11 @@
       <property name="eolChar" value="\n"/>
     </properties>
   </rule>
+  <rule ref="Generic.Metrics.CyclomaticComplexity">
+    <properties>
+       <property name="complexity" value="20"/>
+    </properties>
+  </rule>
 
 
   <!-- All PHP files MUST end with a single blank line. -->
