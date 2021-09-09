@@ -13,6 +13,6 @@ class CliLoader
     {
     	// this is where you can load Cli
     	\WP_CLI::add_command( $prefix, \Baseapp\ExampleCommand::class );
-    	\WP_CLI::add_command( $prefix, \Baseapp\IndexerCommand::class );
+    	// \WP_CLI::add_command( $prefix, \Baseapp\IndexerCommand::class );
     }
 }
