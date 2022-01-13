@@ -22,6 +22,13 @@ To build `dist.zip` for deployment:
 composer app:package
 ```
 
+Deploy `dist.zip` to a wordpress website:
+```shell
+cd your-wp-site-root
+cd wp-content/plugins
+unzip dist.zip -d wp-your-plugin-folder-name
+```
+
 Also, don't forget to update readme.txt with your plugin details.
 
 # Folder structures / Features
@@ -36,6 +43,5 @@ Also, don't forget to update readme.txt with your plugin details.
 - **src/** typescript, javascript, and vue sources
   * using laravel-mix to support multiple admin or frontends `vue` app.  This support also translate inside of `includes/Frontend.php`
   * eslint for linting and formatting support
-  *
 - **tests/** unit tests files
   * support both php (phpunit) and javascript (jest) unit testing
