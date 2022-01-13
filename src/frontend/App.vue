@@ -9,7 +9,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'App1'
+  name: 'AppOne'
 })
 </script>
 

@@ -4,7 +4,7 @@
     "type": "wordpress-plugin",
     "license": "GPL-3.0",
     "require": {
-        "php": "^7.3|^8.0"
+        "php": "^7.4|^8.0"
     },
     "require-dev": {
         "brain/monkey": "^2.6",
@@ -34,6 +34,7 @@
             "npm run production",
             "composer update",
             "composer install --no-dev --optimize-autoloader",
+            "rm -f dist.zip",
             "deployStash=`git stash create`; git archive --worktree-attributes --format=zip -o dist.zip ${deployStash:-HEAD}",
             "zip -ur dist.zip ./vendor",
             "composer update"

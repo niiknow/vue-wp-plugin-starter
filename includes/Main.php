@@ -118,7 +118,7 @@ final class Main
 		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
 
 		// setup cli
-		if ( defined( 'WP_CLI' ) && \WP_CLI ) {
+		if (defined( 'WP_CLI' ) && \WP_CLI) {
 			$this->container['cli'] = new \Baseapp\CliLoader( self::PREFIX );
 		}
 
