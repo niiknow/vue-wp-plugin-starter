@@ -9,6 +9,7 @@ import config from '@/shared/config'
 const win: any = config(window)
 const app = createApp(App)
 
+// allow for using this.$win inside of a component
 app.config.globalProperties.$win = win;
 
 app.use(router)
