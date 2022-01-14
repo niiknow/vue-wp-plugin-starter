@@ -1,0 +1,9 @@
+.router-link-active {
+  @apply border-green-500;
+  @apply font-semibold;
+  @apply border-b-4;
+}
+
+.main-wrapper {
+  padding-top: 70px;
+}

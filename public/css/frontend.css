@@ -1,1 +1,11 @@
+.router-link-active {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 197 94 / var(--tw-border-opacity));
+  font-weight: 600;
+  border-bottom-width: 0.25rem;
+}
+
+.main-wrapper {
+  padding-top: 4.375rem;
+}
 
