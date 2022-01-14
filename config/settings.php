@@ -16,12 +16,5 @@ return array(
 		'type' => 'toggle',
 		'code' => 'css',
 		'default' => false
-	),
-	'include_post_types' => array(
-		'name' => __( 'Post Types', \Baseapp\Main::PREFIX ),
-		'description' => __( 'Which post types do you want to index?', \Baseapp\Main::PREFIX ),
-		'type' => 'dropdownMultiselect',
-		'optionsCallback' => function() { return get_post_types( '', 'names' ); },
-		'default' => array( 'post', 'page' ),
 	)
 );
