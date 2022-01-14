@@ -62,6 +62,7 @@
     "vue-axios": "^3.4.0",
     "vue-loader": "^16.5.0",
     "vue-router": "^4.0.10",
+    "vue3-scroll-spy": "^1.0.8",
     "webpack": "^5.66.0"
   }
 }
