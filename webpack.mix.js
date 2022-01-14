@@ -36,15 +36,13 @@ mix.setPublicPath('public/');
 mix.ts('src/admin/admin.ts', 'js')
   .vue({
     version: 3,
-    extractStyles: true,
-    globalStyles: false
+    extractStyles: true
   });
 
 mix.ts('src/frontend/frontend.ts', 'js')
   .vue({
     version: 3,
-    extractStyles: true,
-    globalStyles: false
+    extractStyles: true
   });
 
 // bare minimum packages: ['core-js', 'vue-router', '@vue/devtools-api']

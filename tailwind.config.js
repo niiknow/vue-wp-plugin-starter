@@ -4,7 +4,7 @@ module.exports = {
     './public/admin.html',
     './public/frontend.html',
     './src/**/*.{js,jsx,ts,tsx,vue}',
-    './src/**/*.{css,scss}',
+    './assets/*.{css,scss}',
   ],
   theme: {
     extend: {},
