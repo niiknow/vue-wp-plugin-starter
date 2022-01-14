@@ -61,7 +61,7 @@ var _hoisted_4 = {
 };
 
 var _hoisted_5 = /*#__PURE__*/(0, vue_1.createElementVNode)("div", null, [/*#__PURE__*/(0, vue_1.createElementVNode)("a", {
-  href: "/",
+  href: "../",
   class: "flex items-center py-4 px-2"
 }, [/*#__PURE__*/(0, vue_1.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
