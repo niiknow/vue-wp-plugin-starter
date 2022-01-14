@@ -33,31 +33,27 @@ const webpackConfig = {
  */
 mix.setPublicPath('public/');
 
-mix.ts('src/admin/admin.ts', 'js/')
+mix.ts('src/admin/admin.ts', 'js')
   .vue({
     version: 3,
-    // extractStyles: true,
-    // globalStyles: false
+    extractStyles: true,
+    globalStyles: false
   });
 
-mix.ts('src/frontend/frontend.ts', 'js/')
+mix.ts('src/frontend/frontend.ts', 'js')
   .vue({
     version: 3,
-    // extractStyles: true,
-    // globalStyles: false
+    extractStyles: true,
+    globalStyles: false
   });
 
 // bare minimum packages: ['core-js', 'vue-router', '@vue/devtools-api']
 mix.extract(); // empty to extract all
 
-mix.sass('assets/admin.scss', 'css/')
-   .sass('assets/frontend.scss', 'css/');
-
-/*
-
 const postcssPlugins = [
-  require('postcss-import'),
+  require('tailwindcss')('./tailwind.config.js'),
   require('autoprefixer'),
+  require('postcss-import')
 ];
 
 mix.options({
@@ -71,7 +67,6 @@ mix.options({
     'assets/frontend.css',
     'css'
   )
-*/
 
 if (mix.inProduction()) {
   mix.version().sourceMaps();
@@ -81,7 +76,7 @@ mix.webpackConfig(webpackConfig)
   .browserSync({
     serveStatic: ['./public'],
     serveStaticOptions: {
-      extensions: ['html'] // pretty urls
+      extensions: ['html'] // don't need to provide html extension, this create pretty urls
     }
   });
 

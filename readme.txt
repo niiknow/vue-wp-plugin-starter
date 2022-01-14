@@ -1,11 +1,20 @@
-=== Plugin Name ===
+=== PLUGIN_NAME ===
 Contributors: noogen
-Donate link: https://github.com/niiknow
 Tags: vue wp plugin starter
-Tested up to: 5.7.2
+Tested up to: 5.8.3
 Stable tag: 1.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Here is a short description of the plugin. This should be no more than 150 characters. No markup here.
+Effortlessly create a new plugin with this template!
 
+For additional instructions, see: INSTRUCTION.md
+
+== Frequently Asked Questions ==
+
+None
+
+== Changelog ==
+
+= 1.0.0 =
+Initial release

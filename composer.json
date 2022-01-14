@@ -1,6 +1,4 @@
 {
-    "name": "niiknow/vue-wp-plugin-starter",
-    "description": "A WordPress Vue.js starter plugin",
     "type": "wordpress-plugin",
     "license": "GPL-3.0",
     "require": {
