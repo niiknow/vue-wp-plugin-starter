@@ -1,6 +1,8 @@
 <template>
   <div class="app-home">
-    <span>{{ msg }}</span>
+    <section class="w-full text-center">
+      {{ msg }}
+    </section>
   </div>
 </template>
 

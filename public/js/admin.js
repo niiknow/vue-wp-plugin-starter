@@ -47,18 +47,89 @@ exports.render = void 0;
 
 var vue_1 = __webpack_require__(/*! vue */ "vue");
 
-var _hoisted_1 = /*#__PURE__*/(0, vue_1.createElementVNode)("h3", null, "Backend App", -1
+var _hoisted_1 = {
+  class: "fixed w-full bg-white shadow-lg"
+};
+var _hoisted_2 = {
+  class: "max-w-6xl mx-auto px-4"
+};
+var _hoisted_3 = {
+  class: "flex justify-between"
+};
+var _hoisted_4 = {
+  class: "flex space-x-7"
+};
+
+var _hoisted_5 = /*#__PURE__*/(0, vue_1.createElementVNode)("div", null, [/*#__PURE__*/(0, vue_1.createElementVNode)("a", {
+  href: "/",
+  class: "flex items-center py-4 px-2"
+}, [/*#__PURE__*/(0, vue_1.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  class: "h-6 w-6",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  stroke: "currentColor"
+}, [/*#__PURE__*/(0, vue_1.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+})]), /*#__PURE__*/(0, vue_1.createElementVNode)("span", {
+  class: "font-semibold text-gray-500 text-lg"
+}, "Home")])], -1
 /* HOISTED */
 );
 
-var _hoisted_2 = {
+var _hoisted_6 = {
+  class: "hidden md:flex items-center space-x-1"
+};
+
+var _hoisted_7 = /*#__PURE__*/(0, vue_1.createTextVNode)("Dashboard");
+
+var _hoisted_8 = /*#__PURE__*/(0, vue_1.createTextVNode)("Settings");
+
+var _hoisted_9 = /*#__PURE__*/(0, vue_1.createElementVNode)("div", {
+  class: "hidden md:flex items-center space-x-3"
+}, [/*#__PURE__*/(0, vue_1.createElementVNode)("iframe", {
+  src: "https://ghbtns.com/github-btn.html?user=niiknow&repo=vue-wp-plugin-starter&type=star&count=true&size=large",
+  frameborder: "0",
+  scrolling: "0",
+  width: "160px",
+  height: "30px"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_10 = {
   class: "main-wrapper"
 };
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_router_link = (0, vue_1.resolveComponent)("router-link");
+
   var _component_router_view = (0, vue_1.resolveComponent)("router-view");
 
-  return (0, vue_1.openBlock)(), (0, vue_1.createElementBlock)(vue_1.Fragment, null, [_hoisted_1, (0, vue_1.createElementVNode)("div", _hoisted_2, [((0, vue_1.openBlock)(), (0, vue_1.createBlock)(_component_router_view, {
+  return (0, vue_1.openBlock)(), (0, vue_1.createElementBlock)(vue_1.Fragment, null, [(0, vue_1.createElementVNode)("nav", _hoisted_1, [(0, vue_1.createElementVNode)("div", _hoisted_2, [(0, vue_1.createElementVNode)("div", _hoisted_3, [(0, vue_1.createElementVNode)("div", _hoisted_4, [(0, vue_1.createCommentVNode)(" Website Logo "), _hoisted_5, (0, vue_1.createCommentVNode)(" Primary Navbar items "), (0, vue_1.createElementVNode)("div", _hoisted_6, [(0, vue_1.createVNode)(_component_router_link, {
+    to: "/",
+    class: "py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300"
+  }, {
+    default: (0, vue_1.withCtx)(function () {
+      return [_hoisted_7];
+    }),
+    _: 1
+    /* STABLE */
+
+  }), (0, vue_1.createVNode)(_component_router_link, {
+    to: "/settings",
+    class: "py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300"
+  }, {
+    default: (0, vue_1.withCtx)(function () {
+      return [_hoisted_8];
+    }),
+    _: 1
+    /* STABLE */
+
+  })])]), (0, vue_1.createCommentVNode)(" Secondary Navbar items "), _hoisted_9])])]), (0, vue_1.createElementVNode)("div", _hoisted_10, [((0, vue_1.openBlock)(), (0, vue_1.createBlock)(_component_router_view, {
     key: _ctx.$route.path
   }))])], 64
   /* STABLE_FRAGMENT */
@@ -307,9 +378,12 @@ var _vue = __webpack_require__(/*! vue */ "vue");
 var _hoisted_1 = {
   class: "app-dashboard"
 };
+var _hoisted_2 = {
+  class: "w-full text-center"
+};
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_1, [(0, _vue.createElementVNode)("span", null, (0, _vue.toDisplayString)(_ctx.msg), 1
+  return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_1, [(0, _vue.createElementVNode)("section", _hoisted_2, (0, _vue.toDisplayString)(_ctx.msg), 1
   /* TEXT */
   )]);
 }
@@ -336,93 +410,42 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  class: "app-settings bg-gray-100 text-gray-900 tracking-wider leading-normal"
+  class: "app-settings"
+};
+var _hoisted_2 = {
+  class: "w-full flex flex-wrap mx-auto"
+};
+var _hoisted_3 = {
+  class: "w-full lg:w-1/5 px-6 text-xl text-gray-800 leading-normal"
 };
 
-var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0, _vue.createElementVNode)("nav", {
-    id: "header",
-    class: "bg-white fixed w-full z-10 top-0 shadow"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("div", {
-    class: "w-full container mx-auto flex flex-wrap items-center justify-between my-4"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("div", {
-    class: "pl-4 md:pl-0"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("a", {
-    class: "flex items-center text-yellow-600 text-base xl:text-xl no-underline hover:no-underline font-extrabold font-sans",
-    href: "javascript:void(0)"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("svg", {
-    class: "fill-current h-6 inline-block text-yellow-600 mr-4",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 20 20"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("path", {
-    d: "M16 2h4v15a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V0h16v2zm0 2v13a1 1 0 0 0 1 1 1 1 0 0 0 1-1V4h-2zM2 2v15a1 1 0 0 0 1 1h11.17a2.98 2.98 0 0 1-.17-1V2H2zm2 8h8v2H4v-2zm0 4h8v2H4v-2zM4 4h8v4H4V4z"
-  })]), /*#__PURE__*/(0, _vue.createTextVNode)(" Multi Section Form / Scrollspy ")])]), /*#__PURE__*/(0, _vue.createElementVNode)("div", {
-    class: "pr-0 flex justify-end"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("div", {
-    class: "flex relative inline-block float-right"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("div", {
-    class: "relative text-sm"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("button", {
-    id: "userButton",
-    class: "flex items-center mr-3 shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white text-sm md:text-base font-bold py-2 px-4 rounded"
-  }, [/*#__PURE__*/(0, _vue.createTextVNode)(" Menu "), /*#__PURE__*/(0, _vue.createElementVNode)("svg", {
-    class: "pl-2 h-2 fill-current text-white",
-    version: "1.1",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 129 129",
-    "xmlns:xlink": "http://www.w3.org/1999/xlink",
-    "enable-background": "new 0 0 129 129"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("g", null, [/*#__PURE__*/(0, _vue.createElementVNode)("path", {
-    d: "m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z"
-  })])])]), /*#__PURE__*/(0, _vue.createElementVNode)("div", {
-    id: "userMenu",
-    class: "bg-white rounded shadow-md mt-2 mr-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30 invisible"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("ul", {
-    class: "list-reset"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("li", null, [/*#__PURE__*/(0, _vue.createElementVNode)("a", {
-    href: "javascript:void(0)",
-    class: "px-4 py-2 block hover:bg-gray-400 no-underline hover:no-underline"
-  }, "My account")]), /*#__PURE__*/(0, _vue.createElementVNode)("li", null, [/*#__PURE__*/(0, _vue.createElementVNode)("a", {
-    href: "javascript:void(0)",
-    class: "px-4 py-2 block hover:bg-gray-400 no-underline hover:no-underline"
-  }, "Notifications")]), /*#__PURE__*/(0, _vue.createElementVNode)("li", null, [/*#__PURE__*/(0, _vue.createElementVNode)("hr", {
-    class: "border-t mx-2 border-gray-400"
-  })]), /*#__PURE__*/(0, _vue.createElementVNode)("li", null, [/*#__PURE__*/(0, _vue.createElementVNode)("a", {
-    href: "javascript:void(0)",
-    class: "px-4 py-2 block text-yellow-600 font-bold hover:bg-yellow-600 hover:text-white no-underline hover:no-underline"
-  }, "Logout")])])])])])])])], -1
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0, _vue.createElementVNode)("p", {
+    class: "text-base font-bold py-2 lg:pb-6 text-gray-700"
+  }, "Menu", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_3 = {
-  class: "container w-full flex flex-wrap mx-auto px-2 pt-8 lg:pt-16 mt-16"
-};
-var _hoisted_4 = {
-  class: "w-full lg:w-1/5 px-6 text-xl text-gray-800 leading-normal"
-};
-
-var _hoisted_5 = /*#__PURE__*/(0, _vue.createStaticVNode)("<p class=\"text-base font-bold py-2 lg:pb-6 text-gray-700\" data-v-3c95d6dd>Menu</p><div class=\"block lg:hidden sticky inset-0\" data-v-3c95d6dd><button id=\"menu-toggle\" class=\"flex w-full justify-end px-3 py-3 bg-white lg:bg-transparent border rounded border-gray-600 hover:border-yellow-600 appearance-none focus:outline-none\" data-v-3c95d6dd><svg class=\"fill-current h-3 float-right\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\" data-v-3c95d6dd><path d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" data-v-3c95d6dd></path></svg></button></div>", 2);
-
-var _hoisted_7 = {
+var _hoisted_5 = {
   class: "w-full sticky inset-0 hidden max-h-64 lg:h-auto overflow-x-hidden overflow-y-auto lg:overflow-y-hidden lg:block mt-0 my-2 lg:my-0 border border-gray-400 lg:border-transparent bg-white shadow lg:shadow-none lg:bg-transparent z-20",
   style: {
     "top": "6em"
   },
   id: "menu-content"
 };
-var _hoisted_8 = {
+var _hoisted_6 = {
   class: "list-reset py-2 md:py-0"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0, _vue.createStaticVNode)("<li class=\"menu-item py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Section 1</span></a></li><li class=\"menu-item py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Section 2</span></a></li><li class=\"menu-item py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Section 3</span></a></li><li class=\"menu-item py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Section 4</span></a></li><li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Section 5</span></a></li>", 5);
+var _hoisted_7 = /*#__PURE__*/(0, _vue.createStaticVNode)("<li class=\"menu-item py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Section 1</span></a></li><li class=\"menu-item py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Section 2</span></a></li><li class=\"menu-item py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Section 3</span></a></li><li class=\"menu-item py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Section 4</span></a></li><li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Section 5</span></a></li>", 5);
 
-var _hoisted_14 = [_hoisted_9];
-var _hoisted_15 = {
+var _hoisted_12 = [_hoisted_7];
+var _hoisted_13 = {
   class: "w-full lg:w-4/5"
 };
 
-var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0, _vue.createElementVNode)("h1", {
     class: "flex items-center font-sans font-bold break-normal text-gray-700 px-2 text-xl mt-12 lg:mt-0 md:text-2xl"
   }, " Multi Section Form with Scrollspy ", -1
@@ -430,11 +453,11 @@ var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_17 = /*#__PURE__*/(0, _vue.createStaticVNode)("<div data-v-3c95d6dd><!--divider--><hr class=\"bg-gray-300 my-12\" data-v-3c95d6dd><!--Title--><h2 id=\"section1\" class=\"font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl\" data-v-3c95d6dd>Section 1</h2><!--Card--><div class=\"p-8 mt-6 lg:mt-0 leading-normal rounded shadow bg-white\" data-v-3c95d6dd><li data-v-3c95d6dd>Using assets build of admin.css</li><li data-v-3c95d6dd>This template uses vue3-scroll-spy</li></div><!--/Card--></div><div data-v-3c95d6dd><!--divider--><hr class=\"bg-gray-300 my-12\" data-v-3c95d6dd><!--Title--><h2 class=\"font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl\" data-v-3c95d6dd>Section 2</h2><!--Card--><div id=\"section2\" class=\"p-8 mt-6 lg:mt-0 rounded shadow bg-white\" data-v-3c95d6dd><form data-v-3c95d6dd><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-textfield\" data-v-3c95d6dd> Text Field </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><input class=\"form-input block w-full focus:bg-white\" id=\"my-textfield\" type=\"text\" value=\"\" data-v-3c95d6dd><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-select\" data-v-3c95d6dd> Drop down field </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><select name=\"\" class=\"form-select block w-full focus:bg-white\" id=\"my-select\" data-v-3c95d6dd><option value=\"Default\" data-v-3c95d6dd>Default</option><option value=\"A\" data-v-3c95d6dd>A</option><option value=\"B\" data-v-3c95d6dd>B</option><option value=\"C\" data-v-3c95d6dd>C</option></select><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-textarea\" data-v-3c95d6dd> Text Area </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><textarea class=\"form-textarea block w-full focus:bg-white\" id=\"my-textarea\" value=\"\" rows=\"8\" data-v-3c95d6dd></textarea><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex md:items-center\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd></div><div class=\"md:w-2/3\" data-v-3c95d6dd><button class=\"shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded\" type=\"button\" data-v-3c95d6dd> Save </button></div></div></form></div><!--/Card--></div><div data-v-3c95d6dd><!--divider--><hr class=\"bg-gray-300 my-12\" data-v-3c95d6dd><!--Title--><h2 class=\"font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl\" data-v-3c95d6dd>Section 3</h2><!--Card--><div id=\"section3\" class=\"p-8 mt-6 lg:mt-0 rounded shadow bg-white\" data-v-3c95d6dd><form data-v-3c95d6dd><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-multiselect\" data-v-3c95d6dd> Multi Select </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><select class=\"form-multiselect block w-full\" multiple id=\"my-multiselect\" data-v-3c95d6dd><option data-v-3c95d6dd>Option 1</option><option data-v-3c95d6dd>Option 2</option><option data-v-3c95d6dd>Option 3</option><option data-v-3c95d6dd>Option 4</option><option data-v-3c95d6dd>Option 5</option></select><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex md:items-center\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd></div><div class=\"md:w-2/3\" data-v-3c95d6dd><button class=\"shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded\" type=\"button\" data-v-3c95d6dd> Save </button></div></div></form></div><!--/Card--></div><div data-v-3c95d6dd><!--divider--><hr class=\"bg-gray-300 my-12\" data-v-3c95d6dd><!--Title--><h2 class=\"font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl\" data-v-3c95d6dd>Section 4</h2><!--Card--><div id=\"section4\" class=\"p-8 mt-6 lg:mt-0 rounded shadow bg-white\" data-v-3c95d6dd><form data-v-3c95d6dd><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-radio\" data-v-3c95d6dd> Radio Buttons </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><div class=\"mt-2\" data-v-3c95d6dd><label class=\"inline-flex items-center\" data-v-3c95d6dd><input type=\"radio\" class=\"form-radio text-indigo-600\" name=\"radioOption\" value=\"A\" data-v-3c95d6dd><span class=\"ml-2\" data-v-3c95d6dd>Radio A</span></label><label class=\"inline-flex items-center ml-6\" data-v-3c95d6dd><input type=\"radio\" class=\"form-radio\" name=\"radioOption\" value=\"B\" data-v-3c95d6dd><span class=\"ml-2\" data-v-3c95d6dd>Radio B</span></label></div><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-checkbox\" data-v-3c95d6dd> Checkboxes </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><div data-v-3c95d6dd><label class=\"inline-flex items-center\" data-v-3c95d6dd><input type=\"checkbox\" class=\"form-checkbox text-indigo-600\" checked data-v-3c95d6dd><span class=\"ml-2\" data-v-3c95d6dd>Option 1</span></label></div><div data-v-3c95d6dd><label class=\"inline-flex items-center\" data-v-3c95d6dd><input type=\"checkbox\" class=\"form-checkbox text-green-500\" checked data-v-3c95d6dd><span class=\"ml-2\" data-v-3c95d6dd>Option 2</span></label></div><div data-v-3c95d6dd><label class=\"inline-flex items-center\" data-v-3c95d6dd><input type=\"checkbox\" class=\"form-checkbox text-pink-600\" checked data-v-3c95d6dd><span class=\"ml-2\" data-v-3c95d6dd>Option 3</span></label></div><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex md:items-center\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd></div><div class=\"md:w-2/3\" data-v-3c95d6dd><button class=\"shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded\" type=\"button\" data-v-3c95d6dd> Save </button></div></div></form></div><!--/Card--></div><div data-v-3c95d6dd><!--divider--><hr class=\"bg-gray-300 my-12\" data-v-3c95d6dd><!--Title--><h2 class=\"font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl\" data-v-3c95d6dd>Section 5</h2><!--Card--><div id=\"section5\" class=\"p-8 mt-6 lg:mt-0 rounded shadow bg-white\" data-v-3c95d6dd><blockquote class=\"border-l-4 border-yellow-600 italic my-4 pl-8 md:pl-12\" data-v-3c95d6dd>Final confirmation disclaimer message etc</blockquote><div class=\"pt-8\" data-v-3c95d6dd><button class=\"shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded mr-4\" type=\"button\" data-v-3c95d6dd> Save </button><button class=\"shadow bg-yellow-100 hover:bg-yellow-200 focus:shadow-outline focus:outline-none text-gray-700 font-bold py-2 px-4 rounded mr-4\" type=\"button\" data-v-3c95d6dd> Additional Action </button><button class=\"shadow bg-yellow-100 hover:bg-yellow-200 focus:shadow-outline focus:outline-none text-gray-700 font-bold py-2 px-4 rounded\" type=\"button\" data-v-3c95d6dd> Additional Action </button></div></div><!--/Card--></div>", 5);
+var _hoisted_15 = /*#__PURE__*/(0, _vue.createStaticVNode)("<div data-v-3c95d6dd><!--divider--><hr class=\"bg-gray-300 my-12\" data-v-3c95d6dd><!--Title--><h2 id=\"section1\" class=\"font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl\" data-v-3c95d6dd>Section 1</h2><!--Card--><div class=\"p-8 mt-6 lg:mt-0 leading-normal rounded shadow bg-white\" data-v-3c95d6dd><li data-v-3c95d6dd>Using assets build of admin.css</li><li data-v-3c95d6dd>This template uses vue3-scroll-spy</li></div><!--/Card--></div><div data-v-3c95d6dd><!--divider--><hr class=\"bg-gray-300 my-12\" data-v-3c95d6dd><!--Title--><h2 class=\"font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl\" data-v-3c95d6dd>Section 2</h2><!--Card--><div id=\"section2\" class=\"p-8 mt-6 lg:mt-0 rounded shadow bg-white\" data-v-3c95d6dd><form data-v-3c95d6dd><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-textfield\" data-v-3c95d6dd> Text Field </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><input class=\"form-input block w-full focus:bg-white\" id=\"my-textfield\" type=\"text\" value=\"\" data-v-3c95d6dd><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-select\" data-v-3c95d6dd> Drop down field </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><select name=\"\" class=\"form-select block w-full focus:bg-white\" id=\"my-select\" data-v-3c95d6dd><option value=\"Default\" data-v-3c95d6dd>Default</option><option value=\"A\" data-v-3c95d6dd>A</option><option value=\"B\" data-v-3c95d6dd>B</option><option value=\"C\" data-v-3c95d6dd>C</option></select><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-textarea\" data-v-3c95d6dd> Text Area </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><textarea class=\"form-textarea block w-full focus:bg-white\" id=\"my-textarea\" value=\"\" rows=\"8\" data-v-3c95d6dd></textarea><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex md:items-center\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd></div><div class=\"md:w-2/3\" data-v-3c95d6dd><button class=\"shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded\" type=\"button\" data-v-3c95d6dd> Save </button></div></div></form></div><!--/Card--></div><div data-v-3c95d6dd><!--divider--><hr class=\"bg-gray-300 my-12\" data-v-3c95d6dd><!--Title--><h2 class=\"font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl\" data-v-3c95d6dd>Section 3</h2><!--Card--><div id=\"section3\" class=\"p-8 mt-6 lg:mt-0 rounded shadow bg-white\" data-v-3c95d6dd><form data-v-3c95d6dd><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-multiselect\" data-v-3c95d6dd> Multi Select </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><select class=\"form-multiselect block w-full\" multiple id=\"my-multiselect\" data-v-3c95d6dd><option data-v-3c95d6dd>Option 1</option><option data-v-3c95d6dd>Option 2</option><option data-v-3c95d6dd>Option 3</option><option data-v-3c95d6dd>Option 4</option><option data-v-3c95d6dd>Option 5</option></select><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex md:items-center\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd></div><div class=\"md:w-2/3\" data-v-3c95d6dd><button class=\"shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded\" type=\"button\" data-v-3c95d6dd> Save </button></div></div></form></div><!--/Card--></div><div data-v-3c95d6dd><!--divider--><hr class=\"bg-gray-300 my-12\" data-v-3c95d6dd><!--Title--><h2 class=\"font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl\" data-v-3c95d6dd>Section 4</h2><!--Card--><div id=\"section4\" class=\"p-8 mt-6 lg:mt-0 rounded shadow bg-white\" data-v-3c95d6dd><form data-v-3c95d6dd><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-radio\" data-v-3c95d6dd> Radio Buttons </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><div class=\"mt-2\" data-v-3c95d6dd><label class=\"inline-flex items-center\" data-v-3c95d6dd><input type=\"radio\" class=\"form-radio text-indigo-600\" name=\"radioOption\" value=\"A\" data-v-3c95d6dd><span class=\"ml-2\" data-v-3c95d6dd>Radio A</span></label><label class=\"inline-flex items-center ml-6\" data-v-3c95d6dd><input type=\"radio\" class=\"form-radio\" name=\"radioOption\" value=\"B\" data-v-3c95d6dd><span class=\"ml-2\" data-v-3c95d6dd>Radio B</span></label></div><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex mb-6\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd><label class=\"block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4\" for=\"my-checkbox\" data-v-3c95d6dd> Checkboxes </label></div><div class=\"md:w-2/3\" data-v-3c95d6dd><div data-v-3c95d6dd><label class=\"inline-flex items-center\" data-v-3c95d6dd><input type=\"checkbox\" class=\"form-checkbox text-indigo-600\" checked data-v-3c95d6dd><span class=\"ml-2\" data-v-3c95d6dd>Option 1</span></label></div><div data-v-3c95d6dd><label class=\"inline-flex items-center\" data-v-3c95d6dd><input type=\"checkbox\" class=\"form-checkbox text-green-500\" checked data-v-3c95d6dd><span class=\"ml-2\" data-v-3c95d6dd>Option 2</span></label></div><div data-v-3c95d6dd><label class=\"inline-flex items-center\" data-v-3c95d6dd><input type=\"checkbox\" class=\"form-checkbox text-pink-600\" checked data-v-3c95d6dd><span class=\"ml-2\" data-v-3c95d6dd>Option 3</span></label></div><p class=\"py-2 text-sm text-gray-600\" data-v-3c95d6dd>add notes about populating the field</p></div></div><div class=\"md:flex md:items-center\" data-v-3c95d6dd><div class=\"md:w-1/3\" data-v-3c95d6dd></div><div class=\"md:w-2/3\" data-v-3c95d6dd><button class=\"shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded\" type=\"button\" data-v-3c95d6dd> Save </button></div></div></form></div><!--/Card--></div><div data-v-3c95d6dd><!--divider--><hr class=\"bg-gray-300 my-12\" data-v-3c95d6dd><!--Title--><h2 class=\"font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl\" data-v-3c95d6dd>Section 5</h2><!--Card--><div id=\"section5\" class=\"p-8 mt-6 lg:mt-0 rounded shadow bg-white\" data-v-3c95d6dd><blockquote class=\"border-l-4 border-yellow-600 italic my-4 pl-8 md:pl-12\" data-v-3c95d6dd>Final confirmation disclaimer message etc</blockquote><div class=\"pt-8\" data-v-3c95d6dd><button class=\"shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded mr-4\" type=\"button\" data-v-3c95d6dd> Save </button><button class=\"shadow bg-yellow-100 hover:bg-yellow-200 focus:shadow-outline focus:outline-none text-gray-700 font-bold py-2 px-4 rounded mr-4\" type=\"button\" data-v-3c95d6dd> Additional Action </button><button class=\"shadow bg-yellow-100 hover:bg-yellow-200 focus:shadow-outline focus:outline-none text-gray-700 font-bold py-2 px-4 rounded\" type=\"button\" data-v-3c95d6dd> Additional Action </button></div></div><!--/Card--></div>", 5);
 
-var _hoisted_22 = [_hoisted_17];
+var _hoisted_20 = [_hoisted_15];
 
-var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0, _vue.createElementVNode)("div", {
     class: "w-full lg:w-4/5 lg:ml-auto text-base md:text-sm text-gray-600 px-4 py-24 mb-12"
   }, [/*#__PURE__*/(0, _vue.createElementVNode)("span", {
@@ -454,7 +477,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _directive_scroll_spy = (0, _vue.resolveDirective)("scroll-spy");
 
-  return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0, _vue.createCommentVNode)("Container"), (0, _vue.createElementVNode)("div", _hoisted_3, [(0, _vue.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0, _vue.createElementVNode)("div", _hoisted_7, [(0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("ul", _hoisted_8, _hoisted_14)), [[_directive_scroll_spy_active], [_directive_scroll_spy_link]])])]), (0, _vue.createCommentVNode)("Section container"), (0, _vue.createElementVNode)("section", _hoisted_15, [(0, _vue.createCommentVNode)("Title"), _hoisted_16, (0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", null, _hoisted_22)), [[_directive_scroll_spy]])]), (0, _vue.createCommentVNode)("/Section container"), (0, _vue.createCommentVNode)("Back link "), _hoisted_23]), (0, _vue.createCommentVNode)("/container")]);
+  return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_1, [(0, _vue.createCommentVNode)("Container"), (0, _vue.createElementVNode)("div", _hoisted_2, [(0, _vue.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0, _vue.createElementVNode)("div", _hoisted_5, [(0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("ul", _hoisted_6, _hoisted_12)), [[_directive_scroll_spy_active], [_directive_scroll_spy_link]])])]), (0, _vue.createCommentVNode)("Section container"), (0, _vue.createElementVNode)("section", _hoisted_13, [(0, _vue.createCommentVNode)("Title"), _hoisted_14, (0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", null, _hoisted_20)), [[_directive_scroll_spy]])]), (0, _vue.createCommentVNode)("/Section container"), (0, _vue.createCommentVNode)("Back link "), _hoisted_21]), (0, _vue.createCommentVNode)("/container")]);
 }
 
 /***/ }),

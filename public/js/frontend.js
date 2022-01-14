@@ -36,7 +36,39 @@ exports.render = void 0;
 
 var vue_1 = __webpack_require__(/*! vue */ "vue");
 
-var _hoisted_1 = /*#__PURE__*/(0, vue_1.createElementVNode)("h3", null, "Frontend App", -1
+var _hoisted_1 = /*#__PURE__*/(0, vue_1.createElementVNode)("nav", {
+  class: "fixed w-full bg-white shadow-lg"
+}, [/*#__PURE__*/(0, vue_1.createElementVNode)("div", {
+  class: "max-w-6xl mx-auto px-4"
+}, [/*#__PURE__*/(0, vue_1.createElementVNode)("div", {
+  class: "flex justify-between"
+}, [/*#__PURE__*/(0, vue_1.createElementVNode)("div", {
+  class: "flex space-x-7"
+}, [/*#__PURE__*/(0, vue_1.createCommentVNode)(" Website Logo "), /*#__PURE__*/(0, vue_1.createElementVNode)("div", null, [/*#__PURE__*/(0, vue_1.createElementVNode)("a", {
+  href: "/",
+  class: "flex items-center py-4 px-2"
+}, [/*#__PURE__*/(0, vue_1.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  class: "h-6 w-6",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  stroke: "currentColor"
+}, [/*#__PURE__*/(0, vue_1.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+})]), /*#__PURE__*/(0, vue_1.createElementVNode)("span", {
+  class: "font-semibold text-gray-500 text-lg"
+}, "Home")])])]), /*#__PURE__*/(0, vue_1.createCommentVNode)(" Secondary Navbar items "), /*#__PURE__*/(0, vue_1.createElementVNode)("div", {
+  class: "hidden md:flex items-center space-x-3"
+}, [/*#__PURE__*/(0, vue_1.createElementVNode)("iframe", {
+  src: "https://ghbtns.com/github-btn.html?user=niiknow&repo=vue-wp-plugin-starter&type=star&count=true&size=large",
+  frameborder: "0",
+  scrolling: "0",
+  width: "160px",
+  height: "30px"
+})])])])], -1
 /* HOISTED */
 );
 
@@ -278,9 +310,12 @@ var _vue = __webpack_require__(/*! vue */ "vue");
 var _hoisted_1 = {
   class: "app-home"
 };
+var _hoisted_2 = {
+  class: "w-full text-center"
+};
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_1, [(0, _vue.createElementVNode)("span", null, (0, _vue.toDisplayString)(_ctx.msg), 1
+  return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_1, [(0, _vue.createElementVNode)("section", _hoisted_2, (0, _vue.toDisplayString)(_ctx.msg), 1
   /* TEXT */
   )]);
 }

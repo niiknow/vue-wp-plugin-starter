@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-gray-100 text-gray-900">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="images/favicon.ico" />
@@ -10,10 +10,15 @@
     <link href="css/admin.css" rel="stylesheet">
     <title>Vue Wordpress Plugin Starter</title>
   </head>
-  <body class="container">
+  <body>
     <div id="vue-admin-app"></div>
     <script src="js/manifest.js"></script>
     <script src="js/vendor.js"></script>
     <script src="js/admin.js"></script>
+    <style>
+      html, body, #vue-admin-app {
+        height: 100%;
+      }
+    </style>
   </body>
 </html>

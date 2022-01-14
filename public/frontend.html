@@ -1,28 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-gray-100 text-gray-900">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="images/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="https://cdn.jsdelivr.net/npm/vue@next/dist/vue.global.prod.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <link href="css/admin.css" rel="stylesheet">
     <title>Vue Wordpress Plugin Starter</title>
   </head>
-  <body class="container">
-    <nav class="navbar navbar-light bg-light justify-content-between">
-      <a class="navbar-brand" href="https://github.com/niiknow/vue-wp-plugin-starter">vue-wp-plugin-starter - View on Github</a>
-      <iframe src="https://ghbtns.com/github-btn.html?user=niiknow&repo=vue-wp-plugin-starter&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-    </nav>
-    <div style="padding-bottom: 10px">&nbsp;</div>
-
-    <h1>Frontend - Test Local</h1>
-
-    <a href=".">Home</a>
+  <body>
     <div id="vue-frontend-app"></div>
     <script src="js/manifest.js"></script>
     <script src="js/vendor.js"></script>
     <script src="js/frontend.js"></script>
+    <style>
+      html, body, #vue-frontend-app {
+        height: 100%;
+      }
+    </style>
   </body>
 </html>

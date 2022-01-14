@@ -51,7 +51,12 @@ mix.extract(); // empty to extract all
 const postcssPlugins = [
   require('tailwindcss')('./tailwind.config.js'),
   require('autoprefixer'),
-  require('postcss-import')
+  require('postcss-import'),
+  require('postcss-pxtorem')({
+    propList: ['*'],
+    selectorBlackList: ['border'],
+    mediaQuery: true,
+  })
 ];
 
 mix.options({
