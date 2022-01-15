@@ -1,16 +1,23 @@
 module.exports = {
+  // allow PurgeCSS to analyze components
   content: [
     './public/index.html',
     './public/admin.html',
     './public/frontend.html',
     './src/**/*.{js,jsx,ts,tsx,vue}',
     './assets/*.{css,scss}',
+    './node_modules/@variantjs/core/src/config/**/*.ts'
   ],
   theme: {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      opacity: ['disabled'],
+      cursor: ['disabled'],
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

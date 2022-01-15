@@ -89,11 +89,11 @@ class AdminLoader
     	wp_localize_script( $this->prefix . '-admin', 'vue_wp_plugin_config', [
 		    'rest' => [
 		        'endpoints' => [
-		            'settings' => esc_url_raw( rest_url( $settingController->get_endpoint() ) ),
+		            'settings' => esc_url_raw(rest_url($settingController->get_endpoint())),
 		        ],
-		        'nonce'     => wp_create_nonce( 'wp_rest' ),  // add header X-WP-Nonce to authenticate
-		        // 'action_nonce'     => wp_create_nonce( 'action_nonce' ),
+		        'nonce' => wp_create_nonce('wp_rest')
 		    ],
+		    'settings' => $settingController->get_settings(null)
 		] );
 
 		$content = '<div class="admin-app-wrapper"><div id="vue-admin-app"></div></div>';

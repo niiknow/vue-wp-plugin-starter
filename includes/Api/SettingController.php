@@ -20,7 +20,7 @@ class SettingController extends \WP_REST_Controller
      */
     public function __construct()
     {
-        $this->prefix = \Baseapp\Main::PREFIX;
+        $this->prefix    = \Baseapp\Main::PREFIX;
         $this->namespace = $this->prefix . '/v1';
         $this->rest_base = 'settings';
     }
@@ -33,7 +33,7 @@ class SettingController extends \WP_REST_Controller
     public function get_endpoint()
     {
         // example: myplugin/v1/settings
-        return  $this->namespace . '/' . $this->rest_base;
+        return $this->namespace . '/' . $this->rest_base;
     }
 
     /**
@@ -73,11 +73,13 @@ class SettingController extends \WP_REST_Controller
      */
     public function get_settings($request)
     {
-        $data = get_option(  $this->prefix . '_settings', false );
+        $data  = get_option($this->prefix . '_settings', false);
+    	$nonce = wp_create_nonce('wp_rest');
 
 		$response = array(
-			'data'  => array('settings' => $data ),
-			'nonce' => wp_create_nonce('wp_rest')
+			'data'    => $data,
+			'success' => true,
+			'nonce'   => $nonce
 		);
 
 	    return rest_ensure_response($response);
@@ -93,11 +95,12 @@ class SettingController extends \WP_REST_Controller
     public function update_settings(\WP_REST_Request $request)
     {
     	// attempt to parse the json parameter
-    	$response = $request->parse_json_params();
+    	$rsp   = $request->parse_json_params();
+    	$nonce = wp_create_nonce('wp_rest');
 
     	if (true === $rsp) {
     		$params       = $request->params['JSON'];
-    		$settings     = isset( $params['settings'] ) ? $params['settings'] : array();
+    		$settings     = isset($params['settings'] ) ? $params['settings'] : array();
     		$setting_key  = $this->prefix . '_settings';
     		$new_settings = $this->sanitized_settings($settings);
     		$old_settings = get_option($setting_key);
@@ -105,15 +108,20 @@ class SettingController extends \WP_REST_Controller
     		$data = apply_filters( $this->prefix . '_settings_update', $new_settings, $old_settings );
     		update_option( $setting_key, $data );
 
+    		// update correct response
 			$response = array(
-				'data'  => array('settings' => $data ),
-				'nonce' => wp_create_nonce('wp_rest')  // another nonce to use later
+				'data'    => $data,
+				'success' => $rsp,
+				'nonce'   => $nonce
 			);
-
-	        return rest_ensure_response($response);
     	}
 
-		return $response;
+    	$response = array(
+			'success' => $rsp,
+			'nonce'   => $nonce
+		);
+
+	    return rest_ensure_response($response);
     }
 
     /**
@@ -136,6 +144,8 @@ class SettingController extends \WP_REST_Controller
         	return new WP_Error( 'rest_forbidden', __( 'Sorry, you cannot update settings.' ), array( 'status' => 403 ) );
         }
 
+        // since success, we response with next noonce
+		header('X-WP-Nonce: ' . wp_create_nonce('wp_rest'));
         return true;
     }
 
@@ -157,7 +167,7 @@ class SettingController extends \WP_REST_Controller
      */
     public function get_settings_structure()
     {
-    	return include( \Baseapp\Main::$PLUGINDIR . '/config/settings.php' );
+    	return include(\Baseapp\Main::$PLUGINDIR . '/config/settings.php');
     }
 
     /**
@@ -241,7 +251,7 @@ class SettingController extends \WP_REST_Controller
 	 */
 	public function sanitize_settings( $settings ) {
 		$sanitized_settings = array();
-		$settings_details = $this->get_settings_structure();
+		$settings_details   = $this->get_settings_structure();
 
 		foreach ($settings_details as $id => $details) {
 			$value = isset($settings[$id]) ? $settings[$id] : $details['default'];
