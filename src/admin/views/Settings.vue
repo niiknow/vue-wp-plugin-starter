@@ -3,7 +3,7 @@
     <aside class="w-full md:w-1/5">
       <div class="w-full sticky inset-0 max-h-64 lg:h-auto overflow-x-hidden overflow-y-auto lg:overflow-y-hidden lg:block mt-0 my-2 lg:my-0 border border-gray-400 lg:border-transparent bg-white shadow lg:shadow-none lg:bg-transparent z-20" style="top:6em;">
 
-        <div class="space-x-3 flex justify-end pr-4 pt-4">
+        <div class="space-x-3 flex justify-end pr-4 pt-2">
           <t-button @click="doSave()" style="width: 100px" :disabled="hasChanged">Save</t-button>
           <t-button variant="secondary" style="width: 100px" :disabled="hasChanged">Cancel</t-button>
         </div>
@@ -26,9 +26,9 @@
     <!--Section container-->
     <section class="w-full md:w-4/5 min-h-screen">
       <div v-scroll-spy>
-        <div>
+        <div class="pt-2">
           <!--Title-->
-          <h2 class="font-sans font-bold break-normal text-gray-700 px-2 pt-8 pb-1 text-xl w-full text-center">General</h2>
+          <h2 class="font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center">General</h2>
 
           <!--Card-->
           <div class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
@@ -46,10 +46,10 @@
 
           </div>
           <!--/Card-->
-      </div>
-      <div>
+        </div>
+        <div class="pt-2">
           <!--Title-->
-          <h2 class="font-sans font-bold break-normal text-gray-700 px-2 pt-8 pb-1 text-xl w-full text-center">Debugging</h2>
+          <h2 class="font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center">Debugging</h2>
 
           <!--Card-->
           <div class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">

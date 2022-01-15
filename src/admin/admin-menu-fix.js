@@ -1,8 +1,9 @@
 // @ts-ignore
 function menuFix(slug) {
-  const currentUrl = window.location.href
-  const currentPath = currentUrl.substr(currentUrl.indexOf('admin.php'))
-  const menuRoot = document.querySelector((currentUrl.indexOf('admin.html') > 0) ? '.wp-menu-open' : `#toplevel_page_${slug}`)
+  const currentUrl  = window.location.href
+  const isLocal     = currentUrl.indexOf('admin.html') > 0
+  const currentPath = currentUrl.substr(currentUrl.indexOf(isLocal ? '#/' : 'admin.php'))
+  const menuRoot    = document.querySelector(isLocal ? '.wp-menu-open' : `#toplevel_page_${slug}`)
 
   if (menuRoot) {
     menuRoot.addEventListener('click', function (e) {
@@ -17,7 +18,8 @@ function menuFix(slug) {
         }
       }
     })
-    const menu = menuRoot.querySelector(`.wp-submenu a[href="${currentPath}"`)
+
+    var menu = menuRoot.querySelector(`.wp-submenu a[href="${currentPath}"`)
     if (menu) {
       menu.parentElement.classList.add('current')
     }

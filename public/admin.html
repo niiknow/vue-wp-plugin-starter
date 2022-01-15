@@ -1,73 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" class="bg-gray-100 text-gray-900">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="images/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="images/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@next/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@next/dist/vue.global.prod.js"></script>
 
-    <link href="css/admin.css" rel="stylesheet">
-    <title>Vue Wordpress Plugin Starter</title>
-  </head>
-  <body>
-    <nav class="fixed w-full bg-white shadow-lg">
-      <div class="max-w-6xl mx-auto px-4">
-          <div class="flex justify-between">
-            <div class="flex space-x-7">
-              <!-- Website Logo -->
-              <div>
-                <a href="../" class="flex items-center py-4 px-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-    </svg>
-                  <span class="font-semibold text-gray-500 text-lg"
-                    >Home</span
-                  >
-                </a>
-              </div>
-              <!-- Primary Navbar items -->
-              <div class="hidden md:flex items-center space-x-1 wp-menu-open">
-                <ul><li class="current">
+  <link href="css/admin.css" rel="stylesheet">
+  <title>Vue Wordpress Plugin Starter</title>
+</head>
+<body>
+  <nav class="fixed w-full bg-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex justify-between">
+        <div class="flex space-x-7">
+          <div>
+            <a href="../" class="flex items-center py-4 px-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              <span class="font-semibold text-gray-500 text-lg">Home</span>
+            </a>
+          </div>
+
+          <!-- Primary Navbar items -->
+          <div class="hidden md:flex items-center space-x-1 wp-menu-open">
+            <ul class="wp-submenu">
+              <li>
                 <a href="#/" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Dashboard</a>
               </li>
-                <li>
+              <li>
                 <a href="#/settings" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Settings</a>
               </li>
             </ul>
-              </div>
-            </div>
-
-            <!-- Secondary Navbar items -->
-            <div class="hidden md:flex items-center space-x-3 ">
-               <iframe src="https://ghbtns.com/github-btn.html?user=niiknow&repo=vue-wp-plugin-starter&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-            </div>
           </div>
         </div>
-    </nav>
-    <div id="vue-admin-app"></div>
-    <script src="js/manifest.js"></script>
-    <script src="js/vendor.js"></script>
-    <script src="js/admin.js"></script>
-    <style>
-      html, body, #vue-admin-app {
-        height: 100%;
-        width: 100%;
+
+        <!-- Secondary Navbar items -->
+        <div class="hidden md:flex items-center space-x-3 ">
+           <iframe src="https://ghbtns.com/github-btn.html?user=niiknow&repo=vue-wp-plugin-starter&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="vue-admin-app"></div>
+  <script src="js/manifest.js"></script>
+  <script src="js/vendor.js"></script>
+  <script src="js/admin.js"></script>
+  <style>
+    html, body, #vue-admin-app {
+      height: 100%;
+      width: 100%;
+    }
+    .wp-menu-open li {
+      display: inline;
+    }
+  </style>
+  <script>
+    var vue_wp_plugin_config = {
+      settings: {
+        enable_debug_messages: false,
+        cleanup_db_on_plugin_uninstall: false
+      },
+      rest: {
+        endpoints: {}
       }
-      .wp-menu-open li {
-        display: inline;
-      }
-    </style>
-    <script>
-      var vue_wp_plugin_config = {
-        settings: {
-          enable_debug_messages: false,
-          cleanup_db_on_plugin_uninstall: false
-        },
-        rest: {
-          endpoints: {}
-        }
-      }
-    </script>
-  </body>
+    }
+  </script>
+</body>
 </html>
