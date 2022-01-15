@@ -5,12 +5,12 @@
       <div class="w-full md:w-1/5">
         <div class="w-full sticky inset-0 max-h-64 lg:h-auto overflow-x-hidden overflow-y-auto lg:overflow-y-hidden lg:block mt-0 my-2 lg:my-0 border border-gray-400 lg:border-transparent bg-white shadow lg:shadow-none lg:bg-transparent z-20" style="top:6em;">
 
-          <div class="w-full mb-3">
-            <button type="button" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out float-right mr-2 mt-2" style="width: 120px"  :disabled="!hasChanged()"
-:class="{ 'opacity-25 cursor-not-allowed': !hasChanged() }">Save</button>
+          <div class="space-x-3 flex justify-end pr-4 pt-4">
+            <t-button @click="doSave()" style="width: 100px" :disabled="hasChanged">Save</t-button>
+            <t-button variant="secondary" style="width: 100px" :disabled="hasChanged">Cancel</t-button>
           </div>
 
-          <ul class="list-reset py-2 md:py-0 mt-14" v-scroll-spy-active v-scroll-spy-link>
+          <ul class="list-reset py-2 md:py-0 mt-4" v-scroll-spy-active v-scroll-spy-link>
             <li class="menu-item py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent">
               <a href='javascript:void(0)' class="block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600">
                   <span class="pb-1 md:pb-0 text-sm">General</span>
@@ -78,31 +78,37 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
-import { TToggle } from '@variantjs/vue'
+import { defineComponent, reactive, computed } from 'vue'
+import { TToggle, TButton } from '@variantjs/vue'
 
 export default defineComponent({
   components: {
-    TToggle
+    TToggle,
+    TButton
   },
   name: 'Settings',
   setup () {
-    const settings = reactive({
+    const oldSettings = {
       enable_debug_messages: false,
       cleanup_db_on_plugin_uninstall: false
-    })
+    }
+    const settings = reactive(Object.assign({}, oldSettings))
+
+    const hasChanged = computed(() => {
+      // compare two objects
+      const a = JSON.stringify(settings)
+      const b = JSON.stringify(oldSettings)
+      return a === b
+    });
 
     return {
       settings,
-      oldSettings: {},
-      endpoints: ''
+      oldSettings,
+      endpoints: '',
+      hasChanged
     }
   },
   methods: {
-    hasChanged() {
-      // compare two objects
-      return JSON.stringify(this.settings) !== JSON.stringify(this.oldSettings)
-    }
   },
   beforeCreate() {
     document.onreadystatechange = () => {
@@ -112,7 +118,7 @@ export default defineComponent({
 
         // copy settings from server output
         Object.keys(settings).forEach((key) => {
-          this.oldSettings = settings[key]
+          this.oldSettings[key] = settings[key]
           this.settings[key] = settings[key]
         })
       }
