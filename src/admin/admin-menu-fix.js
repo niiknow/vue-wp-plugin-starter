@@ -1,8 +1,8 @@
 // @ts-ignore
 function menuFix(slug) {
-  const menuRoot = document.querySelector(`#toplevel_page_${slug}`)
   const currentUrl = window.location.href
   const currentPath = currentUrl.substr(currentUrl.indexOf('admin.php'))
+  const menuRoot = document.querySelector((currentUrl.indexOf('admin.html') > 0) ? '.wp-menu-open' : `#toplevel_page_${slug}`)
 
   if (menuRoot) {
     menuRoot.addEventListener('click', function (e) {

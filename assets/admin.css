@@ -2,7 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.router-link-active {
+.current {
   @apply border-green-500;
   @apply font-semibold;
   @apply border-b-4;
