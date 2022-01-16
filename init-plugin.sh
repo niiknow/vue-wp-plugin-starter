@@ -35,37 +35,44 @@ if ! valid_name "$name"; then
   fi
 fi
 
+# slug is use for wordpress file naming
 slug="$( echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g' )"
+
+# prefix is use as wordpress plugin prefix
 prefix="$( echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g' )"
+
+# our application namespace
 namespace="$(echo "$name" | sed 's/ //')"
-repo="$slug"
+
+# the actual plugin file naming
+pluginfile="$slug"
 templatefile="vue-wp-plugin-starter.ph"
 
-echo -n "Do you want to prepend 'wp-' to your repository name? [Y/N]: "
+echo -n "Do you want to prepend 'wp-' to your plugin file name? [Y/N]: "
 read prepend
 
 if [[ "$prepend" != Y ]] && [[ "$prepend" != y ]]; then
   echo
-  echo -n "Do you want to append '-wp' to your repository name? [Y/N]: "
+  echo -n "Do you want to append '-wp' to your plugin file name? [Y/N]: "
     read append
 
   if [[ "$append" == Y ]] || [[ "$append" == y ]]; then
-    repo="${slug}-wp"
+    pluginfile="${slug}-wp"
   fi
 else
-  repo="wp-${slug}"
+  pluginfile="wp-${slug}"
 fi
 
 
-echo 'Initializing $repo.php'
-rm "$repo.php"
-cp "templatefile" "$repo.php"
-sed -e "s/PLUGIN_NAME/$name/g" "$repo.php" > "$repo.php"-e
-rm "$repo.php"
-mv "$repo.php"-e "$repo.php"
+echo 'Initializing $pluginfile.php'
+rm "$pluginfile.php"
+cp "$templatefile" "$pluginfile.php"
+sed -e "s/PLUGIN_NAME/$name/g" "$pluginfile.php" > "$pluginfile.php"-e
+rm "$pluginfile.php"
+mv "$pluginfile.php"-e "$pluginfile.php"
 
 echo 'Initializing package.json'
-sed -e "s/PLUGIN_NAME/$repo/g" package.json > package.json-e
+sed -e "s/PLUGIN_NAME/$pluginfile/g" package.json > package.json-e
 rm package.json
 mv package.json-e package.json
 
