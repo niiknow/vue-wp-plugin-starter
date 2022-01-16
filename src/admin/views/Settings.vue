@@ -40,7 +40,7 @@
 
     <!--Section container-->
     <section class="w-full md:w-4/5 min-h-screen">
-      <div v-scroll-spy>
+      <div class="ml-3" v-scroll-spy>
         <div class="pt-4" v-for="(value, name) in structure.sections">
           <!--Title-->
           <h2

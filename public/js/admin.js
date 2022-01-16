@@ -48,7 +48,7 @@ exports.render = void 0;
 var vue_1 = __webpack_require__(/*! vue */ "vue");
 
 var _hoisted_1 = {
-  class: "main-wrapper container"
+  class: "main-wrapper"
 };
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -629,46 +629,49 @@ var _hoisted_11 = {
   class: "w-full md:w-4/5 min-h-screen"
 };
 var _hoisted_12 = {
-  class: "pt-4"
+  class: "ml-3"
 };
 var _hoisted_13 = {
-  class: "font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center"
+  class: "pt-4"
 };
 var _hoisted_14 = {
-  class: "p-8 mt-6 lg:mt-0 rounded shadow bg-white"
+  class: "font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center"
 };
 var _hoisted_15 = {
-  class: "md:flex mb-6"
+  class: "p-8 mt-6 lg:mt-0 rounded shadow bg-white"
 };
 var _hoisted_16 = {
-  class: "md:w-3/5"
+  class: "md:flex mb-6"
 };
 var _hoisted_17 = {
+  class: "md:w-3/5"
+};
+var _hoisted_18 = {
   class: "block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4",
   for: "my-checkbox"
 };
-var _hoisted_18 = {
+var _hoisted_19 = {
   class: "py-2 text-sm text-gray-600"
 };
-var _hoisted_19 = {
+var _hoisted_20 = {
   class: "md:w-2/5"
 };
-var _hoisted_20 = {
+var _hoisted_21 = {
   key: 0
 };
-var _hoisted_21 = {
+var _hoisted_22 = {
   key: 1
 };
-var _hoisted_22 = {
+var _hoisted_23 = {
   key: 2
 };
-var _hoisted_23 = {
+var _hoisted_24 = {
   key: 3
 };
-var _hoisted_24 = {
+var _hoisted_25 = {
   key: 4
 };
-var _hoisted_25 = {
+var _hoisted_26 = {
   key: 5
 };
 
@@ -739,22 +742,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ))])), [[_directive_scroll_spy_active, {
     selector: 'li',
     class: 'active'
-  }], [_directive_scroll_spy_link]])])]), (0, _vue.createCommentVNode)("Section container"), (0, _vue.createElementVNode)("section", _hoisted_11, [(0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", null, [((0, _vue.openBlock)(true), (0, _vue.createElementBlock)(_vue.Fragment, null, (0, _vue.renderList)(_ctx.structure.sections, function (value, name) {
-    return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_12, [(0, _vue.createCommentVNode)("Title"), (0, _vue.createElementVNode)("h2", _hoisted_13, (0, _vue.toDisplayString)(value), 1
+  }], [_directive_scroll_spy_link]])])]), (0, _vue.createCommentVNode)("Section container"), (0, _vue.createElementVNode)("section", _hoisted_11, [(0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_12, [((0, _vue.openBlock)(true), (0, _vue.createElementBlock)(_vue.Fragment, null, (0, _vue.renderList)(_ctx.structure.sections, function (value, name) {
+    return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_13, [(0, _vue.createCommentVNode)("Title"), (0, _vue.createElementVNode)("h2", _hoisted_14, (0, _vue.toDisplayString)(value), 1
     /* TEXT */
-    ), (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_14, [((0, _vue.openBlock)(true), (0, _vue.createElementBlock)(_vue.Fragment, null, (0, _vue.renderList)(_ctx.getOptions(name), function (item) {
-      return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_15, [(0, _vue.createElementVNode)("div", _hoisted_16, [(0, _vue.createElementVNode)("label", _hoisted_17, (0, _vue.toDisplayString)(item.name), 1
+    ), (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_15, [((0, _vue.openBlock)(true), (0, _vue.createElementBlock)(_vue.Fragment, null, (0, _vue.renderList)(_ctx.getOptions(name), function (item) {
+      return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_16, [(0, _vue.createElementVNode)("div", _hoisted_17, [(0, _vue.createElementVNode)("label", _hoisted_18, (0, _vue.toDisplayString)(item.name), 1
       /* TEXT */
-      ), (0, _vue.createElementVNode)("p", _hoisted_18, (0, _vue.toDisplayString)(item.description), 1
+      ), (0, _vue.createElementVNode)("p", _hoisted_19, (0, _vue.toDisplayString)(item.description), 1
       /* TEXT */
-      )]), (0, _vue.createElementVNode)("div", _hoisted_19, [item.type === 'toggle' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_20, [(0, _vue.createVNode)(_component_t_toggle, {
+      )]), (0, _vue.createElementVNode)("div", _hoisted_20, [item.type === 'toggle' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_21, [(0, _vue.createVNode)(_component_t_toggle, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;
         }
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue"])])) : item.type === 'dropdownMultiselect' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_21, [(0, _vue.createVNode)(_component_t_rich_select, {
+      , ["modelValue", "onUpdate:modelValue"])])) : item.type === 'dropdownMultiselect' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_22, [(0, _vue.createVNode)(_component_t_rich_select, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;
@@ -764,7 +767,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         tags: ""
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue", "options"])])) : item.type === 'dropdown' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_22, [(0, _vue.createVNode)(_component_t_select, {
+      , ["modelValue", "onUpdate:modelValue", "options"])])) : item.type === 'dropdown' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_23, [(0, _vue.createVNode)(_component_t_select, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;
@@ -772,14 +775,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         options: item.options
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue", "options"])])) : ['textarea'].indexOf(item.type) > -1 ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_23, [(0, _vue.createVNode)(_component_t_textarea, {
+      , ["modelValue", "onUpdate:modelValue", "options"])])) : ['textarea'].indexOf(item.type) > -1 ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_24, [(0, _vue.createVNode)(_component_t_textarea, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;
         }
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue"])])) : item.type === 'code' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_24, [(0, _vue.createVNode)(_component_v_ace_editor, {
+      , ["modelValue", "onUpdate:modelValue"])])) : item.type === 'code' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_25, [(0, _vue.createVNode)(_component_v_ace_editor, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;
@@ -791,7 +794,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue"])])) : ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_25, [(0, _vue.createVNode)(_component_t_input, {
+      , ["modelValue", "onUpdate:modelValue"])])) : ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_26, [(0, _vue.createVNode)(_component_t_input, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;

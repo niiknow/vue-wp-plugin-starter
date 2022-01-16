@@ -424,23 +424,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
-}.container {
-  width: 100%;
-}@media (min-width: 40rem) {.container {
-    max-width: 40rem;
-  }
-}@media (min-width: 48rem) {.container {
-    max-width: 48rem;
-  }
-}@media (min-width: 64rem) {.container {
-    max-width: 64rem;
-  }
-}@media (min-width: 80rem) {.container {
-    max-width: 80rem;
-  }
-}@media (min-width: 96rem) {.container {
-    max-width: 96rem;
-  }
 }.fixed {
   position: fixed;
 }.absolute {
@@ -498,6 +481,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 0;
 }.mt-4 {
   margin-top: 1rem;
+}.ml-3 {
+  margin-left: 0.75rem;
 }.mt-6 {
   margin-top: 1.5rem;
 }.mb-6 {
