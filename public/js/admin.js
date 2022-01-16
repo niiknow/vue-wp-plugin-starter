@@ -670,11 +670,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_t_select = (0, _vue.resolveComponent)("t-select");
 
-  var _component_t_input = (0, _vue.resolveComponent)("t-input");
-
   var _component_t_textarea = (0, _vue.resolveComponent)("t-textarea");
 
   var _component_v_ace_editor = (0, _vue.resolveComponent)("v-ace-editor");
+
+  var _component_t_input = (0, _vue.resolveComponent)("t-input");
 
   var _directive_scroll_spy_active = (0, _vue.resolveDirective)("scroll-spy-active");
 
@@ -743,43 +743,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue"])])) : (0, _vue.createCommentVNode)("v-if", true), item.type === 'dropdownMultiselect' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_21, [(0, _vue.createVNode)(_component_t_rich_select, {
+      , ["modelValue", "onUpdate:modelValue"])])) : item.type === 'dropdownMultiselect' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_21, [(0, _vue.createVNode)(_component_t_rich_select, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;
         },
-        placeholder: "select an option",
         options: item.options,
         multiple: "",
         tags: ""
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue", "options"])])) : (0, _vue.createCommentVNode)("v-if", true), item.type === 'dropdown' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_22, [(0, _vue.createVNode)(_component_t_select, {
+      , ["modelValue", "onUpdate:modelValue", "options"])])) : item.type === 'dropdown' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_22, [(0, _vue.createVNode)(_component_t_select, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;
         },
-        placeholder: "select an option",
-        options: item.options,
-        tags: ""
+        options: item.options
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue", "options"])])) : (0, _vue.createCommentVNode)("v-if", true), ['text', 'number', 'color', 'url'].indexOf(item.type) > -1 ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_23, [(0, _vue.createVNode)(_component_t_input, {
-        modelValue: _ctx.settings[item.id],
-        "onUpdate:modelValue": function onUpdateModelValue($event) {
-          return _ctx.settings[item.id] = $event;
-        },
-        type: "item.type"
-      }, null, 8
-      /* PROPS */
-      , ["modelValue", "onUpdate:modelValue"])])) : (0, _vue.createCommentVNode)("v-if", true), ['textarea', 'richTextarea'].indexOf(item.type) > -1 ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_24, [(0, _vue.createVNode)(_component_t_textarea, {
+      , ["modelValue", "onUpdate:modelValue", "options"])])) : ['textarea', 'richTextarea'].indexOf(item.type) > -1 ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_23, [(0, _vue.createVNode)(_component_t_textarea, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;
         }
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue"])])) : (0, _vue.createCommentVNode)("v-if", true), item.type === 'code' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_25, [(0, _vue.createVNode)(_component_v_ace_editor, {
+      , ["modelValue", "onUpdate:modelValue"])])) : item.type === 'code' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_24, [(0, _vue.createVNode)(_component_v_ace_editor, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;
@@ -791,7 +780,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue"])])) : (0, _vue.createCommentVNode)("v-if", true)])]);
+      , ["modelValue", "onUpdate:modelValue"])])) : ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_25, [(0, _vue.createVNode)(_component_t_input, {
+        modelValue: _ctx.settings[item.id],
+        "onUpdate:modelValue": function onUpdateModelValue($event) {
+          return _ctx.settings[item.id] = $event;
+        },
+        type: "item.type"
+      }, null, 8
+      /* PROPS */
+      , ["modelValue", "onUpdate:modelValue"])]))])]);
     }), 256
     /* UNKEYED_FRAGMENT */
     ))]), (0, _vue.createCommentVNode)("/Card")]);

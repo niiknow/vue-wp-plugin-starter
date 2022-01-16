@@ -38,40 +38,37 @@
                 <div v-if="item.type === 'toggle'">
                    <t-toggle v-model="settings[item.id]" />
                 </div>
-                <div v-if="item.type === 'dropdownMultiselect'">
+                <div v-else-if="item.type === 'dropdownMultiselect'">
                   <t-rich-select
                     v-model="settings[item.id]"
-                    placeholder="select an option"
                     :options="item.options"
                     multiple
                     tags
                   />
                 </div>
-                <div v-if="item.type === 'dropdown'">
+                <div v-else-if="item.type === 'dropdown'">
                   <t-select
                     v-model="settings[item.id]"
-                    placeholder="select an option"
                     :options="item.options"
-                    tags
                   />
                 </div>
-                <div v-if="['text','number','color', 'url'].indexOf(item.type) > -1">
-                  <t-input
-                    v-model="settings[item.id]"
-                    type="item.type"
-                  />
-                </div>
-                <div v-if="['textarea','richTextarea'].indexOf(item.type) > -1">
+                <div v-else-if="['textarea','richTextarea'].indexOf(item.type) > -1">
                   <t-textarea
                     v-model="settings[item.id]"
                   />
                 </div>
-                <div v-if="item.type === 'code'">
+                <div v-else-if="item.type === 'code'">
                   <v-ace-editor
                     v-model="settings[item.id]"
                     lang="html"
                     theme="chrome"
                     style="height: 300px" />
+                </div>
+                <div v-else>
+                  <t-input
+                    v-model="settings[item.id]"
+                    type="item.type"
+                  />
                 </div>
               </div>
             </div>
