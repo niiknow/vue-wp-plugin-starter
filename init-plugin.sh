@@ -44,8 +44,7 @@ fi
 
 slug="$( echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g' )"
 prefix="$( echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g' )"
-nameclean=="$(echo "$name" | sed 's/ //')"
-namespace="$(echo "$nameclean" | sed 's/.*/\u&/')"
+namespace=="$(echo "$name" | sed 's/ //')"
 repo="$slug"
 
 echo -n "Do you want to prepend 'wp-' to your repository name? [Y/N]: "
@@ -63,7 +62,12 @@ else
 	repo="wp-${slug}"
 fi
 
+
+echo 'Initializing $repo.php'
 cp vue-wp-plugin-starter.php "$repo.php"
+sed -i -e "s/PLUGIN_NAME/$repo/g" "$repo.php"
+sed -i -e "s/PLUGIN_NAME/$repo/g" "$repo.php"
+
 echo 'Initializing package.json'
 sed -i -e "s/PLUGIN_NAME/$repo/g" package.json
 

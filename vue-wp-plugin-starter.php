@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: PLUGIN_NAME
-Description: PLUGIN_DESCRIPTION
+Description: PLUGIN_NAME
 Version: 1.0.0
 Author: noogen
 Text Domain: baseapp
