@@ -76,10 +76,10 @@ sed -e "s/PLUGIN_FILE_NAME/$pluginfile/g" package.json > package.json-e
 rm package.json
 mv package.json-e package.json
 
-echo 'Initializing readme.txt'
-sed -e "s/PLUGIN_NAME/$name/g" readme.txt > readme.txt-e
-rm readme.txt
-mv readme.txt-e readme.txt
+echo 'Initializing composer.json'
+sed -e "s/Baseapp/$namespace/g" composer.json > composer.json-e
+rm composer.json
+mv composer.json-e composer.json
 
 echo 'Initializing *.php namespace'
 while read -d '' filename; do
@@ -91,4 +91,12 @@ while read -d '' filename; do
   # rm "${filename}"-e
 done < <(find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0)
 
+# lastly, remove template file
 rm "$templatefile"
+
+echo 'Initializing readme.txt'
+sed -e "s/PLUGIN_NAME/$name/g" readme.txt > readme.txt-e
+rm readme.txt
+mv readme.txt-e readme.txt
+
+echo "Don't forget to update readme.txt with your own plugin details..."
