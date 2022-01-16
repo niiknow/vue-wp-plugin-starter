@@ -62,20 +62,23 @@ fi
 
 echo 'Initializing $repo.php'
 cp vue-wp-plugin-starter.php "$repo.php"
-sed -e "s/PLUGIN_NAME/$name/g" "$repo.php" > "$repo.php"
+sed -e "s/PLUGIN_NAME/$name/g" "$repo.php" > "$repo.php"-e
+rm "$repo.php"
+mv "$repo.php"-e "$repo.php"
 
 echo 'Initializing package.json'
-sed -e "s/PLUGIN_NAME/$repo/g" package.json > package.json
+sed -e "s/PLUGIN_NAME/$repo/g" package.json > package.json-e
+rm package.json
+mv package.json-e package.json
 
 echo 'Initializing readme.txt'
-sed -e "s/PLUGIN_NAME/$name/g" readme.txt > readme.txt
+sed -e "s/PLUGIN_NAME/$name/g" readme.txt > readme.txt-e
+rm readme.txt
+mv readme.txt-e readme.txt
 
 echo 'Initializing *.php namespace'
 while read -d '' filename; do
-  sed -e "s/Baseapp/$namespace/g" "${filename}" >  "${filename}"
-done < <(find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0)
-
-echo 'Initializing *.php prefix'
-while read -d '' filename; do
-  sed -e "s/baseapp/$prefix/g" "${filename}" >  "${filename}"
+  sed -e "s/Baseapp/$namespace/g" "${filename}" > "${filename}"-e
+  sed -e "s/baseapp/$prefix/g" "${filename}"-e > "${filename}"
+  rm "${filename}"-e
 done < <(find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0)
