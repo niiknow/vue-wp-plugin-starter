@@ -441,8 +441,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }@media (min-width: 96rem) {.container {
     max-width: 96rem;
   }
-}.visible {
-  visibility: visible;
 }.fixed {
   position: fixed;
 }.absolute {

@@ -329,13 +329,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 var _default = (0, _vue.defineComponent)({
   components: {
     TToggle: _vue2.TToggle,
-    TButton: _vue2.TButton
+    TButton: _vue2.TButton,
+    TRichSelect: _vue2.TRichSelect
   },
   name: 'Settings',
   setup: function setup() {
     var oldSettings = {
       enable_debug_messages: false,
-      cleanup_db_on_plugin_uninstall: false
+      cleanup_db_on_plugin_uninstall: false,
+      include_post_types: []
     };
     var settings = (0, _vue.reactive)(_objectSpread({}, oldSettings));
     var ui = (0, _vue.reactive)({
@@ -355,7 +357,17 @@ var _default = (0, _vue.defineComponent)({
       endpoints: {
         settings: ''
       },
-      ui: ui
+      ui: ui,
+      options: [{
+        value: 'post',
+        text: 'Post'
+      }, {
+        value: 'page',
+        text: 'Page'
+      }, {
+        value: 'wprm_recipe',
+        text: 'Recipes'
+      }]
     };
   },
   methods: {
@@ -495,17 +507,17 @@ var _hoisted_7 = {
   class: "list-reset py-2 md:py-0 mt-4"
 };
 
-var _hoisted_8 = /*#__PURE__*/(0, _vue.createStaticVNode)("<li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>General</span></a></li><li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Debugging</span></a></li>", 2);
+var _hoisted_8 = /*#__PURE__*/(0, _vue.createStaticVNode)("<li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>General</span></a></li><li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Advanced</span></a></li><li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Debugging</span></a></li>", 3);
 
-var _hoisted_10 = [_hoisted_8];
-var _hoisted_11 = {
+var _hoisted_11 = [_hoisted_8];
+var _hoisted_12 = {
   class: "w-full md:w-4/5 min-h-screen"
 };
-var _hoisted_12 = {
+var _hoisted_13 = {
   class: "pt-2"
 };
 
-var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0, _vue.createElementVNode)("h2", {
     class: "font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center"
   }, "General", -1
@@ -513,14 +525,49 @@ var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_14 = {
+var _hoisted_15 = {
   class: "p-8 mt-6 lg:mt-0 rounded shadow bg-white"
 };
-var _hoisted_15 = {
+var _hoisted_16 = {
   class: "md:flex mb-6"
 };
 
-var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0, _vue.createElementVNode)("div", {
+    class: "md:w-3/5"
+  }, [/*#__PURE__*/(0, _vue.createElementVNode)("label", {
+    class: "block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4",
+    for: "my-checkbox"
+  }, " Post Types "), /*#__PURE__*/(0, _vue.createElementVNode)("p", {
+    class: "py-2 text-sm text-gray-600"
+  }, "Which post types do you want to index?")], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_18 = {
+  class: "md:w-2/5"
+};
+var _hoisted_19 = {
+  class: "pt-2"
+};
+
+var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0, _vue.createElementVNode)("h2", {
+    class: "font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center"
+  }, "Advanced", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_21 = {
+  class: "p-8 mt-6 lg:mt-0 rounded shadow bg-white"
+};
+var _hoisted_22 = {
+  class: "md:flex mb-6"
+};
+
+var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0, _vue.createElementVNode)("div", {
     class: "md:w-3/5"
   }, [/*#__PURE__*/(0, _vue.createElementVNode)("label", {
@@ -533,14 +580,14 @@ var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_17 = {
+var _hoisted_24 = {
   class: "md:w-2/5"
 };
-var _hoisted_18 = {
+var _hoisted_25 = {
   class: "pt-2"
 };
 
-var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0, _vue.createElementVNode)("h2", {
     class: "font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center"
   }, "Debugging", -1
@@ -548,14 +595,14 @@ var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_20 = {
+var _hoisted_27 = {
   class: "p-8 mt-6 lg:mt-0 rounded shadow bg-white"
 };
-var _hoisted_21 = {
+var _hoisted_28 = {
   class: "md:flex mb-6"
 };
 
-var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0, _vue.createElementVNode)("div", {
     class: "md:w-3/5"
   }, [/*#__PURE__*/(0, _vue.createElementVNode)("label", {
@@ -568,12 +615,14 @@ var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_23 = {
+var _hoisted_30 = {
   class: "md:w-2/5"
 };
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_t_button = (0, _vue.resolveComponent)("t-button");
+
+  var _component_t_rich_select = (0, _vue.resolveComponent)("t-rich-select");
 
   var _component_t_toggle = (0, _vue.resolveComponent)("t-toggle");
 
@@ -617,16 +666,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["disabled", "data-rerendered"])]), (0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("ul", _hoisted_7, _hoisted_10)), [[_directive_scroll_spy_active], [_directive_scroll_spy_link]])])]), (0, _vue.createCommentVNode)("Section container"), (0, _vue.createElementVNode)("section", _hoisted_11, [(0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", null, [(0, _vue.createElementVNode)("div", _hoisted_12, [(0, _vue.createCommentVNode)("Title"), _hoisted_13, (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_14, [(0, _vue.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0, _vue.createElementVNode)("div", _hoisted_17, [(0, _vue.createVNode)(_component_t_toggle, {
-    modelValue: _ctx.settings.cleanup_db_on_plugin_uninstall,
+  , ["disabled", "data-rerendered"])]), (0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("ul", _hoisted_7, _hoisted_11)), [[_directive_scroll_spy_active, {
+    selector: 'li',
+    class: 'active'
+  }], [_directive_scroll_spy_link]])])]), (0, _vue.createCommentVNode)("Section container"), (0, _vue.createElementVNode)("section", _hoisted_12, [(0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", null, [(0, _vue.createElementVNode)("div", _hoisted_13, [(0, _vue.createCommentVNode)("Title"), _hoisted_14, (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_15, [(0, _vue.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0, _vue.createElementVNode)("div", _hoisted_18, [(0, _vue.createVNode)(_component_t_rich_select, {
+    modelValue: _ctx.settings.include_post_types,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return _ctx.settings.include_post_types = $event;
+    }),
+    placeholder: "select an option",
+    options: _ctx.options,
+    multiple: "",
+    tags: ""
+  }, null, 8
+  /* PROPS */
+  , ["modelValue", "options"])])])]), (0, _vue.createCommentVNode)("/Card")]), (0, _vue.createElementVNode)("div", _hoisted_19, [(0, _vue.createCommentVNode)("Title"), _hoisted_20, (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_21, [(0, _vue.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0, _vue.createElementVNode)("div", _hoisted_24, [(0, _vue.createVNode)(_component_t_toggle, {
+    modelValue: _ctx.settings.cleanup_db_on_plugin_uninstall,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return _ctx.settings.cleanup_db_on_plugin_uninstall = $event;
     })
   }, null, 8
   /* PROPS */
-  , ["modelValue"])])])]), (0, _vue.createCommentVNode)("/Card")]), (0, _vue.createElementVNode)("div", _hoisted_18, [(0, _vue.createCommentVNode)("Title"), _hoisted_19, (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_20, [(0, _vue.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0, _vue.createElementVNode)("div", _hoisted_23, [(0, _vue.createVNode)(_component_t_toggle, {
+  , ["modelValue"])])])]), (0, _vue.createCommentVNode)("/Card")]), (0, _vue.createElementVNode)("div", _hoisted_25, [(0, _vue.createCommentVNode)("Title"), _hoisted_26, (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_27, [(0, _vue.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0, _vue.createElementVNode)("div", _hoisted_30, [(0, _vue.createVNode)(_component_t_toggle, {
     modelValue: _ctx.settings.enable_debug_messages,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return _ctx.settings.enable_debug_messages = $event;
     })
   }, null, 8
