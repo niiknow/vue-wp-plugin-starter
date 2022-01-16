@@ -65,10 +65,10 @@ final class Main
 	 *
 	 * @param $filename the plugin file name
 	 */
-    private function __construct( $filename )
+    private function __construct($filename)
     {
         self::$PLUGINFILE = $filename;
-        self::$PLUGINDIR  = dirname( $filename );
+        self::$PLUGINDIR  = dirname($filename);
     }
 
 	/**
@@ -80,10 +80,10 @@ final class Main
 	 *
 	 * @return Main the singleton instance
 	 */
-	public static function get_instance( $filename )
+	public static function get_instance($filename)
 	{
 		if (! self::$instance) {
-        	self::$instance = new self( $filename );
+        	self::$instance = new self($filename);
 		}
 
     	return self::$instance;
@@ -99,7 +99,7 @@ final class Main
 
 		$setting_key = self::PREFIX . '_settings';
 		$settings    = get_option($setting_key, []);
-		(new \Baseapp\Migrations())->cleanUp( self::PREFIX, $settings);
+		(new \Baseapp\Migrations())->cleanUp(self::PREFIX, $settings);
 	}
 
 	/**
@@ -109,21 +109,21 @@ final class Main
 	public function run()
 	{
 		// set base url from plugin file name
-        self::$BASEURL = plugins_url( '', self::$PLUGINFILE );
+        self::$BASEURL = plugins_url('', self::$PLUGINFILE);
 
-		register_activation_hook( self::$PLUGINFILE, array( $this, 'activate_plugin' ) );
-		register_deactivation_hook( self::$PLUGINFILE, array( $this, 'deactivate_plugin' ) );
-		register_uninstall_hook( self::$PLUGINFILE, array( __CLASS__, 'uninstall_plugin') );
+		register_activation_hook(self::$PLUGINFILE, array($this, 'activate_plugin'));
+		register_deactivation_hook(self::$PLUGINFILE, array($this, 'deactivate_plugin'));
+		register_uninstall_hook(self::$PLUGINFILE, array(__CLASS__, 'uninstall_plugin'));
 
-		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
+		add_action('plugins_loaded', array($this, 'plugins_loaded'));
 
 		// setup cli
-		if (defined( 'WP_CLI' ) && \WP_CLI) {
-			$this->container['cli'] = new \Baseapp\CliLoader( self::PREFIX );
+		if (defined('WP_CLI') && \WP_CLI) {
+			$this->container['cli'] = new \Baseapp\CliLoader(self::PREFIX);
 		}
 
         $plugin = plugin_basename(self::$PLUGINFILE);
-		add_filter("plugin_action_links_$plugin", array( $this, 'register_settings_link' ));
+		add_filter("plugin_action_links_$plugin", array($this, 'register_settings_link'));
 	}
 
 	/**
@@ -135,9 +135,9 @@ final class Main
 	 */
 	public function __get( $prop )
 	{
-		if (array_key_exists( $prop, $this->container ))
+		if (array_key_exists($prop, $this->container))
 		{
-			return $this->container[ $prop ];
+			return $this->container[$prop];
 		}
 
 		return $this->{$prop};
@@ -150,9 +150,9 @@ final class Main
 	 *
 	 * @return mixed
 	 */
-	public function __isset( $prop )
+	public function __isset($prop)
 	{
-		return isset( $this->{$prop} ) || isset( $this->container[ $prop ] );
+		return isset($this->{$prop}) || isset($this->container[ $prop ]);
 	}
 
 	/**
@@ -162,7 +162,7 @@ final class Main
 	 */
 	public function plugins_loaded()
 	{
-		add_action( 'init', array( $this, 'init_hook_handler' ) );
+		add_action('init', array($this, 'init_hook_handler'));
 	}
 
 	/**
@@ -171,10 +171,10 @@ final class Main
 	 */
 	public function activate_plugin()
 	{
-		(new \Baseapp\Migrations())->run( self::PREFIX, self::VERSION );
+		(new \Baseapp\Migrations())->run(self::PREFIX, self::VERSION);
 
 		// set the current version to activate plugin
-		update_option( self::PREFIX . '_version', self::VERSION );
+		update_option(self::PREFIX . '_version', self::VERSION);
 	}
 
 	/**
@@ -188,7 +188,7 @@ final class Main
 		// do stuff such as: shut off cron tasks, etc...
 
 		// remove version number to deactivate plugin
-		delete_option( self::PREFIX . '_version' );
+		delete_option(self::PREFIX . '_version');
 	}
 
 	/**
@@ -213,27 +213,27 @@ final class Main
 	public function init_hook_handler()
 	{
 		// initialize assets
-		$this->container['assets'] = new \Baseapp\Assets( self::PREFIX );
+		$this->container['assets'] = new \Baseapp\Assets(self::PREFIX);
 
 		// initialize the various loader classes
-		if ($this->is_request( 'admin' ))
+		if ($this->is_request('admin' ))
 		{
-			$ctx = new \Baseapp\AdminLoader( self::PREFIX );
+			$ctx = new \Baseapp\AdminLoader(self::PREFIX);
 			$this->container['admin'] = $ctx;
 		}
 
-		if ($this->is_request( 'frontend' ))
+		if ($this->is_request('frontend'))
 		{
-			$this->container['frontend'] = new \Baseapp\FrontendLoader( self::PREFIX );
+			$this->container['frontend'] = new \Baseapp\FrontendLoader(self::PREFIX);
 		}
 
-		if ($this->is_request( 'ajax' ))
+		if ($this->is_request('ajax'))
 		{
-			// $this->container['ajax'] =  new \Baseapp\AjaxLoader( self::PREFIX );
+			// $this->container['ajax'] =  new \Baseapp\AjaxLoader(self::PREFIX);
 		}
 
 		// finally load api routes
-		$this->container['api'] = new \Baseapp\ApiRoutes( self::PREFIX );
+		$this->container['api'] = new \Baseapp\ApiRoutes(self::PREFIX);
 	}
 
 	/**
@@ -244,7 +244,7 @@ final class Main
 	public function localization_setup()
 	{
 		load_plugin_textdomain(self::PREFIX,
-			false, dirname( plugin_basename( self::PLUGINFILE ) ) . '/languages/' );
+			false, dirname(plugin_basename(self::PLUGINFILE)) . '/languages/');
 	}
 
 	/**
@@ -254,23 +254,23 @@ final class Main
 	 *
 	 * @return bool
 	 */
-	private function is_request( $type )
+	private function is_request($type)
 	{
 		switch ($type) {
-			case 'admin' :
+			case 'admin':
 				return is_admin();
 
-			case 'ajax' :
-				return defined( 'DOING_AJAX' );
+			case 'ajax':
+				return defined('DOING_AJAX');
 
-			case 'rest' :
-				return defined( 'REST_REQUEST' );
+			case 'rest':
+				return defined('REST_REQUEST');
 
-			case 'cron' :
-				return defined( 'DOING_CRON' );
+			case 'cron':
+				return defined('DOING_CRON');
 
-			case 'frontend' :
-				return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
+			case 'frontend':
+				return (! is_admin() || defined('DOING_AJAX' )) && ! defined('DOING_CRON');
 		}
 	}
 }

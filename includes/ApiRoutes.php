@@ -28,7 +28,9 @@ class ApiRoutes
     	// instantiate and load all api routes
         (new Api\SettingController())->register_routes();
         /*
-        // return new nonce
+        // uncomment this to automatically return new nonce
+        // so when you create your own rest controller, you don't
+        // have to manually code to return new nonce
         add_filter( 'rest_post_dispatch', function( WP_REST_Response $response) {
 			$response->header('X-WP-Nonce', wp_create_nonce( 'wp_rest' ));
 			return $response;

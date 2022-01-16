@@ -22,7 +22,7 @@ class Assets
 	function __construct($prefix)
 	{
 		$this->prefix = $prefix;
-		add_action( is_admin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts', [ $this, 'register' ] );
+		add_action(is_admin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts', [$this, 'register']);
 	}
 
 	/**
@@ -64,7 +64,7 @@ class Assets
 	{
 		foreach ($styles as $handle => $style)
 		{
-			$deps = isset( $style['deps'] ) ? $style['deps'] : false;
+			$deps = isset($style['deps']) ? $style['deps'] : false;
 
 			wp_register_style($handle, $style['src'], $deps, null);
 		}

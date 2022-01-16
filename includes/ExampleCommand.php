@@ -30,11 +30,11 @@ class ExampleCommand {
      *
      * @when after_wp_load
      */
-    function hello( $args, $assoc_args ) {
-        list( $name ) = $args;
+    function hello($args, $assoc_args) {
+        list($name) = $args;
 
         // Print the message with type
         $type = $assoc_args['type'];
-        WP_CLI::$type( "Hello, $name!" );
+        WP_CLI::$type("Hello, $name!");
     }
 }

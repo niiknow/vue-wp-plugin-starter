@@ -1,17 +1,37 @@
 <template>
   <div class="app-settings w-full flex flex-wrap mx-auto" v-if="hasLoaded">
     <aside class="w-full md:w-1/5">
-      <div class="w-full sticky inset-0 max-h-64 lg:h-auto overflow-x-hidden overflow-y-auto lg:overflow-y-hidden lg:block mt-0 my-2 lg:my-0 border border-gray-400 lg:border-transparent bg-white shadow lg:shadow-none lg:bg-transparent z-20" style="top:6em;">
+      <div class="w-full sticky inset-0 max-h-64 lg:h-auto overflow-x-hidden overflow-y-auto lg:overflow-y-hidden lg:block mt-0 my-2 lg:my-0 border border-gray-400 lg:border-transparent bg-white shadow lg:shadow-none lg:bg-transparent z-20">
 
         <div class="space-x-3 flex justify-end pr-4 pt-2">
-          <t-button @click="doSave()" style="width: 100px" :disabled="hasChanged" :data-rerendered="ui.actionKey">Save</t-button>
-          <t-button @click="doCancel()" variant="secondary" style="width: 100px" :disabled="hasChanged" :data-rerendered="ui.actionKey">Cancel</t-button>
+          <t-button
+            @click="doSave()"
+            style="width: 100px"
+            :disabled="hasChanged"
+            :data-rerendered="ui.actionKey"
+          >Save</t-button>
+          <t-button
+            @click="doCancel()"
+            variant="secondary"
+            style="width: 100px"
+            :disabled="hasChanged"
+            :data-rerendered="ui.actionKey"
+          >Cancel</t-button>
         </div>
 
-        <ul class="list-reset py-2 md:py-0 mt-4" v-scroll-spy-active="{selector: 'li', class: 'active'}" v-scroll-spy-link>
-          <li class="py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent" v-for="(value, name) in structure.sections">
-            <a href='javascript:void(0)' class="block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600">
-                <span class="pb-1 md:pb-0 text-sm">{{value}}</span>
+        <ul
+          class="list-reset py-2 md:py-0 mt-4"
+          v-scroll-spy-active="{selector: 'li', class: 'active'}"
+          v-scroll-spy-link>
+          <li
+            class="py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent"
+            v-for="(value, name) in structure.sections"
+          >
+            <a
+              href='javascript:void(0)'
+              class="block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600"
+            >
+              <span class="pb-1 md:pb-0 text-sm">{{value}}</span>
             </a>
           </li>
         </ul>
@@ -23,7 +43,9 @@
       <div v-scroll-spy>
         <div class="pt-4" v-for="(value, name) in structure.sections">
           <!--Title-->
-          <h2 class="font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center">{{value}}</h2>
+          <h2
+            class="font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center"
+          >{{value}}</h2>
 
           <!--Card-->
           <div class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
@@ -85,6 +107,11 @@
 import { defineComponent, reactive, computed, ref, nextTick } from 'vue'
 import { TToggle, TButton, TRichSelect, TTextarea, TInput, TSelect } from '@variantjs/vue'
 import { VAceEditor } from 'vue3-ace-editor';
+import ace from 'ace-builds'
+ace.config.set(
+  'basePath',
+  'https://cdn.jsdelivr.net/npm/ace-builds@' + require('ace-builds').version + '/src-noconflict/',
+)
 
 export default defineComponent({
   components: {
@@ -113,38 +140,46 @@ export default defineComponent({
       endpoints: { settings: '' },
       ui,
       structure,
-      hasLoaded,
-      cmOptions: {
-        mode: "text/javascript", // Language mode
-        theme: "dracula", // Theme
-        lineNumbers: true, // Show line number
-        smartIndent: true, // Smart indent
-        indentUnit: 2, // The smart indent unit is 2 spaces in length
-        foldGutter: true, // Code folding
-        styleActiveLine: true, // Display the style of the selected row
-      }
+      hasLoaded
     }
   },
   methods: {
     async doSave() {
-      const rst = await this.axios.post(this.endpoints.settings, {...this.settings})
-      // const rst = { success: true }
-      if (rst.success) {
+      debugger
+      try {
+        const rst = await this.axios.post(this.endpoints.settings, {...this.settings})
+        // const rst = { success: true }
+        if (rst.success) {
+          this.$swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your settings has been saved.',
+            showConfirmButton: false,
+            timer: 1500
+          })
+
+          const settings = {...this.settings}
+          Object.keys(settings).forEach((key) => {
+            this.oldSettings[key] = settings[key]
+          })
+
+          // force rerendered
+          this.ui.actionKey = this.ui.actionKey + 1
+        } else {
+          this.$swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Wordpress response with error.',
+            footer: '<div class="overflow-footer w-full">' + JSON.stringify(rst, null, 2) + '</div>'
+          })
+        }
+      } catch (err) {
         this.$swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Your settings has been saved.',
-          showConfirmButton: false,
-          timer: 1500
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Server response with error.',
+          footer: '<div class="overflow-footer w-full">' + JSON.stringify(err, null, 2) + '</div>'
         })
-
-        const settings = {...this.settings}
-        Object.keys(settings).forEach((key) => {
-          this.oldSettings[key] = settings[key]
-        })
-
-        // force rerendered
-        this.ui.actionKey = this.ui.actionKey + 1
       }
     },
     getOptions(section) {
@@ -210,15 +245,9 @@ export default defineComponent({
   border-color: rgb(202 138 4 / var(--tw-border-opacity));
   font-weight: 700;
 }
-/* CHECKBOX TOGGLE SWITCH */
-/* @apply rules for documentation, these do not work as inline style */
-.toggle-checkbox:checked {
-  @apply: right-0 border-green-400;
-  right: 0;
-  border-color: #68D391;
-}
-.toggle-checkbox:checked + .toggle-label {
-  @apply: bg-green-400;
-  background-color: #68D391;
+
+.overflow-footer {
+  height: 100px;
+  overflow-y: wrap;
 }
 </style>

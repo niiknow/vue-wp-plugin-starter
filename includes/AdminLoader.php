@@ -20,7 +20,7 @@ class AdminLoader
     public function __construct($prefix)
     {
     	$this->prefix = $prefix;
-        add_action('admin_menu', [ $this, 'admin_menu' ]);
+        add_action('admin_menu', [$this, 'admin_menu']);
     }
 
     /**

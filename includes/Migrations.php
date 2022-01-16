@@ -36,20 +36,20 @@ final class Migrations
 		}
 
 		// Explicitly set the character set and collation when creating the tables
-		$this->db_charset = ( defined( 'DB_CHARSET' && '' !== DB_CHARSET ) ) ? DB_CHARSET : 'utf8';
-		$this->db_collate = ( defined( 'DB_COLLATE' && '' !== DB_COLLATE ) ) ? DB_COLLATE : 'utf8_general_ci';
+		$this->db_charset = (defined('DB_CHARSET' && '' !== DB_CHARSET)) ? DB_CHARSET : 'utf8';
+		$this->db_collate = (defined('DB_COLLATE' && '' !== DB_COLLATE)) ? DB_COLLATE : 'utf8_general_ci';
 
-		$lastVersion = get_option( $prefix . '_last_migrated_version', '0.0.0' );
+		$lastVersion = get_option($prefix . '_last_migrated_version', '0.0.0');
 
-		if (version_compare( $lastVersion, $currentVersion, '>=' )) {
+		if (version_compare($lastVersion, $currentVersion, '>=')) {
 	        return;
 	    }
 
-	    $this->applyMigration( $lastVersion, '0.0.0', 'migration_0_0_0' );
-	    $this->applyMigration( $lastVersion, '0.0.1', 'migration_0_0_1' );
+	    $this->applyMigration($lastVersion, '0.0.0', 'migration_0_0_0');
+	    $this->applyMigration($lastVersion, '0.0.1', 'migration_0_0_1');
 	    // TODO: add more migration methods
 
-	    update_option( $prefix . '_last_migrated_version', $currentVersion );
+	    update_option($prefix . '_last_migrated_version', $currentVersion);
 
 	    return $this;
 	}
@@ -64,7 +64,7 @@ final class Migrations
 	 */
 	public function applyMigration($lastVersion, $applyVersion, $migration_func)
 	{
-	    if (version_compare( $lastVersion, $applyVersion, '>=' )) {
+	    if (version_compare($lastVersion, $applyVersion, '>=')) {
 	        return;
 	    }
 
@@ -113,7 +113,7 @@ final class Migrations
 	public function migration_0_0_1() {
 		global $wpdb;
 
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
 	    /* $sqlQuery = "
 		        CREATE TABLE {$wpdb->prefix}baseapp_grid (
