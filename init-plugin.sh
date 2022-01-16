@@ -16,18 +16,14 @@ echo
 echo "Hello, "$USER"."
 echo
 echo "This script will automatically generate a new plugin based on the scaffolding."
-echo "The way it works is you enter a plugin name like 'Hello World' and the script "
-echo "will create a directory 'hello-world' in the current working directory, or one "
-echo "directory up if called from the plugin root, all while performing substitutions "
-echo "on the 'vue-wp-plugin-starter' scaffolding plugin."
 echo
 
-echo -n "Enter your plugin name and press [ENTER]: "
+echo -n "To begin, input your plugin name and press [ENTER]: "
 read name
 
 # Validate plugin name.
 if ! valid_name "$name"; then
-  echo "Malformed name '$name'. Please use title case words separated by spaces. No hyphens. For example, 'Hello World'."
+  echo "Malformed name '$name'. Please use title-case words separated by spaces. No hyphens. For example, 'Hello World'."
   echo
   echo -n "Enter a valid plugin name and press [ENTER]: "
   read name
@@ -43,6 +39,7 @@ slug="$( echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g' )"
 prefix="$( echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g' )"
 namespace="$(echo "$name" | sed 's/ //')"
 repo="$slug"
+templatefile="vue-wp-plugin-starter.ph"
 
 echo -n "Do you want to prepend 'wp-' to your repository name? [Y/N]: "
 read prepend
@@ -61,7 +58,8 @@ fi
 
 
 echo 'Initializing $repo.php'
-cp vue-wp-plugin-starter.php "$repo.php"
+rm "$repo.php"
+cp "templatefile" "$repo.php"
 sed -e "s/PLUGIN_NAME/$name/g" "$repo.php" > "$repo.php"-e
 rm "$repo.php"
 mv "$repo.php"-e "$repo.php"
@@ -83,4 +81,4 @@ while read -d '' filename; do
   rm "${filename}"-e
 done < <(find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0)
 
-rm vue-wp-plugin-starter.php
+rm "$templatefile.php"

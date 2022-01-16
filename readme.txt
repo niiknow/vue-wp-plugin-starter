@@ -18,7 +18,7 @@ Use the https://github.com/niiknow/vue-wp-plugin-starter/blob/main/init-plugin.s
 bash init-plugin.sh
 ```
 
-For addtional usage details, see: https://github.com/niiknow/vue-wp-plugin-starter/blob/main/USAGE.md
+For usage details, see: https://github.com/niiknow/vue-wp-plugin-starter/blob/main/USAGE.md
 
 == Features Highlight ==
 * Object-oriented and separation of concerns between: Assets, Admin, CLI, API, and Frontends.
