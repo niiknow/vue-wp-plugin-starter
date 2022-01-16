@@ -322,16 +322,21 @@ var _vue = __webpack_require__(/*! vue */ "vue");
 
 var _vue2 = __webpack_require__(/*! @variantjs/vue */ "./node_modules/@variantjs/vue/dist/index.umd.js");
 
+var _vue3AceEditor = __webpack_require__(/*! vue3-ace-editor */ "./node_modules/vue3-ace-editor/index.js");
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
-// TODO: Generate setting page from config/settings.php
 var _default = (0, _vue.defineComponent)({
   components: {
     TToggle: _vue2.TToggle,
     TButton: _vue2.TButton,
-    TRichSelect: _vue2.TRichSelect
+    TRichSelect: _vue2.TRichSelect,
+    TTextarea: _vue2.TTextarea,
+    TInput: _vue2.TInput,
+    TSelect: _vue2.TSelect,
+    VAceEditor: _vue3AceEditor.VAceEditor
   },
   name: 'Settings',
   setup: function setup() {
@@ -367,16 +372,22 @@ var _default = (0, _vue.defineComponent)({
       ui: ui,
       structure: structure,
       hasLoaded: hasLoaded,
-      options: [{
-        value: 'post',
-        text: 'Post'
-      }, {
-        value: 'page',
-        text: 'Page'
-      }, {
-        value: 'wprm_recipe',
-        text: 'Recipes'
-      }]
+      cmOptions: {
+        mode: "text/javascript",
+        // Language mode
+        theme: "dracula",
+        // Theme
+        lineNumbers: true,
+        // Show line number
+        smartIndent: true,
+        // Smart indent
+        indentUnit: 2,
+        // The smart indent unit is 2 spaces in length
+        foldGutter: true,
+        // Code folding
+        styleActiveLine: true // Display the style of the selected row
+
+      }
     };
   },
   methods: {
@@ -637,6 +648,18 @@ var _hoisted_20 = {
 var _hoisted_21 = {
   key: 1
 };
+var _hoisted_22 = {
+  key: 2
+};
+var _hoisted_23 = {
+  key: 3
+};
+var _hoisted_24 = {
+  key: 4
+};
+var _hoisted_25 = {
+  key: 5
+};
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_t_button = (0, _vue.resolveComponent)("t-button");
@@ -644,6 +667,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_t_toggle = (0, _vue.resolveComponent)("t-toggle");
 
   var _component_t_rich_select = (0, _vue.resolveComponent)("t-rich-select");
+
+  var _component_t_select = (0, _vue.resolveComponent)("t-select");
+
+  var _component_t_input = (0, _vue.resolveComponent)("t-input");
+
+  var _component_t_textarea = (0, _vue.resolveComponent)("t-textarea");
+
+  var _component_v_ace_editor = (0, _vue.resolveComponent)("v-ace-editor");
 
   var _directive_scroll_spy_active = (0, _vue.resolveDirective)("scroll-spy-active");
 
@@ -723,7 +754,44 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         tags: ""
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue", "options"])])) : (0, _vue.createCommentVNode)("v-if", true)])]);
+      , ["modelValue", "onUpdate:modelValue", "options"])])) : (0, _vue.createCommentVNode)("v-if", true), item.type === 'dropdown' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_22, [(0, _vue.createVNode)(_component_t_select, {
+        modelValue: _ctx.settings[item.id],
+        "onUpdate:modelValue": function onUpdateModelValue($event) {
+          return _ctx.settings[item.id] = $event;
+        },
+        placeholder: "select an option",
+        options: item.options,
+        tags: ""
+      }, null, 8
+      /* PROPS */
+      , ["modelValue", "onUpdate:modelValue", "options"])])) : (0, _vue.createCommentVNode)("v-if", true), ['text', 'number', 'color', 'url'].indexOf(item.type) > -1 ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_23, [(0, _vue.createVNode)(_component_t_input, {
+        modelValue: _ctx.settings[item.id],
+        "onUpdate:modelValue": function onUpdateModelValue($event) {
+          return _ctx.settings[item.id] = $event;
+        },
+        type: "item.type"
+      }, null, 8
+      /* PROPS */
+      , ["modelValue", "onUpdate:modelValue"])])) : (0, _vue.createCommentVNode)("v-if", true), ['textarea', 'richTextarea'].indexOf(item.type) > -1 ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_24, [(0, _vue.createVNode)(_component_t_textarea, {
+        modelValue: _ctx.settings[item.id],
+        "onUpdate:modelValue": function onUpdateModelValue($event) {
+          return _ctx.settings[item.id] = $event;
+        }
+      }, null, 8
+      /* PROPS */
+      , ["modelValue", "onUpdate:modelValue"])])) : (0, _vue.createCommentVNode)("v-if", true), item.type === 'code' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_25, [(0, _vue.createVNode)(_component_v_ace_editor, {
+        modelValue: _ctx.settings[item.id],
+        "onUpdate:modelValue": function onUpdateModelValue($event) {
+          return _ctx.settings[item.id] = $event;
+        },
+        lang: "html",
+        theme: "chrome",
+        style: {
+          "height": "300px"
+        }
+      }, null, 8
+      /* PROPS */
+      , ["modelValue", "onUpdate:modelValue"])])) : (0, _vue.createCommentVNode)("v-if", true)])]);
     }), 256
     /* UNKEYED_FRAGMENT */
     ))]), (0, _vue.createCommentVNode)("/Card")]);

@@ -47,6 +47,32 @@
                     tags
                   />
                 </div>
+                <div v-if="item.type === 'dropdown'">
+                  <t-select
+                    v-model="settings[item.id]"
+                    placeholder="select an option"
+                    :options="item.options"
+                    tags
+                  />
+                </div>
+                <div v-if="['text','number','color', 'url'].indexOf(item.type) > -1">
+                  <t-input
+                    v-model="settings[item.id]"
+                    type="item.type"
+                  />
+                </div>
+                <div v-if="['textarea','richTextarea'].indexOf(item.type) > -1">
+                  <t-textarea
+                    v-model="settings[item.id]"
+                  />
+                </div>
+                <div v-if="item.type === 'code'">
+                  <v-ace-editor
+                    v-model="settings[item.id]"
+                    lang="html"
+                    theme="chrome"
+                    style="height: 300px" />
+                </div>
               </div>
             </div>
 
@@ -60,15 +86,12 @@
 
 <script>
 import { defineComponent, reactive, computed, ref, nextTick } from 'vue'
-import { TToggle, TButton, TRichSelect } from '@variantjs/vue'
-
-// TODO: Generate setting page from config/settings.php
+import { TToggle, TButton, TRichSelect, TTextarea, TInput, TSelect } from '@variantjs/vue'
+import { VAceEditor } from 'vue3-ace-editor';
 
 export default defineComponent({
   components: {
-    TToggle,
-    TButton,
-    TRichSelect
+    TToggle, TButton, TRichSelect, TTextarea, TInput, TSelect, VAceEditor
   },
   name: 'Settings',
   setup () {
@@ -98,19 +121,15 @@ export default defineComponent({
       ui,
       structure,
       hasLoaded,
-      options: [{
-          value: 'post',
-          text: 'Post',
-        },
-        {
-          value: 'page',
-          text: 'Page',
-        },
-        {
-          value: 'wprm_recipe',
-          text: 'Recipes',
-        }
-      ]
+      cmOptions: {
+        mode: "text/javascript", // Language mode
+        theme: "dracula", // Theme
+        lineNumbers: true, // Show line number
+        smartIndent: true, // Smart indent
+        indentUnit: 2, // The smart indent unit is 2 spaces in length
+        foldGutter: true, // Code folding
+        styleActiveLine: true, // Display the style of the selected row
+      }
     }
   },
   methods: {

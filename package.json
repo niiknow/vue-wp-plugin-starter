@@ -40,6 +40,7 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "browser-sync": "^2.27.7",
     "browser-sync-webpack-plugin": "^2.3.0",
+    "codemirror-editor-vue3": "^1.0.1",
     "core-js": "^3.20.3",
     "css-loader": "^6.5.1",
     "eslint": "^8.6.0",
@@ -70,6 +71,7 @@
     "vue-axios": "^3.4.0",
     "vue-loader": "^16.5.0",
     "vue-router": "^4.0.10",
+    "vue3-ace-editor": "^2.2.2",
     "vue3-scroll-spy": "^1.0.8",
     "webpack": "^5.66.0"
   }

@@ -215,31 +215,31 @@ class SettingController extends \WP_REST_Controller
     	$sanitized_value = NULL;
 
 		// Check for custom sanitization function.
-		if (isset( $details['sanitize'] ) && is_callable( $details['sanitize'] )) {
-			$sanitized_value = call_user_func( $details['sanitize'], $value );
+		if (isset($details['sanitize']) && is_callable($details['sanitize'])) {
+			$sanitized_value = call_user_func($details['sanitize'], $value);
 		}
 
 		// Options callback.
-		if (isset( $details['optionsCallback'] )) {
-			$details['options'] = call_user_func( $details['optionsCallback'], $details );
+		if (isset($details['optionsCallback'])) {
+			$details['options'] = call_user_func($details['optionsCallback'], $details);
 		}
 
 		// Default sanitization based on type.
-		if (is_null( $sanitized_value ) && isset( $details['type'] )) {
+		if (is_null($sanitized_value) && isset($details['type'])) {
 			switch ($details['type']) {
 				case 'email':
-					$sanitized_value = trim( sanitize_email( $value ) );
+					$sanitized_value = trim(sanitize_email($value));
 					break;
 				case 'code':
-					$sanitized_value = trim( wp_kses_post( $value ) );
+					$sanitized_value = trim(wp_kses_post($value));
 
 					// Fix for CSS code.
-					$sanitized_value = str_replace( '&gt;', '>', $sanitized_value );
+					$sanitized_value = str_replace('&gt;', '>', $sanitized_value);
 					break;
 				case 'text':
 				case 'number':
 				case 'color':
-					$sanitized_value = trim( sanitize_text_field( $value ) );
+					$sanitized_value = trim(sanitize_text_field($value));
 					break;
 				case 'dropdown':
 				case 'dropdownMultiselect':
@@ -250,7 +250,7 @@ class SettingController extends \WP_REST_Controller
 					}
 
 					foreach ($value as $option) {
-						if (array_key_exists( $option, $details['options'] )) {
+						if (array_key_exists($option, $details['options'])) {
 							$sanitized_value[] = $option;
 						}
 					}
@@ -258,10 +258,10 @@ class SettingController extends \WP_REST_Controller
 					break;
 				case 'richTextarea':
 				case 'textarea':
-					$sanitized_value = trim( stripslashes( wp_kses_post( $value ) ) );
+					$sanitized_value = trim(stripslashes(wp_kses_post($value)));
 					break;
-				case 'file':
-					$sanitized_value = trim( esc_url( $value ) );
+				case 'url':
+					$sanitized_value = trim(esc_url($value));
 				case 'toggle':
 					$sanitized_value = $value ? true : false;
 					break;
