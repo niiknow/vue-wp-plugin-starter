@@ -18,7 +18,7 @@ const webpackConfig = {
     }
   },
   watchOptions: {
-    ignored: ['**/public', '**/node_modules']
+    ignored: ['**/public/admin.html','**/public/frontend.html', '**/node_modules']
   },
   devServer: {
     port: 31337   // in case your port 8080 and 31337 are taken, replace this

@@ -326,6 +326,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
+// TODO: Generate setting page from config/settings.php
 var _default = (0, _vue.defineComponent)({
   components: {
     TToggle: _vue2.TToggle,
@@ -341,8 +342,14 @@ var _default = (0, _vue.defineComponent)({
     };
     var settings = (0, _vue.reactive)(_objectSpread({}, oldSettings));
     var ui = (0, _vue.reactive)({
-      actionKey: 0
+      actionKey: 0,
+      loaded: false
     });
+    var structure = (0, _vue.reactive)({
+      sections: {},
+      options: {}
+    });
+    var hasLoaded = (0, _vue.ref)(false);
     var hasChanged = (0, _vue.computed)(function () {
       // compare two objects
       var a = JSON.stringify(settings);
@@ -358,6 +365,8 @@ var _default = (0, _vue.defineComponent)({
         settings: ''
       },
       ui: ui,
+      structure: structure,
+      hasLoaded: hasLoaded,
       options: [{
         value: 'post',
         text: 'Post'
@@ -411,22 +420,93 @@ var _default = (0, _vue.defineComponent)({
           }
         }, _callee);
       }))();
+    },
+    getOptions: function getOptions(section) {
+      var options = _objectSpread({}, this.structure.options);
+
+      var result = [];
+      Object.keys(options).forEach(function (key) {
+        var item = options[key];
+
+        if (item.section === section) {
+          item.id = key;
+          result.push(item);
+        }
+      });
+      return result;
+    },
+    doCancel: function doCancel() {
+      var _this2 = this;
+
+      var settings = this.oldSettings;
+      Object.keys(settings).forEach(function (key) {
+        _this2.oldSettings[key] = settings[key];
+        _this2.settings[key] = settings[key];
+      });
+    },
+    doLoad: function doLoad() {
+      var _this3 = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+        var structure, settings;
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return (0, _vue.nextTick)();
+
+              case 2:
+                structure = _this3.$win.vue_wp_plugin_config.settingStructure;
+                _this3.structure['sections'] = structure['sections'];
+                _this3.structure['options'] = structure['options'];
+                settings = _this3.$win.vue_wp_plugin_config.settings || {};
+                _this3.endpoints = _this3.$win.vue_wp_plugin_config.rest.endpoints; // copy settings from server output
+
+                Object.keys(settings).forEach(function (key) {
+                  _this3.oldSettings[key] = settings[key];
+                  _this3.settings[key] = settings[key];
+                }); // make sure data is loaded before ui render
+
+                _this3.hasLoaded = true;
+
+                _this3.$forceUpdate();
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   },
-  beforeCreate: function beforeCreate() {
-    var _this2 = this;
+  beforeMount: function beforeMount() {
+    var _this4 = this;
 
-    document.onreadystatechange = function () {
-      if (document.readyState == "complete") {
-        var settings = _this2.$win.vue_wp_plugin_config.settings || {};
-        _this2.endpoints = _this2.$win.vue_wp_plugin_config.rest.endpoints; // copy settings from server output
+    var that = this;
 
-        Object.keys(settings).forEach(function (key) {
-          _this2.oldSettings[key] = settings[key];
-          _this2.settings[key] = settings[key];
-        });
-      }
-    };
+    if (that.$win.vue_wp_plugin_config) {
+      that.doLoad();
+      return;
+    }
+
+    document.onreadystatechange = /*#__PURE__*/(0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+      return _regenerator.default.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              if (document.readyState == "complete") {
+                _this4.doLoad();
+              }
+
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
   }
 });
 
@@ -477,6 +557,12 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.render = render;
 
+__webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+
+__webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+
+__webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+
 var _vue = __webpack_require__(/*! vue */ "vue");
 
 var _withScopeId = function _withScopeId(n) {
@@ -484,6 +570,7 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
+  key: 0,
   class: "app-settings w-full flex flex-wrap mx-auto"
 };
 var _hoisted_2 = {
@@ -506,125 +593,57 @@ var _hoisted_6 = /*#__PURE__*/(0, _vue.createTextVNode)("Cancel");
 var _hoisted_7 = {
   class: "list-reset py-2 md:py-0 mt-4"
 };
-
-var _hoisted_8 = /*#__PURE__*/(0, _vue.createStaticVNode)("<li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>General</span></a></li><li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Advanced</span></a></li><li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Debugging</span></a></li>", 3);
-
-var _hoisted_11 = [_hoisted_8];
-var _hoisted_12 = {
+var _hoisted_8 = {
+  class: "py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent"
+};
+var _hoisted_9 = {
+  href: "javascript:void(0)",
+  class: "block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600"
+};
+var _hoisted_10 = {
+  class: "pb-1 md:pb-0 text-sm"
+};
+var _hoisted_11 = {
   class: "w-full md:w-4/5 min-h-screen"
 };
-var _hoisted_13 = {
-  class: "pt-2"
+var _hoisted_12 = {
+  class: "pt-4"
 };
-
-var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0, _vue.createElementVNode)("h2", {
-    class: "font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center"
-  }, "General", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_15 = {
+var _hoisted_13 = {
+  class: "font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center"
+};
+var _hoisted_14 = {
   class: "p-8 mt-6 lg:mt-0 rounded shadow bg-white"
+};
+var _hoisted_15 = {
+  class: "md:flex mb-6"
 };
 var _hoisted_16 = {
-  class: "md:flex mb-6"
+  class: "md:w-3/5"
 };
-
-var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0, _vue.createElementVNode)("div", {
-    class: "md:w-3/5"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("label", {
-    class: "block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4",
-    for: "my-checkbox"
-  }, " Post Types "), /*#__PURE__*/(0, _vue.createElementVNode)("p", {
-    class: "py-2 text-sm text-gray-600"
-  }, "Which post types do you want to index?")], -1
-  /* HOISTED */
-  );
-});
-
+var _hoisted_17 = {
+  class: "block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4",
+  for: "my-checkbox"
+};
 var _hoisted_18 = {
-  class: "md:w-2/5"
+  class: "py-2 text-sm text-gray-600"
 };
 var _hoisted_19 = {
-  class: "pt-2"
+  class: "md:w-2/5"
 };
-
-var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0, _vue.createElementVNode)("h2", {
-    class: "font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center"
-  }, "Advanced", -1
-  /* HOISTED */
-  );
-});
-
+var _hoisted_20 = {
+  key: 0
+};
 var _hoisted_21 = {
-  class: "p-8 mt-6 lg:mt-0 rounded shadow bg-white"
-};
-var _hoisted_22 = {
-  class: "md:flex mb-6"
-};
-
-var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0, _vue.createElementVNode)("div", {
-    class: "md:w-3/5"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("label", {
-    class: "block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4",
-    for: "my-checkbox"
-  }, " Cleanup database upon plugin uninstall. "), /*#__PURE__*/(0, _vue.createElementVNode)("p", {
-    class: "py-2 text-sm text-gray-600"
-  }, "When enabled the plugin will remove any database data upon plugin uninstall.")], -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_24 = {
-  class: "md:w-2/5"
-};
-var _hoisted_25 = {
-  class: "pt-2"
-};
-
-var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0, _vue.createElementVNode)("h2", {
-    class: "font-sans font-bold break-normal text-gray-700 px-2 pb-1 text-xl w-full text-center"
-  }, "Debugging", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_27 = {
-  class: "p-8 mt-6 lg:mt-0 rounded shadow bg-white"
-};
-var _hoisted_28 = {
-  class: "md:flex mb-6"
-};
-
-var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0, _vue.createElementVNode)("div", {
-    class: "md:w-3/5"
-  }, [/*#__PURE__*/(0, _vue.createElementVNode)("label", {
-    class: "block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4",
-    for: "my-checkbox"
-  }, " Enable Debug Messages "), /*#__PURE__*/(0, _vue.createElementVNode)("p", {
-    class: "py-2 text-sm text-gray-600"
-  }, "When enabled the plugin will output debug messages in the JavaScript console.")], -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_30 = {
-  class: "md:w-2/5"
+  key: 1
 };
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_t_button = (0, _vue.resolveComponent)("t-button");
 
-  var _component_t_rich_select = (0, _vue.resolveComponent)("t-rich-select");
-
   var _component_t_toggle = (0, _vue.resolveComponent)("t-toggle");
+
+  var _component_t_rich_select = (0, _vue.resolveComponent)("t-rich-select");
 
   var _directive_scroll_spy_active = (0, _vue.resolveDirective)("scroll-spy-active");
 
@@ -632,7 +651,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _directive_scroll_spy = (0, _vue.resolveDirective)("scroll-spy");
 
-  return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_1, [(0, _vue.createElementVNode)("aside", _hoisted_2, [(0, _vue.createElementVNode)("div", _hoisted_3, [(0, _vue.createElementVNode)("div", _hoisted_4, [(0, _vue.createVNode)(_component_t_button, {
+  return _ctx.hasLoaded ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_1, [(0, _vue.createElementVNode)("aside", _hoisted_2, [(0, _vue.createElementVNode)("div", _hoisted_3, [(0, _vue.createElementVNode)("div", _hoisted_4, [(0, _vue.createVNode)(_component_t_button, {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.doSave();
     }),
@@ -651,6 +670,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["disabled", "data-rerendered"]), (0, _vue.createVNode)(_component_t_button, {
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return _ctx.doCancel();
+    }),
     variant: "secondary",
     style: {
       "width": "100px"
@@ -666,35 +688,48 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["disabled", "data-rerendered"])]), (0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("ul", _hoisted_7, _hoisted_11)), [[_directive_scroll_spy_active, {
+  , ["disabled", "data-rerendered"])]), (0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("ul", _hoisted_7, [((0, _vue.openBlock)(true), (0, _vue.createElementBlock)(_vue.Fragment, null, (0, _vue.renderList)(_ctx.structure.sections, function (value, name) {
+    return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("li", _hoisted_8, [(0, _vue.createElementVNode)("a", _hoisted_9, [(0, _vue.createElementVNode)("span", _hoisted_10, (0, _vue.toDisplayString)(value), 1
+    /* TEXT */
+    )])]);
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  ))])), [[_directive_scroll_spy_active, {
     selector: 'li',
     class: 'active'
-  }], [_directive_scroll_spy_link]])])]), (0, _vue.createCommentVNode)("Section container"), (0, _vue.createElementVNode)("section", _hoisted_12, [(0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", null, [(0, _vue.createElementVNode)("div", _hoisted_13, [(0, _vue.createCommentVNode)("Title"), _hoisted_14, (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_15, [(0, _vue.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0, _vue.createElementVNode)("div", _hoisted_18, [(0, _vue.createVNode)(_component_t_rich_select, {
-    modelValue: _ctx.settings.include_post_types,
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.settings.include_post_types = $event;
-    }),
-    placeholder: "select an option",
-    options: _ctx.options,
-    multiple: "",
-    tags: ""
-  }, null, 8
-  /* PROPS */
-  , ["modelValue", "options"])])])]), (0, _vue.createCommentVNode)("/Card")]), (0, _vue.createElementVNode)("div", _hoisted_19, [(0, _vue.createCommentVNode)("Title"), _hoisted_20, (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_21, [(0, _vue.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0, _vue.createElementVNode)("div", _hoisted_24, [(0, _vue.createVNode)(_component_t_toggle, {
-    modelValue: _ctx.settings.cleanup_db_on_plugin_uninstall,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return _ctx.settings.cleanup_db_on_plugin_uninstall = $event;
-    })
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"])])])]), (0, _vue.createCommentVNode)("/Card")]), (0, _vue.createElementVNode)("div", _hoisted_25, [(0, _vue.createCommentVNode)("Title"), _hoisted_26, (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_27, [(0, _vue.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0, _vue.createElementVNode)("div", _hoisted_30, [(0, _vue.createVNode)(_component_t_toggle, {
-    modelValue: _ctx.settings.enable_debug_messages,
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return _ctx.settings.enable_debug_messages = $event;
-    })
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"])])])]), (0, _vue.createCommentVNode)("/Card")])])), [[_directive_scroll_spy]])])]);
+  }], [_directive_scroll_spy_link]])])]), (0, _vue.createCommentVNode)("Section container"), (0, _vue.createElementVNode)("section", _hoisted_11, [(0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", null, [((0, _vue.openBlock)(true), (0, _vue.createElementBlock)(_vue.Fragment, null, (0, _vue.renderList)(_ctx.structure.sections, function (value, name) {
+    return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_12, [(0, _vue.createCommentVNode)("Title"), (0, _vue.createElementVNode)("h2", _hoisted_13, (0, _vue.toDisplayString)(value), 1
+    /* TEXT */
+    ), (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_14, [((0, _vue.openBlock)(true), (0, _vue.createElementBlock)(_vue.Fragment, null, (0, _vue.renderList)(_ctx.getOptions(name), function (item) {
+      return (0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_15, [(0, _vue.createElementVNode)("div", _hoisted_16, [(0, _vue.createElementVNode)("label", _hoisted_17, (0, _vue.toDisplayString)(item.name), 1
+      /* TEXT */
+      ), (0, _vue.createElementVNode)("p", _hoisted_18, (0, _vue.toDisplayString)(item.description), 1
+      /* TEXT */
+      )]), (0, _vue.createElementVNode)("div", _hoisted_19, [item.type === 'toggle' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_20, [(0, _vue.createVNode)(_component_t_toggle, {
+        modelValue: _ctx.settings[item.id],
+        "onUpdate:modelValue": function onUpdateModelValue($event) {
+          return _ctx.settings[item.id] = $event;
+        }
+      }, null, 8
+      /* PROPS */
+      , ["modelValue", "onUpdate:modelValue"])])) : (0, _vue.createCommentVNode)("v-if", true), item.type === 'dropdownMultiselect' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_21, [(0, _vue.createVNode)(_component_t_rich_select, {
+        modelValue: _ctx.settings[item.id],
+        "onUpdate:modelValue": function onUpdateModelValue($event) {
+          return _ctx.settings[item.id] = $event;
+        },
+        placeholder: "select an option",
+        options: item.options,
+        multiple: "",
+        tags: ""
+      }, null, 8
+      /* PROPS */
+      , ["modelValue", "onUpdate:modelValue", "options"])])) : (0, _vue.createCommentVNode)("v-if", true)])]);
+    }), 256
+    /* UNKEYED_FRAGMENT */
+    ))]), (0, _vue.createCommentVNode)("/Card")]);
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  ))])), [[_directive_scroll_spy]])])])) : (0, _vue.createCommentVNode)("v-if", true);
 }
 
 /***/ }),

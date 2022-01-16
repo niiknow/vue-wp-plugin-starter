@@ -20,5 +20,6 @@ class SettingControllerTests extends PluginTestCase {
 		$expected = 'settings';
         $this->assertEquals($expected, $actual);
 
+        echo(json_encode($controller->get_settings_structure(true), true));
     }
 }

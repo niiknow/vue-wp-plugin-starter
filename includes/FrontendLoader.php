@@ -48,7 +48,6 @@ class FrontendLoader
         wp_enqueue_style($this->prefix . '-' . $postfix);
         wp_enqueue_script($this->prefix . '-' . $postfix);
 
-
 		// output data for use on client-side
     	// https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
     	wp_localize_script($this->prefix . '-frontend', 'vue_wp_plugin_config', [

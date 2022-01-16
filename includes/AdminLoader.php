@@ -93,7 +93,8 @@ class AdminLoader
 		        ],
 		        'nonce' => wp_create_nonce('wp_rest')
 		    ],
-		    'settings' => $settingController->get_settings(null)
+		    'settings' => $settingController->get_settings(null),
+		    'settingStructure' => $settingController->get_settings_structure(true)
 		] );
 
 		$content = '<div class="admin-app-wrapper"><div id="vue-admin-app"></div></div>';

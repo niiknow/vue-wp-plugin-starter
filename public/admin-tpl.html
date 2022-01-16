@@ -67,13 +67,15 @@
     var vue_wp_plugin_config = {
       settings: {
         enable_debug_messages: false,
-        cleanup_db_on_plugin_uninstall: false
+        cleanup_db_on_plugin_uninstall: false,
+        include_post_types: ['page', 'post']
       },
       rest: {
         endpoints: {
           settings: '/wp-json/slsgrid/v1/settings'
         }
-      }
+      },
+      settingStructure: {"sections":{"general":"General","advanced":"Advanced","debugging":"Debugging"},"options":{"enable_debug_messages":{"name":"Enable Debug Messages","description":"When enabled the plugin will output debug messages in the JavaScript console.","section":"debugging","type":"toggle","code":"css","default":false},"cleanup_db_on_plugin_uninstall":{"name":"Cleanup database upon plugin uninstall","description":"When enabled the plugin will remove any database data upon plugin uninstall.","section":"advanced","type":"toggle","code":"css","default":false},"include_post_types":{"name":"Post Types","description":"Which post types do you want to index?","section":"general","type":"dropdownMultiselect","optionsCallback":{},"default":["post","page"],"options":["post","page"]}}}
     }
   </script>
 </body>

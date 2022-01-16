@@ -73,7 +73,7 @@ class SettingController extends \WP_REST_Controller
      */
     public function get_settings($request)
     {
-        $data  = get_option($this->prefix . '_settings', false);
+        $data  = get_option($this->prefix . '_settings', $this->get_setting_defaults());
     	$nonce = wp_create_nonce('wp_rest');
 
 		$response = array(
@@ -163,11 +163,44 @@ class SettingController extends \WP_REST_Controller
     /**
      * Settings structure goes here
      *
+     * @param  boolean $runOptionsCallback
      * @return array settings structure definition
      */
-    public function get_settings_structure()
+    public function get_settings_structure($runOptionsCallback = false)
     {
-    	return include(\Baseapp\Main::$PLUGINDIR . '/config/settings.php');
+    	$options = include(\Baseapp\Main::$PLUGINDIR . '/config/settings.php');
+
+    	if ($runOptionsCallback) {
+
+			$settings_details = $options['options'];
+
+			foreach ($settings_details as $id => $details) {
+				//var_dump($details);
+				if (isset($details['optionsCallback'])) {
+					$options['options'][$id]['options'] = call_user_func($details['optionsCallback'], $details);
+				}
+			}
+    	}
+
+    	return $options;
+    }
+
+     /**
+     * Get setting defaults
+     *
+     * @return array setting defaults
+     */
+    public function get_setting_defaults()
+    {
+    	$options = include(\Baseapp\Main::$PLUGINDIR . '/config/settings.php');
+    	$result = [];
+
+		$settings_details = $options['options'];
+    	foreach ($settings_details as $id => $details) {
+			$result[$id] = $details['default'];
+		}
+
+		return $result;
     }
 
     /**
@@ -251,7 +284,7 @@ class SettingController extends \WP_REST_Controller
 	 */
 	public function sanitize_settings( $settings ) {
 		$sanitized_settings = array();
-		$settings_details   = $this->get_settings_structure();
+		$settings_details   = $this->get_settings_structure()['options'];
 
 		foreach ($settings_details as $id => $details) {
 			$value = isset($settings[$id]) ? $settings[$id] : $details['default'];
