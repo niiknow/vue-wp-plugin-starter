@@ -44,3 +44,15 @@ Also, don't forget to update readme.txt with your plugin details.
   * eslint for linting and formatting support
 - **tests/** unit tests files
   * support both php (phpunit) and javascript (jest) unit testing
+
+# Front-end apps
+There are two front-end app example.  Let say your prefix is `wp-awesome-plugin`, then your shortcodes would be:
+
+```html
+<!-- frontend app (full route) example -->
+[wp-awesome-plugin-vue-app postfix='frontend']
+
+<!-- frontview app (dynamic view) example, render component in frontview/views/Comp2.vue folder -->
+[wp-awesome-plugin-vue-app postfix='frontview' view="Comp2"]
+```
+
