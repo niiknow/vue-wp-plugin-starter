@@ -45,7 +45,7 @@ index.html export-ignore
 public/*.html export-ignore
 vue-wp-plugin-starter.php export-ignore
 *.md export-ignore
-.gitkeep
-.gitattributes
-init-plugin.sh
-package.json
+.gitkeep export-ignore
+.gitattributes export-ignore
+init-plugin.sh export-ignore
+package.json export-ignore
