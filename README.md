@@ -26,6 +26,8 @@ cd wp-content/plugins
 unzip dist.zip -d wp-your-plugin-folder-name
 ```
 
+Also, don't forget to update [readme.txt](readme.txt) file appropriately since it is one of wordpress plugin required file.
+
 # Folder structures / Features
 
 - **assets/** image, css, and sass/scss files
