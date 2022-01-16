@@ -46,7 +46,7 @@ namespace="$(echo "$name" | sed 's/ //')"
 
 # the actual plugin file naming
 pluginfile="$slug"
-templatefile="vue-wp-plugin-starter.ph"
+templatefile="vue-wp-plugin-starter.php"
 
 echo -n "Do you want to prepend 'wp-' to your plugin file name? [Y/N]: "
 read prepend
@@ -98,6 +98,8 @@ sed -e "s/PLUGIN_NAME/$name/g" readme.txt > readme.txt-e
 rm readme.txt
 mv readme.txt-e readme.txt
 
+echo ""
+echo "..."
 echo "Plugin init completed, run 'composer install' and 'npm install' appropriately."
 echo "Also, don't forget to update readme.txt with your own plugin details..."
 
