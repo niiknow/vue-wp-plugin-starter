@@ -1,9 +1,6 @@
 #!/bin/bash
 # Usage: ./vue-wp-plugin-starter/init-plugin.sh
 
-PLUGIN_NAME=
-PLUGIN_NAMESPACE=
-
 # Check for valid plugin name.
 function valid_name () {
   valid="^[A-Z][A-Za-z0-9]*( [A-Z][A-Za-z0-9]*)*$"
@@ -65,17 +62,20 @@ fi
 
 echo 'Initializing $repo.php'
 cp vue-wp-plugin-starter.php "$repo.php"
-sed -i'' -e "s/PLUGIN_NAME/$repo/g" "$repo.php"
+sed -e "s/PLUGIN_NAME/$name/g" "$repo.php" > "$repo.php"
 
 echo 'Initializing package.json'
-sed -i'' -e "s/PLUGIN_NAME/$repo/g" package.json
+sed -e "s/PLUGIN_NAME/$repo/g" package.json > package.json
 
 echo 'Initializing readme.txt'
-sed -i'' -e "s/PLUGIN_NAME/$name/g" readme.txt
-
+sed -e "s/PLUGIN_NAME/$name/g" readme.txt > readme.txt
 
 echo 'Initializing *.php namespace'
-find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -exec sed -i'' -e "s/Baseapp/$namespace/g" {} \;
+while read -d '' filename; do
+  sed -e "s/Baseapp/$namespace/g" "${filename}" >  "${filename}"
+done < <(find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0)
 
 echo 'Initializing *.php prefix'
-find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -exec sed -i'' -e "s/baseapp/$prefix/g" {} \;
+while read -d '' filename; do
+  sed -e "s/baseapp/$prefix/g" "${filename}" >  "${filename}"
+done < <(find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0)
