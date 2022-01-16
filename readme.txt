@@ -20,6 +20,8 @@ bash init-plugin.sh
 
 For usage details, see: https://github.com/niiknow/vue-wp-plugin-starter/blob/main/USAGE.md
 
+Limited demo: https://niiknow.github.io/vue-wp-plugin-starter/
+
 == Features Highlight ==
 * Object-oriented and separation of concerns between: Assets, Admin, CLI, API, and Frontends.
 * Database migration instruction inside of Migrations.php
