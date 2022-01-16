@@ -1,4 +1,4 @@
-(self["webpackChunkPLUGIN_NAME"] = self["webpackChunkPLUGIN_NAME"] || []).push([["/js/vendor"],{
+(self["webpackChunkPLUGIN_FILE_NAME"] = self["webpackChunkPLUGIN_FILE_NAME"] || []).push([["/js/vendor"],{
 
 /***/ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js":
 /*!*****************************************************************!*\

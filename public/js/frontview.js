@@ -1,4 +1,4 @@
-(self["webpackChunkPLUGIN_NAME"] = self["webpackChunkPLUGIN_NAME"] || []).push([["/js/frontview"],{
+(self["webpackChunkPLUGIN_FILE_NAME"] = self["webpackChunkPLUGIN_FILE_NAME"] || []).push([["/js/frontview"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-6!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/frontview/App.vue?vue&type=script&lang=ts":
 /*!**************************************************************************************************************************************************************************************************************************************!*\

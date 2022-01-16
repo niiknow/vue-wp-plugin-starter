@@ -208,7 +208,7 @@
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkPLUGIN_NAME"] = self["webpackChunkPLUGIN_NAME"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunkPLUGIN_FILE_NAME"] = self["webpackChunkPLUGIN_FILE_NAME"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	}();
