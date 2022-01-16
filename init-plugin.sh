@@ -82,3 +82,5 @@ while read -d '' filename; do
   sed -e "s/baseapp/$prefix/g" "${filename}"-e > "${filename}"
   rm "${filename}"-e
 done < <(find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0)
+
+rm vue-wp-plugin-starter.php
