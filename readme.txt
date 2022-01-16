@@ -19,11 +19,13 @@ Use the [`init-plugin.sh`](init-plugin.sh) bash script to scaffold a new plugin.
 For additional instructions, see: [`INSTALLATION.md`](INSTALLATION.md)
 
 == Features Highlight ==
-* Database migration examples
-* Automatic admin settings page with simply edit of config/settings.php
-* Basic deadless (no wordpress) unit testings in php and vue
+* Object-oriented and separation of concerns between: Assets, Admin, CLI, API, and Frontends.
+* Database migration instruction inside of Migrations.php
+* Automatic admin settings page with simple structure inside config/settings.php
+* Basic headless (no wordpress) unit testings in php and vue
 * TailwindCSS for admin templating
-* Support multiple frontends with different vue app and shortcode
+* Laravel mix build supporting css, frontend, and backend vue3 typescript build
+* Support multiple frontends with different vue app, shortcode, and structure
 
 == Frequently Asked Questions ==
 
