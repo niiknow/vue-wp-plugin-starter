@@ -200,14 +200,14 @@ var vue_1 = __webpack_require__(/*! vue */ "vue");
 
 var App_vue_1 = __importDefault(__webpack_require__(/*! ./App.vue */ "./src/frontview/App.vue"));
 
-__webpack_require__(/*! @/shared/index */ "./src/shared/index.ts");
+__webpack_require__(/*! @src/shared/index */ "./src/shared/index.ts");
 
 var vue_axios_1 = __importDefault(__webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js"));
 
-var config_1 = __importDefault(__webpack_require__(/*! @/shared/config */ "./src/shared/config.ts"));
-
 var index_1 = __importDefault(__webpack_require__(/*! ./router/index */ "./src/frontview/router/index.ts")); // @ts-ignore
 
+
+var config_1 = __importDefault(__webpack_require__(/*! @src/shared/config */ "./src/shared/config.ts"));
 
 var win = (0, config_1.default)(window);
 var app = (0, vue_1.createApp)(App_vue_1.default); // allow for using this.$win inside of a component
@@ -239,7 +239,7 @@ Object.defineProperty(exports, "__esModule", ({
 
 var vue_router_1 = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
 
-var Home_vue_1 = __importDefault(__webpack_require__(/*! @/frontend/views/Home.vue */ "./src/frontend/views/Home.vue"));
+var Home_vue_1 = __importDefault(__webpack_require__(/*! @src/frontend/views/Home.vue */ "./src/frontend/views/Home.vue"));
 
 var routes = [{
   path: "/",

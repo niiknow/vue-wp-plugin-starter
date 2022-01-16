@@ -93,7 +93,7 @@ class AdminLoader
 		        ],
 		        'nonce' => wp_create_nonce('wp_rest')
 		    ],
-		    'settings' => $settingController->get_settings(null),
+		    'settings' => $settingController->get_settings_raw(),
 		    'settingStructure' => $settingController->get_settings_structure(true)
 		] );
 

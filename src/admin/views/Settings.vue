@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import { defineComponent, reactive, computed, ref, nextTick } from 'vue'
+import { defineComponent, reactive, computed, ref, nextTick, toRaw } from 'vue'
 import { TToggle, TButton, TRichSelect, TTextarea, TInput, TSelect } from '@variantjs/vue'
 import { VAceEditor } from 'vue3-ace-editor';
 import ace from 'ace-builds'
@@ -145,11 +145,11 @@ export default defineComponent({
   },
   methods: {
     async doSave() {
-      debugger
       try {
-        const rst = await this.axios.post(this.endpoints.settings, {...this.settings})
+        let data = toRaw(this.settings)
+        const rst = await this.axios.post(this.endpoints.settings, data)
         // const rst = { success: true }
-        if (rst.success) {
+        if (rst.status == 200) {
           this.$swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -178,7 +178,7 @@ export default defineComponent({
           icon: 'error',
           title: 'Oops...',
           text: 'Server response with error.',
-          footer: '<div class="overflow-footer w-full">' + JSON.stringify(err, null, 2) + '</div>'
+          footer: '<div class="overflow-footer w-full">' + err.message + '</div>'
         })
       }
     },
@@ -208,6 +208,12 @@ export default defineComponent({
 
       // @ts-ignore
       const config = this.$win.vue_wp_plugin_config_admin
+
+      // @ts-ignore
+      if (! this.$win.$appConfig.nonce) {
+        this.$win.$appConfig.nonce = config.rest.nonce
+      }
+
       const structure = config.settingStructure
       this.structure['sections'] = structure['sections']
       this.structure['options'] = structure['options']

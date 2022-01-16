@@ -1,11 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router/index'
-import '@/shared/index'
+import '@src/shared/index'
 import VueAxios from 'vue-axios'
-import config from '@/shared/config'
 
 // @ts-ignore
+import config from '@src/shared/config'
 const win: any = config(window)
 const app = createApp(App)
 

@@ -13,7 +13,7 @@ final class Main
 	 *
 	 * @var string
 	 */
-	const VERSION = '0.1.0';
+	const VERSION = '1.0.0';
 
 	/**
 	 * A unique plugin prefix to use throughout your plugin.

@@ -64,6 +64,16 @@ class SettingController extends \WP_REST_Controller
 		);
 	}
 
+
+	/**
+	 * Retrieves settings data only
+	 *
+	 */
+	public function get_settings_raw()
+	{
+		return get_option($this->prefix . '_settings', $this->get_setting_defaults());
+	}
+
 	/**
 	 * Retrieves settings
 	 *
@@ -73,7 +83,7 @@ class SettingController extends \WP_REST_Controller
 	 */
 	public function get_settings($request)
 	{
-		$data  = get_option($this->prefix . '_settings', $this->get_setting_defaults());
+		$data  = $this->get_settings_raw();
 		$nonce = wp_create_nonce('wp_rest');
 
 		$response = array(
@@ -85,6 +95,7 @@ class SettingController extends \WP_REST_Controller
 		return rest_ensure_response($response);
 	}
 
+
 	/**
 	 * Update settings
 	 *
@@ -95,31 +106,27 @@ class SettingController extends \WP_REST_Controller
 	public function update_settings(\WP_REST_Request $request)
 	{
 		// attempt to parse the json parameter
-		$rsp   = $request->parse_json_params();
-		$nonce = wp_create_nonce('wp_rest');
+		$params = $request->get_json_params();
+		$nonce  = wp_create_nonce('wp_rest');
 
-		if (true === $rsp) {
-			$params       = $request->params['JSON'];
-			$settings     = isset($params['settings'] ) ? $params['settings'] : array();
+		// update correct response
+		$response = array(
+			'data'    => $params,
+			'success' => false,
+			'nonce'   => $nonce
+		);
+
+		if (isset($params)) {
+			$settings     = $params;
 			$setting_key  = $this->prefix . '_settings';
-			$new_settings = $this->sanitized_settings($settings);
+			$new_settings = $this->sanitize_settings($settings);
 			$old_settings = get_option($setting_key);
 
 			$data = apply_filters($this->prefix . '_settings_update', $new_settings, $old_settings);
 			update_option($setting_key, $data);
-
-			// update correct response
-			$response = array(
-				'data'    => $data,
-				'success' => $rsp,
-				'nonce'   => $nonce
-			);
+			$response['data'] = $data;
+			$response['success'] = true;
 		}
-
-		$response = array(
-			'success' => $rsp,
-			'nonce'   => $nonce
-		);
 
 		return rest_ensure_response($response);
 	}
@@ -141,7 +148,7 @@ class SettingController extends \WP_REST_Controller
 
 		if (! current_user_can('manage_options'))
 		{
-			return new WP_Error('rest_forbidden', __('Sorry, you cannot update settings.'), array( 'status' => 403 ));
+			return new \WP_Error('rest_forbidden', __('Sorry, you cannot update settings.'), array( 'status' => 403 ));
 		}
 
 		// since success, we response with next noonce

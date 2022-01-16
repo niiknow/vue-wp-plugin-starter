@@ -13,7 +13,7 @@ const webpackConfig = {
   resolve: {
     extensions: ['.js', '.json', '.vue', '.sass', '.scss', '.ts'],
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@src': path.resolve(__dirname, 'src'),
       'vue$': 'vue/dist/vue.esm.js'
     }
   },

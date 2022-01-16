@@ -89,14 +89,14 @@ var index_1 = __importDefault(__webpack_require__(/*! ./router/index */ "./src/a
 
 var vue_axios_1 = __importDefault(__webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js"));
 
-var config_1 = __importDefault(__webpack_require__(/*! @/shared/config */ "./src/shared/config.ts"));
-
 var vue3_scroll_spy_1 = __webpack_require__(/*! vue3-scroll-spy */ "./node_modules/vue3-scroll-spy/dist/index.js");
 
 var vue_2 = __webpack_require__(/*! @variantjs/vue */ "./node_modules/@variantjs/vue/dist/index.umd.js");
 
 var sweetalert2_1 = __importDefault(__webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js")); // @ts-ignore
 
+
+var config_1 = __importDefault(__webpack_require__(/*! @src/shared/config */ "./src/shared/config.ts"));
 
 var win = (0, config_1.default)(window);
 var app = (0, vue_1.createApp)(App_vue_1.default); // Using default options
@@ -152,9 +152,9 @@ Object.defineProperty(exports, "__esModule", ({
 
 var vue_router_1 = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
 
-var Dashboard_vue_1 = __importDefault(__webpack_require__(/*! @/admin/views/Dashboard.vue */ "./src/admin/views/Dashboard.vue"));
+var Dashboard_vue_1 = __importDefault(__webpack_require__(/*! @src/admin/views/Dashboard.vue */ "./src/admin/views/Dashboard.vue"));
 
-var Settings_vue_1 = __importDefault(__webpack_require__(/*! @/admin/views/Settings.vue */ "./src/admin/views/Settings.vue"));
+var Settings_vue_1 = __importDefault(__webpack_require__(/*! @src/admin/views/Settings.vue */ "./src/admin/views/Settings.vue"));
 
 var routes = [{
   path: "/",
@@ -379,21 +379,21 @@ var _default = (0, _vue.defineComponent)({
       var _this = this;
 
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var rst, settings;
+        var data, rst, settings;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                debugger;
-                _context.prev = 1;
+                _context.prev = 0;
+                data = (0, _vue.toRaw)(_this.settings);
                 _context.next = 4;
-                return _this.axios.post(_this.endpoints.settings, _objectSpread({}, _this.settings));
+                return _this.axios.post(_this.endpoints.settings, data);
 
               case 4:
                 rst = _context.sent;
 
                 // const rst = { success: true }
-                if (rst.success) {
+                if (rst.status == 200) {
                   _this.$swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -422,13 +422,13 @@ var _default = (0, _vue.defineComponent)({
 
               case 8:
                 _context.prev = 8;
-                _context.t0 = _context["catch"](1);
+                _context.t0 = _context["catch"](0);
 
                 _this.$swal.fire({
                   icon: 'error',
                   title: 'Oops...',
                   text: 'Server response with error.',
-                  footer: '<div class="overflow-footer w-full">' + JSON.stringify(_context.t0, null, 2) + '</div>'
+                  footer: '<div class="overflow-footer w-full">' + _context.t0.message + '</div>'
                 });
 
               case 11:
@@ -436,7 +436,7 @@ var _default = (0, _vue.defineComponent)({
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 8]]);
+        }, _callee, null, [[0, 8]]);
       }))();
     },
     getOptions: function getOptions(section) {
@@ -476,7 +476,12 @@ var _default = (0, _vue.defineComponent)({
 
               case 2:
                 // @ts-ignore
-                config = _this3.$win.vue_wp_plugin_config_admin;
+                config = _this3.$win.vue_wp_plugin_config_admin; // @ts-ignore
+
+                if (!_this3.$win.$appConfig.nonce) {
+                  _this3.$win.$appConfig.nonce = config.rest.nonce;
+                }
+
                 structure = config.settingStructure;
                 _this3.structure['sections'] = structure['sections'];
                 _this3.structure['options'] = structure['options'];
@@ -492,7 +497,7 @@ var _default = (0, _vue.defineComponent)({
 
                 _this3.$forceUpdate();
 
-              case 11:
+              case 12:
               case "end":
                 return _context2.stop();
             }
