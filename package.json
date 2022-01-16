@@ -4,7 +4,6 @@
   "description": "A WordPress Vue.js starter plugin",
   "author": "Tom Noogen",
   "license": "GPLv2",
-  "private": true,
   "scripts": {
     "dev": "npm run development",
     "development": "mix",

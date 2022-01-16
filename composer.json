@@ -1,6 +1,6 @@
 {
   "type": "wordpress-plugin",
-  "license": "GPL-3.0",
+  "license": "GPL-2.0",
   "require": {
     "php": "^7.4|^8.0"
   },
