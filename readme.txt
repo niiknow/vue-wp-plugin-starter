@@ -12,7 +12,7 @@ Effortlessly create a new plugin with this template!
 
 **Scaffolding**
 
-Use the https://github.com/niiknow/vue-wp-plugin-starter/blob/main/init-plugin.sh bash script to scaffold a new plugin.
+Use the init-plugin.sh bash script to scaffold a new plugin.
 
 ```shell
 bash init-plugin.sh
