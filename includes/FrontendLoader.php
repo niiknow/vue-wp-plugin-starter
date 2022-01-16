@@ -31,7 +31,7 @@ class FrontendLoader
 
     	// let say your prefix is wp-awesome-plugin, then it will be
     	// [wp-awesome-plugin-vue-app postfix='frontend']
-        $this->id = $this->prefix . '-vue-app'
+        $this->id = str_replace("_", "-", $this->prefix . '-vue-app');
         add_shortcode($this->id, [$this, 'render_frontend']);
     }
 
@@ -66,15 +66,18 @@ class FrontendLoader
 	    	wp_localize_script($this->prefix . '-'.$postfix, 'vue_wp_plugin_config_'.$postfix, [
 	    		// todo: add config output here
 			]);
+
+			$content .= '<div id="vue-frontend-app" ></div>';
 		} else if ($postfix === 'frontview') {
 		    // output data for use on client-side
 	    	// https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
 	    	wp_localize_script($this->prefix . '-'.$postfix, 'vue_wp_plugin_config_'.$postfix, [
-	    		'viewComponent' => esc_attr($a['view']);
+	    		'viewComponent' => esc_attr($a['view'])
 			]);
+
+			$content .= '<div id="vue-frontview-app" ></div>';
 		}
 
-		$content .= '<div id="' . $this->id . '" ></div>';
         return $content;
     }
 }
