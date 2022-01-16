@@ -12,7 +12,6 @@ const app = createApp(App)
 // allow for using this.$win inside of a component
 app.config.globalProperties.$win = win;
 
-provide('$win', win)
 app.use(router)
    .use(VueAxios, win.$appConfig.axios);
 app.mount('#vue-frontview-app')

@@ -213,7 +213,6 @@ var win = (0, config_1.default)(window);
 var app = (0, vue_1.createApp)(App_vue_1.default); // allow for using this.$win inside of a component
 
 app.config.globalProperties.$win = win;
-(0, vue_1.provide)('$win', win);
 app.use(index_1.default).use(vue_axios_1.default, win.$appConfig.axios);
 app.mount('#vue-frontview-app');
 
