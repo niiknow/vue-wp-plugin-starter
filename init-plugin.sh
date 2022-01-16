@@ -63,7 +63,6 @@ else
   pluginfile="wp-${slug}"
 fi
 
-
 echo 'Initializing $pluginfile.php'
 rm "$pluginfile.php"
 cp "$templatefile" "$pluginfile.php"
@@ -92,11 +91,13 @@ while read -d '' filename; do
 done < <(find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0)
 
 # lastly, remove template file
-rm "$templatefile"
+rm "$templatefile" composer.lock package-lock.json
 
 echo 'Initializing readme.txt'
 sed -e "s/PLUGIN_NAME/$name/g" readme.txt > readme.txt-e
 rm readme.txt
 mv readme.txt-e readme.txt
 
-echo "Don't forget to update readme.txt with your own plugin details..."
+echo "Plugin init completed, run 'composer install' and 'npm install' appropriately."
+echo "Also, don't forget to update readme.txt with your own plugin details..."
+
