@@ -33,20 +33,21 @@ Also, don't forget to update readme.txt with your plugin details.
 # Folder structures / Features
 
 - **assets/** image, css, and sass/scss files
-  * `sass` support but can easily convert to `postcss` for use with Tailwind CSS
-- **config/** php type configuration file similar to laravel
-- **includes/**  php source files
+  * `css` post css file demo use with Tailwind CSS
+  * `html` template file for local debug
+- **config/** location containing php type configuration file similar to laravel
+- **includes/** main php source location
   * structural layout on how to: DB Migration, Admin pages, Frontend pages, WP_CLI setup, REST API, and Assets management.
-- **languages/** translation files
+- **languages/** standard wordpress style translation files
 - **public/** compiled script and static contents.  Support limited local test of compiled `vue` assets.
 - **src/** typescript, javascript, and vue sources
-  * using laravel-mix to support multiple admin or frontends `vue` app.  This support also translate inside of `includes/Frontend.php`
+  * using laravel-mix to support multiple admin and front-end `vue` apps.  This support also translate inside of `includes/FrontendLoader.php`
   * eslint for linting and formatting support
 - **tests/** unit tests files
   * support both php (phpunit) and javascript (jest) unit testing
 
-# Front-end apps
-There are two front-end app example.  Let say your prefix is `wp-awesome-plugin`, then your shortcodes would be:
+# Vue apps
+There are two front-end apps in this starter/example.  Let say your prefix is `wp-awesome-plugin`, then your shortcodes would be (also see `include/FrontendLoader.php`):
 
 ```html
 <!-- frontend app (full route) example -->
@@ -56,3 +57,4 @@ There are two front-end app example.  Let say your prefix is `wp-awesome-plugin`
 [wp-awesome-plugin-vue-app postfix='frontview' view="Comp2"]
 ```
 
+Since admin does not require shortcode, it is automatically generate with wrapper id=`admin-app-wrapper`

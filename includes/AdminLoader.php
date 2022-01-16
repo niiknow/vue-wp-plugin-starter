@@ -36,8 +36,8 @@ class AdminLoader
         $slug       = $this->prefix;
 
         $hook = add_menu_page(
-        	esc_html__('SLS Grid', $this->prefix),
-        	esc_html__('SLS Grid', $this->prefix),
+        	esc_html__('PLUGIN_NAME', $this->prefix),
+        	esc_html__('PLUGIN_NAME', $this->prefix),
         	$capability,
         	$slug,
         	[ $this, 'plugin_page' ],

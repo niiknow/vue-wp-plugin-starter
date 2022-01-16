@@ -1,5 +1,5 @@
 {
-  "name": "PLUGIN_NAME",
+  "name": "PLUGIN_FILE_NAME",
   "version": "1.0.0",
   "description": "A WordPress Vue.js starter plugin",
   "author": "Tom Noogen",

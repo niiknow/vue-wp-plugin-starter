@@ -72,7 +72,7 @@ rm "$pluginfile.php"
 mv "$pluginfile.php"-e "$pluginfile.php"
 
 echo 'Initializing package.json'
-sed -e "s/PLUGIN_NAME/$pluginfile/g" package.json > package.json-e
+sed -e "s/PLUGIN_FILE_NAME/$pluginfile/g" package.json > package.json-e
 rm package.json
 mv package.json-e package.json
 
@@ -85,7 +85,10 @@ echo 'Initializing *.php namespace'
 while read -d '' filename; do
   sed -e "s/Baseapp/$namespace/g" "${filename}" > "${filename}"-e
   sed -e "s/baseapp/$prefix/g" "${filename}"-e > "${filename}"
-  rm "${filename}"-e
+  sed -e "s/PLUGIN_NAME/$name/g" "${filename}" > "${filename}"-e
+  rm ${filename}
+  mv "${filename}"-e ${filename}
+  # rm "${filename}"-e
 done < <(find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0)
 
 rm "$templatefile"
