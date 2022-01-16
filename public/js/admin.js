@@ -466,7 +466,7 @@ var _default = (0, _vue.defineComponent)({
       var _this3 = this;
 
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-        var structure, settings;
+        var config, structure, settings;
         return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -475,11 +475,13 @@ var _default = (0, _vue.defineComponent)({
                 return (0, _vue.nextTick)();
 
               case 2:
-                structure = _this3.$win.vue_wp_plugin_config.settingStructure;
+                // @ts-ignore
+                config = _this3.$win.vue_wp_plugin_config_admin;
+                structure = config.settingStructure;
                 _this3.structure['sections'] = structure['sections'];
                 _this3.structure['options'] = structure['options'];
-                settings = _this3.$win.vue_wp_plugin_config.settings || {};
-                _this3.endpoints = _this3.$win.vue_wp_plugin_config.rest.endpoints; // copy settings from server output
+                settings = config.settings || {};
+                _this3.endpoints = config.rest.endpoints; // copy settings from server output
 
                 Object.keys(settings).forEach(function (key) {
                   _this3.oldSettings[key] = settings[key];
@@ -490,7 +492,7 @@ var _default = (0, _vue.defineComponent)({
 
                 _this3.$forceUpdate();
 
-              case 10:
+              case 11:
               case "end":
                 return _context2.stop();
             }
@@ -502,9 +504,9 @@ var _default = (0, _vue.defineComponent)({
   beforeMount: function beforeMount() {
     var _this4 = this;
 
-    var that = this;
+    var that = this; // @ts-ignore
 
-    if (that.$win.vue_wp_plugin_config) {
+    if (that.$win && that.$win.vue_wp_plugin_config_admin) {
       that.doLoad();
       return;
     }

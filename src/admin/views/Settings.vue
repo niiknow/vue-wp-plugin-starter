@@ -205,12 +205,15 @@ export default defineComponent({
     },
     async doLoad() {
       await nextTick()
-      const structure = this.$win.vue_wp_plugin_config.settingStructure
+
+      // @ts-ignore
+      const config = this.$win.vue_wp_plugin_config_admin
+      const structure = config.settingStructure
       this.structure['sections'] = structure['sections']
       this.structure['options'] = structure['options']
 
-      const settings = this.$win.vue_wp_plugin_config.settings || {}
-      this.endpoints = this.$win.vue_wp_plugin_config.rest.endpoints
+      const settings = config.settings || {}
+      this.endpoints = config.rest.endpoints
 
       // copy settings from server output
       Object.keys(settings).forEach((key) => {
@@ -225,7 +228,9 @@ export default defineComponent({
   },
   beforeMount() {
     var that = this
-    if (that.$win.vue_wp_plugin_config) {
+
+    // @ts-ignore
+    if (that.$win && that.$win.vue_wp_plugin_config_admin) {
       that.doLoad()
       return
     }
