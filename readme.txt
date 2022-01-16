@@ -10,13 +10,13 @@ Effortlessly create a new plugin with this template!
 
 **Scaffolding**
 
-Use the [`init-plugin.sh`](init-plugin.sh) bash script to scaffold a new plugin.
+Use the https://github.com/niiknow/vue-wp-plugin-starter/blob/main/init-plugin.sh bash script to scaffold a new plugin.
 
-```bash
-./init-plugin.sh
+```shell
+bash init-plugin.sh
 ```
 
-For additional instructions, see: [`INSTALLATION.md`](INSTALLATION.md)
+For additional instructions, see: https://github.com/niiknow/vue-wp-plugin-starter/blob/main/INSTALLATION.md
 
 == Features Highlight ==
 * Object-oriented and separation of concerns between: Assets, Admin, CLI, API, and Frontends.
