@@ -164,6 +164,7 @@
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/manifest": 0,
+/******/ 			"css/frontview": 0,
 /******/ 			"css/frontend": 0,
 /******/ 			"css/admin": 0
 /******/ 		};

@@ -13,7 +13,8 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var vue_1 = __webpack_require__(/*! vue */ "vue");
+var vue_1 = __webpack_require__(/*! vue */ "vue"); // this demonstrate frontend app that utilize the router
+
 
 exports["default"] = (0, vue_1.defineComponent)({
   name: 'AppOne'

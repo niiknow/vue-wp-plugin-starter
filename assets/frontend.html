@@ -7,7 +7,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue@next/dist/vue.global.prod.js"></script>
 
-  <link href="css/admin.css" rel="stylesheet">
+  <link href="css/frontend.css" rel="stylesheet">
   <title>Vue Wordpress Plugin Starter</title>
 </head>
 <body>
@@ -22,6 +22,11 @@
               </svg>
               <span class="font-semibold text-gray-500 text-lg">Home</span>
             </a>
+          </div>
+
+          <!-- Primary Navbar items -->
+          <div class="hidden md:flex items-center space-x-1">
+            <span class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Frontend App</span>
           </div>
         </div>
 
@@ -47,5 +52,10 @@
       padding-top: 70px;
     }
   </style>
+
+  <script>
+    var vue_wp_plugin_config_frontend = {
+    }
+  </script>
 </body>
 </html>

@@ -7,6 +7,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+// this demonstrate frontend app that utilize the router
 export default defineComponent({
   name: 'AppOne'
 })
