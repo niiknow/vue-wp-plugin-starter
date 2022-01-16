@@ -44,11 +44,10 @@ fi
 
 slug="$( echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g' )"
 prefix="$( echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g' )"
-namespace="$( echo "$name" | sed 's/ //g' )"
-class="$( echo "$name" | sed 's/ /_/g' )"
+nameclean=="$(echo "$name" | sed 's/ //')"
+namespace="$(echo "$nameclean" | sed 's/.*/\u&/')"
 repo="$slug"
 
-echo
 echo -n "Do you want to prepend 'wp-' to your repository name? [Y/N]: "
 read prepend
 
@@ -63,4 +62,19 @@ if [[ "$prepend" != Y ]] && [[ "$prepend" != y ]]; then
 else
 	repo="wp-${slug}"
 fi
+
+cp vue-wp-plugin-starter.php "$repo.php"
+echo 'Initializing package.json'
+sed -i -e "s/PLUGIN_NAME/$repo/g" package.json
+
+echo 'Initializing readme.txt'
+sed -i -e "s/PLUGIN_NAME/$name/g" readme.txt
+
+
+echo 'Initializing *.php namespace'
+find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0 | xargs -0 sed -i '' -e "s/Baseapp/$namespace/g"
+
+echo 'Initializing *.php prefix'
+find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0 | xargs -0 sed -i '' -e "s/baseapp/$prefix/g"
+
 
