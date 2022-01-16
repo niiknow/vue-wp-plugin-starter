@@ -6,6 +6,8 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+Vue Wordpress Plugin Starter with Vue3, Typescript, and Laravel Mix (Webpack wrapper)
+
 Effortlessly create a new plugin with this template!
 
 **Scaffolding**
@@ -16,7 +18,7 @@ Use the https://github.com/niiknow/vue-wp-plugin-starter/blob/main/init-plugin.s
 bash init-plugin.sh
 ```
 
-For additional instructions, see: https://github.com/niiknow/vue-wp-plugin-starter/blob/main/INSTALLATION.md
+For addtional usage details, see: https://github.com/niiknow/vue-wp-plugin-starter/blob/main/USAGE.md
 
 == Features Highlight ==
 * Object-oriented and separation of concerns between: Assets, Admin, CLI, API, and Frontends.
