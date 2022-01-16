@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A WordPress Vue.js starter plugin",
   "author": "Tom Noogen",
-  "license": "GPLv3",
+  "license": "GPLv2",
   "private": true,
   "scripts": {
     "dev": "npm run development",

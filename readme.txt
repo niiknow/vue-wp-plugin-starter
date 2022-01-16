@@ -3,14 +3,22 @@ Contributors: noogen
 Tags: vue wp plugin starter
 Tested up to: 5.8.3
 Stable tag: 1.0.0
-License: GPLv3
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Effortlessly create a new plugin with this template!
 
-For additional instructions, see: INSTALLATION.md
+**Scaffolding**
 
-== Features Highligh ==
+Use the [`init-plugin.sh`](init-plugin.sh) bash script to scaffold a new plugin.
+
+```bash
+./init-plugin.sh
+```
+
+For additional instructions, see: [`INSTALLATION.md`](INSTALLATION.md)
+
+== Features Highlight ==
 * Database migration examples
 * Automatic admin settings page with simply edit of config/settings.php
 * Basic deadless (no wordpress) unit testings in php and vue
