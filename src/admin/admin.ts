@@ -5,6 +5,7 @@ import VueAxios from 'vue-axios'
 import config from '@/shared/config'
 import { registerScrollSpy } from 'vue3-scroll-spy'
 import { variantJS, VariantJSConfiguration } from '@variantjs/vue'
+import swal from 'sweetalert2'
 
 // @ts-ignore
 const win: any = config(window)
@@ -16,6 +17,7 @@ registerScrollSpy(app)
 // allow for using this.$win/axios inside of a component
 app.config.globalProperties.$win  = win;
 app.config.globalProperties.axios = win.$appConfig.axios
+app.config.globalProperties.$swal = swal
 
 app.use(router)
   .use(VueAxios, win.$appConfig.axios)

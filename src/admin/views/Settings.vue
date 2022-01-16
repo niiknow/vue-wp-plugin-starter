@@ -4,8 +4,8 @@
       <div class="w-full sticky inset-0 max-h-64 lg:h-auto overflow-x-hidden overflow-y-auto lg:overflow-y-hidden lg:block mt-0 my-2 lg:my-0 border border-gray-400 lg:border-transparent bg-white shadow lg:shadow-none lg:bg-transparent z-20" style="top:6em;">
 
         <div class="space-x-3 flex justify-end pr-4 pt-2">
-          <t-button @click="doSave()" style="width: 100px" :disabled="hasChanged">Save</t-button>
-          <t-button variant="secondary" style="width: 100px" :disabled="hasChanged">Cancel</t-button>
+          <t-button @click="doSave()" style="width: 100px" :disabled="hasChanged" :data-rerendered="ui.actionKey">Save</t-button>
+          <t-button variant="secondary" style="width: 100px" :disabled="hasChanged" :data-rerendered="ui.actionKey">Cancel</t-button>
         </div>
 
         <ul class="list-reset py-2 md:py-0 mt-4" v-scroll-spy-active v-scroll-spy-link>
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { defineComponent, reactive, computed } from 'vue'
+import { defineComponent, reactive, computed, ref } from 'vue'
 import { TToggle, TButton } from '@variantjs/vue'
 
 export default defineComponent({
@@ -88,28 +88,46 @@ export default defineComponent({
       enable_debug_messages: false,
       cleanup_db_on_plugin_uninstall: false
     }
-    const settings = reactive(Object.assign({}, oldSettings))
+    const settings = reactive({...oldSettings})
+    const ui = reactive({ actionKey: 0 })
 
     const hasChanged = computed(() => {
       // compare two objects
       const a = JSON.stringify(settings)
       const b = JSON.stringify(oldSettings)
-      return a === b
+      ui.actionKey = ui.actionKey + 1
+      return (a === b)
     });
 
     return {
       settings,
       oldSettings,
+      hasChanged,
       endpoints: { settings: '' },
-      hasChanged
+      ui
     }
   },
   methods: {
     async doSave() {
-      debugger
       const rst = await this.axios.post(this.endpoints.settings, {...this.settings})
-      // validate success?
-      let a = 1
+      // const rst = { success: true }
+      if (rst.success) {
+        this.$swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your settings has been saved.',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+        const settings = {...this.settings}
+        Object.keys(settings).forEach((key) => {
+          this.oldSettings[key] = settings[key]
+        })
+
+        // force rerendered
+        this.ui.actionKey = this.ui.actionKey + 1
+      }
     }
   },
   beforeCreate() {

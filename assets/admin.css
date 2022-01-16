@@ -2,12 +2,8 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.current {
+.my-local-menu li.current {
   @apply border-green-500;
   @apply font-semibold;
   @apply border-b-4;
-}
-
-.main-wrapper {
-  padding-top: 70px;
 }

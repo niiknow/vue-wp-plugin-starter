@@ -93,7 +93,9 @@ var config_1 = __importDefault(__webpack_require__(/*! @/shared/config */ "./src
 
 var vue3_scroll_spy_1 = __webpack_require__(/*! vue3-scroll-spy */ "./node_modules/vue3-scroll-spy/dist/index.js");
 
-var vue_2 = __webpack_require__(/*! @variantjs/vue */ "./node_modules/@variantjs/vue/dist/index.umd.js"); // @ts-ignore
+var vue_2 = __webpack_require__(/*! @variantjs/vue */ "./node_modules/@variantjs/vue/dist/index.umd.js");
+
+var sweetalert2_1 = __importDefault(__webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js")); // @ts-ignore
 
 
 var win = (0, config_1.default)(window);
@@ -103,6 +105,7 @@ var app = (0, vue_1.createApp)(App_vue_1.default); // Using default options
 
 app.config.globalProperties.$win = win;
 app.config.globalProperties.axios = win.$appConfig.axios;
+app.config.globalProperties.$swal = sweetalert2_1.default;
 app.use(index_1.default).use(vue_axios_1.default, win.$appConfig.axios);
 var configuration = {
   TButton: {
@@ -305,17 +308,15 @@ exports["default"] = void 0;
 
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
 
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
-
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
-
-__webpack_require__(/*! core-js/modules/es.object.assign.js */ "./node_modules/core-js/modules/es.object.assign.js");
-
 __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
 
 __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 
 __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
 
 var _vue = __webpack_require__(/*! vue */ "vue");
 
@@ -336,20 +337,25 @@ var _default = (0, _vue.defineComponent)({
       enable_debug_messages: false,
       cleanup_db_on_plugin_uninstall: false
     };
-    var settings = (0, _vue.reactive)(Object.assign({}, oldSettings));
+    var settings = (0, _vue.reactive)(_objectSpread({}, oldSettings));
+    var ui = (0, _vue.reactive)({
+      actionKey: 0
+    });
     var hasChanged = (0, _vue.computed)(function () {
       // compare two objects
       var a = JSON.stringify(settings);
       var b = JSON.stringify(oldSettings);
+      ui.actionKey = ui.actionKey + 1;
       return a === b;
     });
     return {
       settings: settings,
       oldSettings: oldSettings,
+      hasChanged: hasChanged,
       endpoints: {
         settings: ''
       },
-      hasChanged: hasChanged
+      ui: ui
     };
   },
   methods: {
@@ -357,21 +363,36 @@ var _default = (0, _vue.defineComponent)({
       var _this = this;
 
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var rst, a;
+        var rst, settings;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                debugger;
-                _context.next = 3;
+                _context.next = 2;
                 return _this.axios.post(_this.endpoints.settings, _objectSpread({}, _this.settings));
 
-              case 3:
+              case 2:
                 rst = _context.sent;
-                // validate success?
-                a = 1;
 
-              case 5:
+                // const rst = { success: true }
+                if (rst.success) {
+                  _this.$swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your settings has been saved.',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+
+                  settings = _objectSpread({}, _this.settings);
+                  Object.keys(settings).forEach(function (key) {
+                    _this.oldSettings[key] = settings[key];
+                  }); // force rerendered
+
+                  _this.ui.actionKey = _this.ui.actionKey + 1;
+                }
+
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -569,7 +590,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     style: {
       "width": "100px"
     },
-    disabled: _ctx.hasChanged
+    disabled: _ctx.hasChanged,
+    "data-rerendered": _ctx.ui.actionKey
   }, {
     default: (0, _vue.withCtx)(function () {
       return [_hoisted_5];
@@ -579,12 +601,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["disabled"]), (0, _vue.createVNode)(_component_t_button, {
+  , ["disabled", "data-rerendered"]), (0, _vue.createVNode)(_component_t_button, {
     variant: "secondary",
     style: {
       "width": "100px"
     },
-    disabled: _ctx.hasChanged
+    disabled: _ctx.hasChanged,
+    "data-rerendered": _ctx.ui.actionKey
   }, {
     default: (0, _vue.withCtx)(function () {
       return [_hoisted_6];
@@ -594,7 +617,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["disabled"])]), (0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("ul", _hoisted_7, _hoisted_10)), [[_directive_scroll_spy_active], [_directive_scroll_spy_link]])])]), (0, _vue.createCommentVNode)("Section container"), (0, _vue.createElementVNode)("section", _hoisted_11, [(0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", null, [(0, _vue.createElementVNode)("div", _hoisted_12, [(0, _vue.createCommentVNode)("Title"), _hoisted_13, (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_14, [(0, _vue.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0, _vue.createElementVNode)("div", _hoisted_17, [(0, _vue.createVNode)(_component_t_toggle, {
+  , ["disabled", "data-rerendered"])]), (0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("ul", _hoisted_7, _hoisted_10)), [[_directive_scroll_spy_active], [_directive_scroll_spy_link]])])]), (0, _vue.createCommentVNode)("Section container"), (0, _vue.createElementVNode)("section", _hoisted_11, [(0, _vue.withDirectives)(((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", null, [(0, _vue.createElementVNode)("div", _hoisted_12, [(0, _vue.createCommentVNode)("Title"), _hoisted_13, (0, _vue.createCommentVNode)("Card"), (0, _vue.createElementVNode)("div", _hoisted_14, [(0, _vue.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0, _vue.createElementVNode)("div", _hoisted_17, [(0, _vue.createVNode)(_component_t_toggle, {
     modelValue: _ctx.settings.cleanup_db_on_plugin_uninstall,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return _ctx.settings.cleanup_db_on_plugin_uninstall = $event;

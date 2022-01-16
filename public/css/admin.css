@@ -441,6 +441,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }@media (min-width: 96rem) {.container {
     max-width: 96rem;
   }
+}.visible {
+  visibility: visible;
 }.fixed {
   position: fixed;
 }.absolute {
@@ -995,13 +997,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 }.ease-in {
   -webkit-transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
           transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}.current {
+}.my-local-menu li.current {
   --tw-border-opacity: 1;
   border-color: rgb(34 197 94 / var(--tw-border-opacity));
   font-weight: 600;
   border-bottom-width: 0.25rem;
-}.main-wrapper {
-  padding-top: 4.375rem;
 }.hover\:bg-blue-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));

@@ -1,3 +1,4 @@
+const fs = require('fs')
 const mix = require('laravel-mix');
 const path = require('path')
 const webpack = require('webpack')
@@ -15,6 +16,9 @@ const webpackConfig = {
       '@': path.resolve(__dirname, 'src'),
       'vue$': 'vue/dist/vue.esm.js'
     }
+  },
+  watchOptions: {
+    ignored: ['**/public', '**/node_modules']
   },
   devServer: {
     port: 31337   // in case your port 8080 and 31337 are taken, replace this
@@ -71,9 +75,27 @@ mix.options({
     'css'
   )
 
+mix.version()
+
 if (mix.inProduction()) {
-  mix.version().sourceMaps();
+  mix.sourceMaps()
 }
+
+mix.after(() => {
+  let manifest = JSON.parse(
+    fs.readFileSync('./public/mix-manifest.json').toString()
+  )
+
+  let adminHtml    = fs.readFileSync('./public/admin-tpl.html').toString()
+  let frontendHtml = fs.readFileSync('./public/frontend-tpl.html').toString()
+  for (let path of Object.keys(manifest)) {
+    adminHtml    = adminHtml.replace(path.replace(/^\//, ''), manifest[path].replace(/^\//, ''))
+    frontendHtml = frontendHtml.replace(path.replace(/^\//, ''), manifest[path].replace(/^\//, ''))
+  }
+
+  fs.writeFileSync('./public/admin.html', adminHtml.replace(/\/\//i, '/'))
+  fs.writeFileSync('./public/frontend.html', frontendHtml.replace(/\/\//i, '/'))
+});
 
 mix.webpackConfig(webpackConfig)
   .browserSync({
