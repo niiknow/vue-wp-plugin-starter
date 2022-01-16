@@ -1,20 +1,18 @@
 # vue-wp-plugin-starter
 Vue Wordpress Plugin Starter with Vue3, Typescript, and Laravel Mix (Webpack wrapper)
 
-# to get started
+Effortlessly create a new plugin with this template!
+
+**Scaffolding**
+
+Use the [init-plugin.sh](init-plugin.sh) bash script to scaffold a new plugin.
 
 Run:
-```
+```shell
 bash init-plugin.sh
 ```
 
-Use composer with `composer install` and `npm install` for Vue.
-
-For limited local debug, run (also see package.json scripts):
-```shell
-npm run watch
-```
-Limited client-side demo: https://niiknow.github.io/vue-wp-plugin-starter/public/
+Use `composer install` to install php dependencies, and use `npm install` for front-end dependencies.
 
 To build `dist.zip` for deployment:
 ```shell
@@ -27,8 +25,6 @@ cd your-wp-site-root
 cd wp-content/plugins
 unzip dist.zip -d wp-your-plugin-folder-name
 ```
-
-Also, don't forget to update readme.txt with your plugin details.
 
 # Folder structures / Features
 
@@ -58,3 +54,11 @@ There are two front-end apps in this starter/example.  Let say your prefix is `w
 ```
 
 Since admin does not require shortcode, it is automatically generate with wrapper id=`admin-app-wrapper`
+
+Run/preview locally:
+```shell
+npm run watch
+```
+
+Preview online: https://niiknow.github.io/vue-wp-plugin-starter/
+
