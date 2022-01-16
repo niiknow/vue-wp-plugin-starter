@@ -91,8 +91,8 @@ mix.after(() => {
     frontendHtml = frontendHtml.replace(path.replace(/^\//, ''), manifest[path].replace(/^\//, ''))
   }
 
-  fs.writeFileSync('./public/admin.html', adminHtml.replace(/\/\//i, '/'))
-  fs.writeFileSync('./public/frontend.html', frontendHtml.replace(/\/\//i, '/'))
+  fs.writeFileSync('./public/admin.html', adminHtml)
+  fs.writeFileSync('./public/frontend.html', frontendHtml)
 });
 
 mix.webpackConfig(webpackConfig)
