@@ -88,4 +88,4 @@ while read -d '' filename; do
   rm "${filename}"-e
 done < <(find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.git \) -prune -o -name '*.php' -print0)
 
-rm "$templatefile.php"
+rm "$templatefile"
