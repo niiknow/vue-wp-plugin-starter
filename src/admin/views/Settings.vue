@@ -9,7 +9,7 @@
         </div>
 
         <ul class="list-reset py-2 md:py-0 mt-4" v-scroll-spy-active v-scroll-spy-link>
-          <li class="menu-item py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent">
+          <li class="py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent">
             <a href='javascript:void(0)' class="block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600">
                 <span class="pb-1 md:pb-0 text-sm">General</span>
             </a>
@@ -100,11 +100,17 @@ export default defineComponent({
     return {
       settings,
       oldSettings,
-      endpoints: '',
+      endpoints: { settings: '' },
       hasChanged
     }
   },
   methods: {
+    async doSave() {
+      debugger
+      const rst = await this.axios.post(this.endpoints.settings, {...this.settings})
+      // validate success?
+      let a = 1
+    }
   },
   beforeCreate() {
     document.onreadystatechange = () => {

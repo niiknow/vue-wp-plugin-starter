@@ -288,10 +288,26 @@ exports["default"] = _default;
 
 
 
+__webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+
+__webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+
+__webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+
+__webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
+
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
 
 __webpack_require__(/*! core-js/modules/es.object.assign.js */ "./node_modules/core-js/modules/es.object.assign.js");
 
@@ -304,6 +320,10 @@ __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/cor
 var _vue = __webpack_require__(/*! vue */ "vue");
 
 var _vue2 = __webpack_require__(/*! @variantjs/vue */ "./node_modules/@variantjs/vue/dist/index.umd.js");
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 var _default = (0, _vue.defineComponent)({
   components: {
@@ -326,22 +346,51 @@ var _default = (0, _vue.defineComponent)({
     return {
       settings: settings,
       oldSettings: oldSettings,
-      endpoints: '',
+      endpoints: {
+        settings: ''
+      },
       hasChanged: hasChanged
     };
   },
-  methods: {},
+  methods: {
+    doSave: function doSave() {
+      var _this = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var rst, a;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                debugger;
+                _context.next = 3;
+                return _this.axios.post(_this.endpoints.settings, _objectSpread({}, _this.settings));
+
+              case 3:
+                rst = _context.sent;
+                // validate success?
+                a = 1;
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  },
   beforeCreate: function beforeCreate() {
-    var _this = this;
+    var _this2 = this;
 
     document.onreadystatechange = function () {
       if (document.readyState == "complete") {
-        var settings = _this.$win.vue_wp_plugin_config.settings || {};
-        _this.endpoints = _this.$win.vue_wp_plugin_config.rest.endpoints; // copy settings from server output
+        var settings = _this2.$win.vue_wp_plugin_config.settings || {};
+        _this2.endpoints = _this2.$win.vue_wp_plugin_config.rest.endpoints; // copy settings from server output
 
         Object.keys(settings).forEach(function (key) {
-          _this.oldSettings[key] = settings[key];
-          _this.settings[key] = settings[key];
+          _this2.oldSettings[key] = settings[key];
+          _this2.settings[key] = settings[key];
         });
       }
     };
@@ -425,7 +474,7 @@ var _hoisted_7 = {
   class: "list-reset py-2 md:py-0 mt-4"
 };
 
-var _hoisted_8 = /*#__PURE__*/(0, _vue.createStaticVNode)("<li class=\"menu-item py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>General</span></a></li><li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Debugging</span></a></li>", 2);
+var _hoisted_8 = /*#__PURE__*/(0, _vue.createStaticVNode)("<li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>General</span></a></li><li class=\"py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent\" data-v-3c95d6dd><a href=\"javascript:void(0)\" class=\"block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600\" data-v-3c95d6dd><span class=\"pb-1 md:pb-0 text-sm\" data-v-3c95d6dd>Debugging</span></a></li>", 2);
 
 var _hoisted_10 = [_hoisted_8];
 var _hoisted_11 = {
