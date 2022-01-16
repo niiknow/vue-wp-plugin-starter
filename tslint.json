@@ -39,7 +39,7 @@
   },
   "linterOptions": {
     "exclude": [
-        "src/admin/admin-menu-fix.ts"
+      "src/admin/admin-menu-fix.ts"
     ]
   }
 }

@@ -52,7 +52,7 @@
                     :options="item.options"
                   />
                 </div>
-                <div v-else-if="['textarea','richTextarea'].indexOf(item.type) > -1">
+                <div v-else-if="['textarea'].indexOf(item.type) > -1">
                   <t-textarea
                     v-model="settings[item.id]"
                   />
@@ -67,7 +67,7 @@
                 <div v-else>
                   <t-input
                     v-model="settings[item.id]"
-                    type="item.type"
+                    :type="item.type"
                   />
                 </div>
               </div>
@@ -92,11 +92,7 @@ export default defineComponent({
   },
   name: 'Settings',
   setup () {
-    const oldSettings = {
-      enable_debug_messages: false,
-      cleanup_db_on_plugin_uninstall: false,
-      include_post_types: []
-    }
+    const oldSettings = {}
     const settings = reactive({...oldSettings})
     const ui = reactive({ actionKey: 0, loaded: false })
     const structure = reactive({sections: {}, options: {}})

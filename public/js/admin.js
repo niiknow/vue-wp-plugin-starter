@@ -340,11 +340,7 @@ var _default = (0, _vue.defineComponent)({
   },
   name: 'Settings',
   setup: function setup() {
-    var oldSettings = {
-      enable_debug_messages: false,
-      cleanup_db_on_plugin_uninstall: false,
-      include_post_types: []
-    };
+    var oldSettings = {};
     var settings = (0, _vue.reactive)(_objectSpread({}, oldSettings));
     var ui = (0, _vue.reactive)({
       actionKey: 0,
@@ -761,7 +757,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         options: item.options
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue", "options"])])) : ['textarea', 'richTextarea'].indexOf(item.type) > -1 ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_23, [(0, _vue.createVNode)(_component_t_textarea, {
+      , ["modelValue", "onUpdate:modelValue", "options"])])) : ['textarea'].indexOf(item.type) > -1 ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_23, [(0, _vue.createVNode)(_component_t_textarea, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;
@@ -785,10 +781,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;
         },
-        type: "item.type"
+        type: item.type
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue"])]))])]);
+      , ["modelValue", "onUpdate:modelValue", "type"])]))])]);
     }), 256
     /* UNKEYED_FRAGMENT */
     ))]), (0, _vue.createCommentVNode)("/Card")]);

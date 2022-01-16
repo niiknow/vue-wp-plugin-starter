@@ -17,9 +17,6 @@ const webpackConfig = {
       'vue$': 'vue/dist/vue.esm.js'
     }
   },
-  watchOptions: {
-    ignored: ['**/public/admin.html','**/public/frontend.html', '**/node_modules']
-  },
   devServer: {
     port: 31337   // in case your port 8080 and 31337 are taken, replace this
   }
@@ -51,6 +48,7 @@ mix.ts('src/frontend/frontend.ts', 'js')
 
 // bare minimum packages: ['core-js', 'vue-router', '@vue/devtools-api']
 mix.extract(); // empty to extract all
+
 
 const postcssPlugins = [
   require('tailwindcss')('./tailwind.config.js'),
@@ -86,8 +84,8 @@ mix.after(() => {
     fs.readFileSync('./public/mix-manifest.json').toString()
   )
 
-  let adminHtml    = fs.readFileSync('./public/admin-tpl.html').toString()
-  let frontendHtml = fs.readFileSync('./public/frontend-tpl.html').toString()
+  let adminHtml    = fs.readFileSync('./assets/admin.html').toString()
+  let frontendHtml = fs.readFileSync('./assets/frontend.html').toString()
   for (let path of Object.keys(manifest)) {
     adminHtml    = adminHtml.replace(path.replace(/^\//, ''), manifest[path].replace(/^\//, ''))
     frontendHtml = frontendHtml.replace(path.replace(/^\//, ''), manifest[path].replace(/^\//, ''))
@@ -99,9 +97,14 @@ mix.after(() => {
 
 mix.webpackConfig(webpackConfig)
   .browserSync({
-    serveStatic: ['./public'],
+    serveStatic: ['./'],
     serveStaticOptions: {
       extensions: ['html'] // don't need to provide html extension, this create pretty urls
     }
   });
 
+mix.override((config) => {
+  config.watchOptions = {
+    ignored: ["**/node_modules/**", "**/public/**", "**/vendor/**"]
+  };
+});

@@ -255,8 +255,12 @@ class SettingController extends \WP_REST_Controller
 						}
 					}
 
+					// only one option for single dropdown
+					if ($details['type'] === 'drodown') {
+						$sanitized_value = $sanitized_value[0];
+					}
+
 					break;
-				case 'richTextarea':
 				case 'textarea':
 					$sanitized_value = trim(stripslashes(wp_kses_post($value)));
 					break;
