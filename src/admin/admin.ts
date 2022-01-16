@@ -24,20 +24,20 @@ app.use(router)
 
 const configuration: VariantJSConfiguration = {
   TButton: {
-    fixedClasses: "block px-4 py-2 transition duration-100 ease-in-out focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed",
-    classes: "text-white bg-blue-500 border border-transparent shadow-sm rounded hover:bg-blue-600",
+    fixedClasses: 'block px-4 py-2 transition duration-100 ease-in-out focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+    classes: 'text-white bg-blue-500 border border-transparent shadow-sm rounded hover:bg-blue-600',
     variants: {
       secondary: {
-        classes: "text-gray-800 bg-white border border-gray-300 shadow-sm rounded hover:text-gray-600"
+        classes: 'text-gray-800 bg-white border border-gray-300 shadow-sm rounded hover:text-gray-600'
       },
       error: {
-        classes: "text-white bg-red-500 border border-transparent rounded shadow-sm hover:bg-red-600"
+        classes: 'text-white bg-red-500 border border-transparent rounded shadow-sm hover:bg-red-600'
       },
       success:{
-        classes: "text-white bg-green-500 border border-transparent rounded shadow-sm hover:bg-green-600"
+        classes: 'text-white bg-green-500 border border-transparent rounded shadow-sm hover:bg-green-600'
       },
       link: {
-        classes: "text-blue-500 underline hover:text-blue-600"
+        classes: 'text-blue-500 underline hover:text-blue-600'
       }
     },
   },
