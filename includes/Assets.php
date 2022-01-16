@@ -104,6 +104,11 @@ class Assets
 				'deps'      => [ 'bootstrap', $this->prefix . '-vendor' ],
 				'in_footer' => true
 			],
+			$this->prefix . '-frontview' => [
+				'src'       => $assets_url . $this->mix('/js/frontview.js'),
+				'deps'      => [ 'bootstrap', $this->prefix . '-vendor' ],
+				'in_footer' => true
+			],
 			$this->prefix . '-admin' => [
 				'src'       => $assets_url . $this->mix('/js/admin.js'),
 				'deps'      => [ $this->prefix . '-vendor' ],
@@ -129,6 +134,9 @@ class Assets
 			],
 			$this->prefix . '-frontend' => [
 				'src' => $assets_url . $this->mix('/css/frontend.css')
+			],
+			$this->prefix . '-frontview' => [
+				'src' => $assets_url . $this->mix('/css/frontview.css')
 			],
 			$this->prefix . '-admin' => [
 				'src' => $assets_url . $this->mix('/css/admin.css')
