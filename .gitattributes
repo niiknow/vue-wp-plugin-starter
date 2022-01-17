@@ -37,6 +37,8 @@ package-lock.json export-ignore
 tsconfig.json export-ignore
 tsconfig.test.json export-ignore
 tslint.json export-ignore
+bin/ export-ignore
+bin/**/* export-ignore
 assets/ export-ignore
 assets/**/* export-ignore
 src/ export-ignore

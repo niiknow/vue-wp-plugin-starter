@@ -30,6 +30,8 @@ cd wp-content/plugins
 unzip dist.zip -d wp-your-plugin-folder-name
 ```
 
+To make plugin translation, run `./bin/makepot.js` or `node bin/makepot.js`
+
 Also, don't forget to update [readme.txt](readme.txt) file appropriately since it is one of wordpress plugin required file.
 
 # Vue/Front-end apps
