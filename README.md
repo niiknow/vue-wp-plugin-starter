@@ -3,9 +3,13 @@ Vue Wordpress Plugin Starter with Vue3, Typescript, and Laravel Mix (Webpack wra
 
 Effortlessly create a new plugin with this template!
 
+Preview online: https://niiknow.github.io/vue-wp-plugin-starter/
+
+![screenshot](https://raw.githubusercontent.com/niiknow/vue-wp-plugin-starter/master/screenshot.gif?raw=true)
+
 **Scaffolding**
 
-Use the [init-plugin.sh](init-plugin.sh) bash script to scaffold a new plugin.
+As this is a template, you can use template to your own repository and run the [init-plugin.sh](init-plugin.sh) bash script to scaffold a new plugin.
 
 Run:
 ```shell
@@ -27,6 +31,24 @@ unzip dist.zip -d wp-your-plugin-folder-name
 ```
 
 Also, don't forget to update [readme.txt](readme.txt) file appropriately since it is one of wordpress plugin required file.
+
+# Vue/Front-end apps
+There are two front-end apps in this starter/example.  Let say your prefix is `wp-awesome-plugin`, then your shortcodes would be (also see `include/FrontendLoader.php`):
+
+```html
+<!-- frontend app (full route) example -->
+[wp-awesome-plugin-vue-app postfix='frontend']
+
+<!-- frontview app (dynamic view) example, render component in frontview/views/Comp2.vue folder -->
+[wp-awesome-plugin-vue-app postfix='frontview' view="Comp2"]
+```
+
+Since admin does not require shortcode, it is automatically generate with wrapper id=`admin-app-wrapper`
+
+Run/preview locally:
+```shell
+npm run watch
+```
 
 # Project structures
 ```
@@ -100,28 +122,6 @@ vue-wp-plugin-starter/
 .... to provide overview of our project structure so not all files are listed here.
 -----
 ```
-
-# Vue/Front-end apps
-There are two front-end apps in this starter/example.  Let say your prefix is `wp-awesome-plugin`, then your shortcodes would be (also see `include/FrontendLoader.php`):
-
-```html
-<!-- frontend app (full route) example -->
-[wp-awesome-plugin-vue-app postfix='frontend']
-
-<!-- frontview app (dynamic view) example, render component in frontview/views/Comp2.vue folder -->
-[wp-awesome-plugin-vue-app postfix='frontview' view="Comp2"]
-```
-
-Since admin does not require shortcode, it is automatically generate with wrapper id=`admin-app-wrapper`
-
-Run/preview locally:
-```shell
-npm run watch
-```
-
-Preview online: https://niiknow.github.io/vue-wp-plugin-starter/
-
-![screenshot](https://raw.githubusercontent.com/niiknow/vue-wp-plugin-starter/master/screenshot.gif?raw=true)
 
 # FAQ
 1.  Can I use SASS/SCSS intead of postCss?
