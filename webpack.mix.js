@@ -1,7 +1,10 @@
 const fs = require('fs')
-const mix = require('laravel-mix');
+const mix = require('laravel-mix')
 const path = require('path')
 const webpack = require('webpack')
+const StylelintPlugin = require('stylelint-webpack-plugin')
+
+require('laravel-mix-tailwind')
 
 const webpackConfig = {
   externals: {
@@ -9,6 +12,16 @@ const webpackConfig = {
     'vue': 'Vue'
   },
   plugins: [
+    /**
+     * Stylelint
+     *
+     * @link https://github.com/webpack-contrib/stylelint-webpack-plugin
+     */
+    new StylelintPlugin({
+      context: './assets',
+      files: '**/*.css',
+      fix: true,
+    }),
   ],
   resolve: {
     extensions: ['.js', '.json', '.vue', '.sass', '.scss', '.ts'],
@@ -53,19 +66,19 @@ mix.ts('src/frontview/frontview.ts', 'js')
   })
 
 // bare minimum packages: ['core-js', 'vue-router', '@vue/devtools-api']
-mix.extract(); // empty to extract all
+mix.extract() // empty to extract all
 
 
 const postcssPlugins = [
-  require('tailwindcss')('./tailwind.config.js'),
   require('autoprefixer'),
   require('postcss-import'),
+  require('postcss-preset-env')({ stage: 1 }),
   require('postcss-pxtorem')({
     propList: ['*'],
     selectorBlackList: ['border'],
     mediaQuery: true,
   })
-];
+]
 
 mix.options({
     postCss: postcssPlugins
@@ -83,7 +96,7 @@ mix.options({
     'css'
   )
 
-mix.version()
+mix.tailwind().version()
 
 if (mix.inProduction()) {
   mix.sourceMaps()
@@ -106,7 +119,7 @@ mix.after(() => {
   fs.writeFileSync('./public/admin.html', adminHtml)
   fs.writeFileSync('./public/frontend.html', frontendHtml)
   fs.writeFileSync('./public/frontview.html', frontviewHtml)
-});
+})
 
 mix.webpackConfig(webpackConfig)
   .browserSync({
@@ -114,10 +127,14 @@ mix.webpackConfig(webpackConfig)
     serveStaticOptions: {
       extensions: ['html'] // don't need to provide html extension, this create pretty urls
     }
-  });
+  })
 
 mix.override((config) => {
   config.watchOptions = {
-    ignored: ["**/node_modules/**", "**/public/**", "**/vendor/**"]
-  };
-});
+    ignored: [
+      '**/node_modules/**',
+      '**/public/**',
+      '**/vendor/**'
+    ]
+  }
+})

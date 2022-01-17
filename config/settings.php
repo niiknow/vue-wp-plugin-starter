@@ -5,7 +5,7 @@ if (! defined( 'ABSPATH' )) exit;
 // this allow for using wordpress server-side translation
 return array(
 	'sections' => array(
-		'general' => __('General', \Baseapp\Main::PREFIX),
+		'general' => __( 'General', \Baseapp\Main::PREFIX ),
 		'advanced' => __('Advanced', \Baseapp\Main::PREFIX),
 		'debugging' => __('Debugging', \Baseapp\Main::PREFIX)
 	),
