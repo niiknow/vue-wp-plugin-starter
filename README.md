@@ -130,7 +130,7 @@ vue-wp-plugin-starter/
 
 2.  Why does my CSS failed to output?
 
-* Is there syntax error in your CSS file?  You can try sass instead of postCss transform.  sass is better at letting you know if you CSS is having error.  postCss just fail and doesn't notify you of the error.
+* Is there syntax error in your CSS file?  You can try sass instead of postCss transform.  sass is better at letting you know if your CSS is having error.  In my experience, postCss just fail and doesn't notify you of the error.
 
 ... more TBD
 

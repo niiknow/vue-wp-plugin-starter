@@ -17,6 +17,7 @@ module.exports = {
       cursor: ['disabled'],
     },
   },
+//  prefix: 'baseapp-', //to prevent overlapping styles from WP
   plugins: [
     require('@tailwindcss/forms'),
   ],
