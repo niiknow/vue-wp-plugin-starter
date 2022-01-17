@@ -64,3 +64,4 @@ npm run watch
 
 Preview online: https://niiknow.github.io/vue-wp-plugin-starter/
 
+![screenshot](https://raw.githubusercontent.com/niiknow/vue-wp-plugin-starter/master/screenshot.gif?raw=true)

@@ -49,3 +49,4 @@ vue-wp-plugin-starter.php export-ignore
 .gitattributes export-ignore
 init-plugin.sh export-ignore
 package.json export-ignore
+screenshot.gif export-ignore
