@@ -96,7 +96,8 @@ vue-wp-plugin-starter/
     │   |   SettingControllerTests.php
     │   bootstrap.php                - loader file, act like (fake) plugin file in main folder
 -----
-.... root files can be seen above so it's not listed.  Above listing is to provide overview of our project structure so not all files are listed here.
+.... root files can be seen above so it's not listed.  Above listing is
+.... to provide overview of our project structure so not all files are listed here.
 -----
 ```
 
