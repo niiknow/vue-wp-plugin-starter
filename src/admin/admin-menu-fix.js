@@ -2,8 +2,9 @@
 function menuFix(slug) {
   const currentUrl  = window.location.href
   const isLocal     = currentUrl.indexOf('admin.html') > 0
-  const currentPath = currentUrl.substr(currentUrl.indexOf(isLocal ? '#/' : 'admin.php'))
   const menuRoot    = document.querySelector(isLocal ? '.wp-menu-open' : `#toplevel_page_${slug}`)
+
+  var currentPath = currentUrl.substr(currentUrl.indexOf(isLocal ? '#/' : 'admin.php'))
 
   if (menuRoot) {
     menuRoot.addEventListener('click', function (e) {
@@ -19,8 +20,21 @@ function menuFix(slug) {
       }
     })
 
+    // remove all current
+    var items = menuRoot.querySelectorAll(`.current`)
+    for (let i = 0; i < items.length; i++) {
+      let node = items[i];
+      node.classList.remove('current')
+    }
+
     var menu = menuRoot.querySelector(`.wp-submenu a[href="${currentPath}"`)
+
+    if (! isLocal && currentPath.endsWith('#/')) {
+      menu = menuRoot.querySelector(`.wp-submenu a.wp-first-item`)
+    }
+
     if (menu) {
+      console.log(menu)
       menu.parentElement.classList.add('current')
     }
   }

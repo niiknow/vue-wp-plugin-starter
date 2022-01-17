@@ -25,8 +25,12 @@ var admin_menu_fix_1 = __importDefault(__webpack_require__(/*! ./admin-menu-fix 
 
 exports["default"] = (0, vue_1.defineComponent)({
   mounted: function mounted() {
-    // fix the admin menu for the slug "vue-app"
-    (0, admin_menu_fix_1.default)('vue-app');
+    var that = this; // @ts-ignore
+
+    setTimeout(function () {
+      // fix the admin menu for the prefix slug or 'vue-app' if none is defined
+      (0, admin_menu_fix_1.default)(that.$win.vue_wp_plugin_config_admin.prefix || 'vue-app');
+    }, 1000);
   }
 });
 
@@ -379,7 +383,7 @@ var _default = (0, _vue.defineComponent)({
       var _this = this;
 
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var data, rst, settings;
+        var data, rst, config, oldSettings, settings;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -400,11 +404,15 @@ var _default = (0, _vue.defineComponent)({
                     title: 'Your settings has been saved.',
                     showConfirmButton: false,
                     timer: 1500
-                  });
+                  }); // @ts-ignore
 
+
+                  config = _this.$win.vue_wp_plugin_config_admin;
+                  oldSettings = config.settings || {};
                   settings = _objectSpread({}, _this.settings);
                   Object.keys(settings).forEach(function (key) {
                     _this.oldSettings[key] = settings[key];
+                    oldSettings[key] = settings[key];
                   }); // force rerendered
 
                   _this.ui.actionKey = _this.ui.actionKey + 1;
@@ -817,7 +825,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 /*!*************************************!*\
   !*** ./src/admin/admin-menu-fix.js ***!
   \*************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
 
@@ -826,12 +834,14 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 
+__webpack_require__(/*! core-js/modules/es.string.ends-with.js */ "./node_modules/core-js/modules/es.string.ends-with.js");
+
 // @ts-ignore
 function menuFix(slug) {
   var currentUrl = window.location.href;
   var isLocal = currentUrl.indexOf('admin.html') > 0;
-  var currentPath = currentUrl.substr(currentUrl.indexOf(isLocal ? '#/' : 'admin.php'));
   var menuRoot = document.querySelector(isLocal ? '.wp-menu-open' : "#toplevel_page_".concat(slug));
+  var currentPath = currentUrl.substr(currentUrl.indexOf(isLocal ? '#/' : 'admin.php'));
 
   if (menuRoot) {
     menuRoot.addEventListener('click', function (e) {
@@ -847,10 +857,23 @@ function menuFix(slug) {
           target.parentElement.classList.add('current');
         }
       }
-    });
+    }); // remove all current
+
+    var items = menuRoot.querySelectorAll(".current");
+
+    for (var i = 0; i < items.length; i++) {
+      var node = items[i];
+      node.classList.remove('current');
+    }
+
     var menu = menuRoot.querySelector(".wp-submenu a[href=\"".concat(currentPath, "\""));
 
+    if (!isLocal && currentPath.endsWith('#/')) {
+      menu = menuRoot.querySelector(".wp-submenu a.wp-first-item");
+    }
+
     if (menu) {
+      console.log(menu);
       menu.parentElement.classList.add('current');
     }
   }

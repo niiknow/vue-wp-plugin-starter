@@ -158,9 +158,14 @@ export default defineComponent({
             timer: 1500
           })
 
-          const settings = {...this.settings}
+          // @ts-ignore
+          const config      = this.$win.vue_wp_plugin_config_admin
+          const oldSettings = config.settings || {}
+          const settings    = {...this.settings}
+
           Object.keys(settings).forEach((key) => {
             this.oldSettings[key] = settings[key]
+            oldSettings[key] = settings[key]
           })
 
           // force rerendered

@@ -34432,6 +34432,31 @@ module.exports = function (target, source, exceptions) {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/correct-is-regexp-logic.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/core-js/internals/correct-is-regexp-logic.js ***!
+  \*******************************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "./node_modules/core-js/internals/well-known-symbol.js");
+
+var MATCH = wellKnownSymbol('match');
+
+module.exports = function (METHOD_NAME) {
+  var regexp = /./;
+  try {
+    '/./'[METHOD_NAME](regexp);
+  } catch (error1) {
+    try {
+      regexp[MATCH] = false;
+      return '/./'[METHOD_NAME](regexp);
+    } catch (error2) { /* empty */ }
+  } return false;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/create-non-enumerable-property.js":
 /*!**************************************************************************!*\
   !*** ./node_modules/core-js/internals/create-non-enumerable-property.js ***!
@@ -35449,6 +35474,28 @@ module.exports = false;
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/is-regexp.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/is-regexp.js ***!
+  \*****************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
+var classof = __webpack_require__(/*! ../internals/classof-raw */ "./node_modules/core-js/internals/classof-raw.js");
+var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "./node_modules/core-js/internals/well-known-symbol.js");
+
+var MATCH = wellKnownSymbol('match');
+
+// `IsRegExp` abstract operation
+// https://tc39.es/ecma262/#sec-isregexp
+module.exports = function (it) {
+  var isRegExp;
+  return isObject(it) && ((isRegExp = it[MATCH]) !== undefined ? !!isRegExp : classof(it) == 'RegExp');
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/is-symbol.js":
 /*!*****************************************************!*\
   !*** ./node_modules/core-js/internals/is-symbol.js ***!
@@ -35783,6 +35830,26 @@ var PromiseCapability = function (C) {
 // https://tc39.es/ecma262/#sec-newpromisecapability
 module.exports.f = function (C) {
   return new PromiseCapability(C);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/internals/not-a-regexp.js":
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/internals/not-a-regexp.js ***!
+  \********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
+var isRegExp = __webpack_require__(/*! ../internals/is-regexp */ "./node_modules/core-js/internals/is-regexp.js");
+
+var TypeError = global.TypeError;
+
+module.exports = function (it) {
+  if (isRegExp(it)) {
+    throw TypeError("The method doesn't accept regular expressions");
+  } return it;
 };
 
 
@@ -37596,6 +37663,55 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
     });
     if (result.error) reject(result.value);
     return capability.promise;
+  }
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es.string.ends-with.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.string.ends-with.js ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var uncurryThis = __webpack_require__(/*! ../internals/function-uncurry-this */ "./node_modules/core-js/internals/function-uncurry-this.js");
+var getOwnPropertyDescriptor = (__webpack_require__(/*! ../internals/object-get-own-property-descriptor */ "./node_modules/core-js/internals/object-get-own-property-descriptor.js").f);
+var toLength = __webpack_require__(/*! ../internals/to-length */ "./node_modules/core-js/internals/to-length.js");
+var toString = __webpack_require__(/*! ../internals/to-string */ "./node_modules/core-js/internals/to-string.js");
+var notARegExp = __webpack_require__(/*! ../internals/not-a-regexp */ "./node_modules/core-js/internals/not-a-regexp.js");
+var requireObjectCoercible = __webpack_require__(/*! ../internals/require-object-coercible */ "./node_modules/core-js/internals/require-object-coercible.js");
+var correctIsRegExpLogic = __webpack_require__(/*! ../internals/correct-is-regexp-logic */ "./node_modules/core-js/internals/correct-is-regexp-logic.js");
+var IS_PURE = __webpack_require__(/*! ../internals/is-pure */ "./node_modules/core-js/internals/is-pure.js");
+
+// eslint-disable-next-line es/no-string-prototype-endswith -- safe
+var un$EndsWith = uncurryThis(''.endsWith);
+var slice = uncurryThis(''.slice);
+var min = Math.min;
+
+var CORRECT_IS_REGEXP_LOGIC = correctIsRegExpLogic('endsWith');
+// https://github.com/zloirock/core-js/pull/702
+var MDN_POLYFILL_BUG = !IS_PURE && !CORRECT_IS_REGEXP_LOGIC && !!function () {
+  var descriptor = getOwnPropertyDescriptor(String.prototype, 'endsWith');
+  return descriptor && !descriptor.writable;
+}();
+
+// `String.prototype.endsWith` method
+// https://tc39.es/ecma262/#sec-string.prototype.endswith
+$({ target: 'String', proto: true, forced: !MDN_POLYFILL_BUG && !CORRECT_IS_REGEXP_LOGIC }, {
+  endsWith: function endsWith(searchString /* , endPosition = @length */) {
+    var that = toString(requireObjectCoercible(this));
+    notARegExp(searchString);
+    var endPosition = arguments.length > 1 ? arguments[1] : undefined;
+    var len = that.length;
+    var end = endPosition === undefined ? len : min(toLength(endPosition), len);
+    var search = toString(searchString);
+    return un$EndsWith
+      ? un$EndsWith(that, search, end)
+      : slice(that, end - search.length, end) === search;
   }
 });
 
