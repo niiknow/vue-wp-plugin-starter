@@ -28,23 +28,81 @@ unzip dist.zip -d wp-your-plugin-folder-name
 
 Also, don't forget to update [readme.txt](readme.txt) file appropriately since it is one of wordpress plugin required file.
 
-# Folder structures / Features
+# Project structures
+```
+vue-wp-plugin-starter/
+└───assets/
+    │   admin.css                    - css for wordpress admin
+    │   admin.html                   - admin demo html template
+    │   frontend.css                 - css for front-end supporting full routing
+    │   frontend.html                - front-end demo html template
+    │   frontview.css                - css for front-end allow dynamic vue view/page
+    │   frontview.html               - demo of dynamic vue view/page html template
+└───config/
+    │   settings.php                 - plugin config file for admin settings page
+└───includes/
+    └───Api/
+    |   │   SettingsController.php   - REST Api for admin settings
+    │   AdminLoader.php              - load wordpress admin stuff
+    │   ApiRouters.php               - load REST Api routes
+    │   Assets.php                   - maintain plugin assets
+    │   CliLoader.php                - load CLI commands
+    │   ExampleCommand.php           - hello world command
+    │   FrontendLoader.php           - load vue front-end shortcodes
+    │   Main.php                     - Main plugin instance
+    │   Migrations.php               - handle database migrations
+└───public/
+    └───css/                         - output of assets/ folder
+    └───js/                          - compiled/output of src
+    │   mix-manifest.json            - versioning builted assets
+└───src/
+    └───admin/
+    │   └───router/
+    │   |   |    index.ts            - map all route/files in admin router folder
+    │   |   admin-menu-fix.js        - SPA menu selector for wordpress admin
+    │   |   admin.ts                 - admin main entry point
+    │   |   App.vue                  - admin main view
+    └───frontend/
+    │   └───router/
+    │   |   |    index.ts            - map all route/files in frontend router folder
+    │   └───views/
+    │   |   |    Home.Vue
+    │   |   App.vue                  - frontend main view
+    │   |   frontend.ts              - frontend main entry point
+    └───frontview/
+    │   └───router/
+    │   |   |    index.ts            - just a dummy router
+    │   └───views/
+    │   |   |    Comp2.Vue           - demo second view
+    │   |   |    Home.Vue            - demo main/first view
+    │   |   App.vue                  - main view
+    │   |   frontview.ts             - main entry point
+    │   shims-vue.d.ts               - allow vue to use in typescript
+    │   shims-window.d.ts            - allow windows object use in typescript
+└───tests/
+    └───jsunit/
+    │   └───admin/
+    │   │   └───views/
+    │   |   |   Dashboard.spec.ts    - Demo jest/javascript unit testing
+    └───phpunit/
+    │   └───inc/                     - mocking/fake and base files
+    │   |   |   class-wp-rest-controller.php
+    │   |   |   PluginTestCase.php
+    │   └───testcases/               - PHP unit testing files
+    │   |   AdminTests.php
+    │   |   ApiTests.php
+    │   |   AssetsTests.php
+    │   |   FrontendTests.php
+    │   |   SettingControllerTests.php
+    │   bootstrap.php                - loader file, act like (fake) plugin file in main folder
+-----
+.... additional root folder listing and be seen above
+-----
+```
 
-- **assets/** image, css, and sass/scss files
-  * `css` post css file demo use with Tailwind CSS
-  * `html` template file for local debug
-- **config/** location containing php type configuration file similar to laravel
-- **includes/** main php source location
-  * structural layout on how to: DB Migration, Admin pages, Frontend pages, WP_CLI setup, REST API, and Assets management.
-- **languages/** standard wordpress style translation files
-- **public/** compiled script and static contents.  Support limited local test of compiled `vue` assets.
-- **src/** typescript, javascript, and vue sources
-  * using laravel-mix to support multiple admin and front-end `vue` apps.  This support also translate inside of `includes/FrontendLoader.php`
-  * eslint for linting and formatting support
-- **tests/** unit tests files
-  * support both php (phpunit) and javascript (jest) unit testing
+**Note**: Purpose above listing is to provide overview of our project structure so not all files are listed.
 
-# Vue apps
+# Vue/Front-end apps
 There are two front-end apps in this starter/example.  Let say your prefix is `wp-awesome-plugin`, then your shortcodes would be (also see `include/FrontendLoader.php`):
 
 ```html

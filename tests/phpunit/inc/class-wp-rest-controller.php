@@ -1,6 +1,6 @@
 <?php
 /**
- * REST API: WP_REST_Controller class
+ * REST API: WP_REST_Controller class MOCKING
  *
  * @package WordPress
  * @subpackage REST_API
