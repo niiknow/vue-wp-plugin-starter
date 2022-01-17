@@ -1,41 +1,47 @@
 === PLUGIN_NAME ===
 Contributors: noogen
-Tags: vue wp plugin starter
+Donate link: https://www.redcross.org/donate/donation.html/
+Tags: wordpress, plugin, template, vue
+Requires at least: 5.6
 Tested up to: 5.8.3
-Stable tag: 1.0.0
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Vue Wordpress Plugin Starter with Vue3, Typescript, and Laravel Mix (Webpack wrapper)
+This is where you craft a short, punchy description of your plugin
 
-Effortlessly create a new plugin with this template!
+== Description ==
 
-**Scaffolding**
+This is where you can give a much longer description of your plugin that you can use to explain just how it awesome it really is.
 
-Use the init-plugin.sh bash script to scaffold a new plugin.
+== Installation ==
 
-```shell
-bash init-plugin.sh
-```
+Installing "WordPress Plugin Template" can be done either by searching for "WordPress Plugin Template" via the "Plugins > Add New" screen in your WordPress dashboard, or by using the following steps:
 
-For usage details, see: https://github.com/niiknow/vue-wp-plugin-starter/blob/main/USAGE.md
+1. Download the plugin via WordPress.org
+1. Upload the ZIP file through the 'Plugins > Add New > Upload' screen in your WordPress dashboard
+1. Activate the plugin through the 'Plugins' menu in WordPress
 
-Generic demo: https://niiknow.github.io/vue-wp-plugin-starter/
+== Screenshots ==
 
-== Features Highlight ==
-* Object-oriented and separation of concerns between: Assets, Admin, CLI, API, and Frontends.
-* Database migration instruction inside of Migrations.php
-* Automatic admin settings page with simple structure inside config/settings.php
-* Basic headless (no wordpress) unit testings in php and vue
-* TailwindCSS for admin templating
-* Laravel mix build supporting css, frontend, and backend vue3 typescript build
-* Support multiple frontends with different vue app, shortcode, and structure
+1. Description of first screenshot named screenshot-1
+2. Description of second screenshot named screenshot-2
+3. Description of third screenshot named screenshot-3
 
 == Frequently Asked Questions ==
 
-None
+= What is the plugin template for? =
+
+This plugin template is designed to help you get started with any new WordPress plugin.
 
 == Changelog ==
 
-= 1.0.0 =
-Initial release
+= 1.0 =
+* 2022-01-15
+* Initial release
+
+== Upgrade Notice ==
+
+= 1.0 =
+* 2022-01-15
+* Initial release

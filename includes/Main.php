@@ -9,14 +9,7 @@ namespace Baseapp;
 final class Main
 {
 	/**
-	 * Plugin version.
-	 *
-	 * @var string
-	 */
-	const VERSION = '1.0.0';
-
-	/**
-	 * A unique plugin prefix to use throughout your plugin.
+	 * A unique plugin prefix/token to use throughout your plugin.
 	 * This is also your application domain.
 	 *
 	 * @var string
@@ -27,15 +20,28 @@ final class Main
 	 * Holds various class instances.
 	 *
 	 * @var array
+	 * @access  private
+	 * @since   1.0.0
 	 */
 	private $container = array();
 
 	/**
-	 * The singleton instance.
+	 * The single instance of Main.
 	 *
-	 * @var Main
+	 * @var     object
+	 * @access  private
+	 * @since   1.0.0
 	 */
-	private static $instance;
+	private static $_instance = null; //phpcs:ignore
+
+	/**
+	 * The version number.
+	 *
+	 * @var     string
+	 * @access  public
+	 * @since   1.0.0
+	 */
+	public $_version; //phpcs:ignore
 
 	/**
 	 * The plugin filename.
@@ -63,12 +69,14 @@ final class Main
 	 * Sets up all the appropriate hooks and actions
 	 * within our plugin.
 	 *
-	 * @param $filename the plugin file name
+	 * @param string $filepath the plugin file path
+	 * @param string $version Plugin version.
 	 */
-    private function __construct($filename)
+    private function __construct($filepath, $version = '1.0.0')
     {
-        self::$PLUGINFILE = $filename;
-        self::$PLUGINDIR  = dirname($filename);
+        self::$PLUGINFILE = $filepath;
+        self::$PLUGINDIR  = dirname($filepath);
+        $this->_version  = $version;
     }
 
 	/**
@@ -76,17 +84,18 @@ final class Main
 	 *
 	 * Usage: Main::get_instance()
 	 *
-	 * @param $filename the plugin file name
+	 * @param string $filepath the plugin file path
+	 * @param string $version Plugin version.
 	 *
 	 * @return Main the singleton instance
 	 */
-	public static function get_instance($filename)
+	public static function get_instance($filepath, $version = '1.0.0')
 	{
-		if (! self::$instance) {
-        	self::$instance = new self($filename);
+		if (is_null(self::$_instance)) {
+        	self::$_instance = new self($filepath, $version);
 		}
 
-    	return self::$instance;
+    	return self::$_instance;
 	}
 
 	/**
@@ -124,6 +133,9 @@ final class Main
 
         $plugin = plugin_basename(self::$PLUGINFILE);
 		add_filter("plugin_action_links_$plugin", array($this, 'register_settings_link'));
+
+		// Additional thing you can do: register post type, taxonomy, etc...
+		return $this;
 	}
 
 	/**
@@ -171,10 +183,10 @@ final class Main
 	 */
 	public function activate_plugin()
 	{
-		(new \Baseapp\Migrations())->run(self::PREFIX, self::VERSION);
+		(new \Baseapp\Migrations())->run(self::PREFIX, $this->_version);
 
 		// set the current version to activate plugin
-		update_option(self::PREFIX . '_version', self::VERSION);
+		update_option(self::PREFIX . '_version', $this->_version);
 	}
 
 	/**
@@ -188,7 +200,7 @@ final class Main
 		// do stuff such as: shut off cron tasks, etc...
 
 		// remove version number to deactivate plugin
-		delete_option(self::PREFIX . '_version');
+		delete_option($this->$_prefix . '_version');
 	}
 
 	/**
@@ -273,4 +285,23 @@ final class Main
 				return (! is_admin() || defined('DOING_AJAX' )) && ! defined('DOING_CRON');
 		}
 	}
+
+	/**
+	 * Cloning is forbidden.
+	 *
+	 * @since 1.0.0
+	 */
+	public function __clone() {
+		_doing_it_wrong( __FUNCTION__, esc_html( __( 'Cloning of Main is forbidden' ) ), esc_attr( $this->_version ) );
+
+	} // End __clone ()
+
+	/**
+	 * Unserializing instances of this class is forbidden.
+	 *
+	 * @since 1.0.0
+	 */
+	public function __wakeup() {
+		_doing_it_wrong( __FUNCTION__, esc_html( __( 'Unserializing instances of Main is forbidden' ) ), esc_attr( $this->_version ) );
+	} // End __wakeup ()
 }
