@@ -9,7 +9,7 @@ Preview online: https://niiknow.github.io/vue-wp-plugin-starter/
 
 **Scaffolding**
 
-As this is a template, you can use template to your own repository and run the [init-plugin.sh](init-plugin.sh) bash script to scaffold a new plugin.
+As this is a template project, simply click the "Use this template" button and run the [init-plugin.sh](init-plugin.sh) bash script to scaffold a new plugin.
 
 Run:
 ```shell
