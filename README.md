@@ -96,11 +96,9 @@ vue-wp-plugin-starter/
     │   |   SettingControllerTests.php
     │   bootstrap.php                - loader file, act like (fake) plugin file in main folder
 -----
-.... additional root folder listing and be seen above
+.... root files can be seen above so it's not listed.  Above listing is to provide overview of our project structure so not all files are listed here.
 -----
 ```
-
-**Note**: Purpose above listing is to provide overview of our project structure so not all files are listed.
 
 # Vue/Front-end apps
 There are two front-end apps in this starter/example.  Let say your prefix is `wp-awesome-plugin`, then your shortcodes would be (also see `include/FrontendLoader.php`):
