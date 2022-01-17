@@ -125,10 +125,12 @@ vue-wp-plugin-starter/
 
 # FAQ
 1.  Can I use SASS/SCSS intead of postCss?
-- Yes.  Simply uses mix.sass instead of mix.postCss in webpack.mix.js file.  Since there are multiple assets (admin, frontend, frontview), you can also mix different css processors between them too.
+
+* Yes.  Simply uses mix.sass instead of mix.postCss in webpack.mix.js file.  Since there are multiple assets (admin, frontend, frontview), you can also mix different css processors between them too.
 
 2.  Why does my CSS failed to output?
--Is there syntax error in your CSS file?  You can try sass instead of postCss transform.  sass is better at letting you know if you CSS is having error.  postCss just fail and doesn't notify you of the error.
+
+* Is there syntax error in your CSS file?  You can try sass instead of postCss transform.  sass is better at letting you know if you CSS is having error.  postCss just fail and doesn't notify you of the error.
 
 ... more TBD
 
