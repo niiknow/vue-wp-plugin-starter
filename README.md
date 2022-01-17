@@ -32,11 +32,11 @@ Also, don't forget to update [readme.txt](readme.txt) file appropriately since i
 ```
 vue-wp-plugin-starter/
 └───assets/
-    │   admin.css                    - css for wordpress admin
+    │   admin.css                    - postcss for wordpress admin
     │   admin.html                   - admin demo html template
-    │   frontend.css                 - css for front-end supporting full routing
+    │   frontend.css                 - postcss for front-end supporting full routing
     │   frontend.html                - front-end demo html template
-    │   frontview.css                - css for front-end allow dynamic vue view/page
+    │   frontview.css                - postcss for front-end allow dynamic vue view/page
     │   frontview.html               - demo of dynamic vue view/page html template
 └───config/
     │   settings.php                 - plugin config file for admin settings page
@@ -122,3 +122,14 @@ npm run watch
 Preview online: https://niiknow.github.io/vue-wp-plugin-starter/
 
 ![screenshot](https://raw.githubusercontent.com/niiknow/vue-wp-plugin-starter/master/screenshot.gif?raw=true)
+
+# FAQ
+1.  Can I use SASS/SCSS intead of postCss?
+- Yes.  Simply uses mix.sass instead of mix.postCss in webpack.mix.js file.  Since there are multiple assets (admin, frontend, frontview), you can also mix different css processors between them too.
+
+2.  Why does my CSS failed to output?
+-Is there syntax error in your CSS file?  You can try sass instead of postCss transform.  sass is better at letting you know if you CSS is having error.  postCss just fail and doesn't notify you of the error.
+
+... more TBD
+
+# GPLv2 or later
