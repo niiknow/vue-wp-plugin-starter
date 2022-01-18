@@ -30,7 +30,7 @@ cd wp-content/plugins
 unzip dist.zip -d wp-your-plugin-folder-name
 ```
 
-To make plugin translation, run `./bin/makepot.js` or `node bin/makepot.js`
+To make plugin translation, run `npm run makepot`. For vuejs translation, use `i18next-scanner` to scan and generate json translation file, see config https://github.com/i18next/i18next-scanner/issues/208#issuecomment-912501468
 
 Also, don't forget to update [readme.txt](readme.txt) file appropriately since it is one of wordpress plugin required file.
 
