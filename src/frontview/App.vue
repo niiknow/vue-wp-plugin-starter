@@ -1,5 +1,5 @@
 <template>
-  <div class="main-wrapper" v-if="hasLoaded">
+  <div v-if="hasLoaded" class="main-wrapper">
     <component :is="comp"></component>
   </div>
 </template>
@@ -25,6 +25,22 @@ export default defineComponent({
       hasLoaded
     }
   },
+  mounted() {
+    const that = this
+
+    // @ts-ignore
+    if (that.$win.vue_wp_plugin_config_frontview) {
+      that.doLoad()
+      return
+    }
+
+    document.onreadystatechange = async () => {
+      if (document.readyState == 'complete') {
+        that.doLoad()
+      }
+    }
+
+  },
   methods: {
     async doLoad() {
       const that = this
@@ -48,22 +64,6 @@ export default defineComponent({
       that.hasLoaded = true
       that.$forceUpdate()
     }
-  },
-  mounted() {
-    const that = this
-
-    // @ts-ignore
-    if (that.$win.vue_wp_plugin_config_frontview) {
-      that.doLoad()
-      return
-    }
-
-    document.onreadystatechange = async () => {
-      if (document.readyState == "complete") {
-        that.doLoad()
-      }
-    }
-
   }
 })
 </script>

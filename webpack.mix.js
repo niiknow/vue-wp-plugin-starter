@@ -30,6 +30,9 @@ const webpackConfig = {
       'vue$': 'vue/dist/vue.esm.js'
     }
   },
+  stats: {
+    children: true
+  },
   devServer: {
     port: 31337   // in case your port 8080 and 31337 are taken, replace this
   }
