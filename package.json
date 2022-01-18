@@ -58,7 +58,7 @@
     "postcss-preset-env": "^7.2.3",
     "postcss-pxtorem": "^6.0.0",
     "purecss-sass": "^2.0.6",
-    "resolve-url-loader": "^4.0.0",
+    "resolve-url-loader": "^5.0.0",
     "sass": "^1.48.0",
     "sass-loader": "^12.4.0",
     "stylelint": "^14.2.0",

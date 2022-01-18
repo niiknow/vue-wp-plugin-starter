@@ -79,18 +79,43 @@ exports["default"] = (0, vue_1.defineComponent)({
       hasLoaded: hasLoaded
     };
   },
+  mounted: function mounted() {
+    var that = this; // @ts-ignore
+
+    if (that.$win.vue_wp_plugin_config_frontview) {
+      that.doLoad();
+      return;
+    }
+
+    document.onreadystatechange = /*#__PURE__*/(0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (document.readyState == 'complete') {
+                that.doLoad();
+              }
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+  },
   methods: {
     doLoad: function doLoad() {
       var _this = this;
 
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
         var that, viewComponent;
-        return _regenerator.default.wrap(function _callee$(_context) {
+        return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 that = _this;
-                _context.next = 3;
+                _context2.next = 3;
                 return (0, vue_1.nextTick)();
 
               case 3:
@@ -112,37 +137,12 @@ exports["default"] = (0, vue_1.defineComponent)({
 
               case 9:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     }
-  },
-  mounted: function mounted() {
-    var that = this; // @ts-ignore
-
-    if (that.$win.vue_wp_plugin_config_frontview) {
-      that.doLoad();
-      return;
-    }
-
-    document.onreadystatechange = /*#__PURE__*/(0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-      return _regenerator.default.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              if (document.readyState == "complete") {
-                that.doLoad();
-              }
-
-            case 1:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
   }
 });
 
