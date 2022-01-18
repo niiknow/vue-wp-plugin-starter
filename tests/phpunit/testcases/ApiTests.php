@@ -2,13 +2,13 @@
 
 namespace Tests;
 
-use \Brain\Monkey\Functions;
-
 defined('ABSPATH') or die();
 
-class ApiTests extends PluginTestCase {
+class ApiTests extends PluginTestCase
+{
 
-    public function test_construct() {
+    public function test_construct()
+    {
         //echo PLUGIN_DIR;
         //$plug = new \Baseapp\MyPlugin();
 

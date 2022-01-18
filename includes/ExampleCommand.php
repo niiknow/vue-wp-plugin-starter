@@ -5,7 +5,8 @@ namespace Baseapp;
  * Implements example command.
  *
  */
-class ExampleCommand {
+class ExampleCommand
+{
 
     /**
      * Prints a greeting.
@@ -30,7 +31,8 @@ class ExampleCommand {
      *
      * @when after_wp_load
      */
-    function hello($args, $assoc_args) {
+    public function hello($args, $assoc_args)
+    {
         list($name) = $args;
 
         // Print the message with type

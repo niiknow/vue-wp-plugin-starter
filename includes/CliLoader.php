@@ -7,15 +7,15 @@ namespace Baseapp;
  */
 class CliLoader
 {
-	/**
-	 * Initialize this class
-	 */
+    /**
+     * Initialize this class
+     */
     public function __construct($prefix)
     {
-    	// this is where you can load Cli
-    	\WP_CLI::add_command( $prefix, \Baseapp\ExampleCommand::class );
+        // this is where you can load Cli
+        \WP_CLI::add_command($prefix, \Baseapp\ExampleCommand::class);
 
-    	// additional command can be registered here
-    	// \WP_CLI::add_command( $prefix, \Baseapp\IndexerCommand::class );
+        // additional command can be registered here
+        // \WP_CLI::add_command( $prefix, \Baseapp\IndexerCommand::class );
     }
 }

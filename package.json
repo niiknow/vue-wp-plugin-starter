@@ -15,7 +15,7 @@
     "lint": "tslint --project ./tsconfig.json src/**/*.ts && eslint src/**/*.vue",
     "lint-fix": "tslint --project ./tsconfig.json --fix src/**/*.ts && eslint --fix src/**/*.vue",
     "test": "jest",
-    "make-pot": "node make-translation.js"
+    "makepot": "./bin/makepot.js"
   },
   "browserslist": [
     "> 1%",

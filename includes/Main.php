@@ -8,300 +8,298 @@ namespace Baseapp;
  */
 final class Main
 {
-	/**
-	 * A unique plugin prefix/token to use throughout your plugin.
-	 * This is also your application domain.
-	 *
-	 * @var string
-	 */
-	const PREFIX = 'baseapp';
+    /**
+     * A unique plugin prefix/token to use throughout your plugin.
+     * This is also your application domain.
+     *
+     * @var string
+     */
+    const PREFIX = 'baseapp';
 
-	/**
-	 * Holds various class instances.
-	 *
-	 * @var array
-	 * @access  private
-	 * @since   1.0.0
-	 */
-	private $container = array();
+    /**
+     * Holds various class instances.
+     *
+     * @var array
+     * @access  private
+     * @since   1.0.0
+     */
+    private $container = array();
 
-	/**
-	 * The single instance of Main.
-	 *
-	 * @var     object
-	 * @access  private
-	 * @since   1.0.0
-	 */
-	private static $_instance = null; //phpcs:ignore
+    /**
+     * The single instance of Main.
+     *
+     * @var     object
+     * @access  private
+     * @since   1.0.0
+     */
+    private static $_instance = null; //phpcs:ignore
 
-	/**
-	 * The version number.
-	 *
-	 * @var     string
-	 * @access  public
-	 * @since   1.0.0
-	 */
-	public $_version; //phpcs:ignore
+    /**
+     * The version number.
+     *
+     * @var     string
+     * @access  public
+     * @since   1.0.0
+     */
+    public $_version; //phpcs:ignore
 
-	/**
-	 * The plugin filename.
-	 *
-	 * @var string
-	 */
-	public static $PLUGINFILE = '';
+    /**
+     * The plugin filename.
+     *
+     * @var string
+     */
+    public static $PLUGINFILE = '';
 
-	/**
-	 * The base url, default '.'
-	 *
-	 * @var string
-	 */
-	public static $BASEURL = '.';
+    /**
+     * The base url, default '.'
+     *
+     * @var string
+     */
+    public static $BASEURL = '.';
 
-	/**
-	 * The plugin dir, default to empty string
-	 * @var string
-	 */
-	public static $PLUGINDIR = '';
+    /**
+     * The plugin dir, default to empty string
+     * @var string
+     */
+    public static $PLUGINDIR = '';
 
-	/**
-	 * Constructor for the Main class
-	 *
-	 * Sets up all the appropriate hooks and actions
-	 * within our plugin.
-	 *
-	 * @param string $filepath the plugin file path
-	 * @param string $version Plugin version.
-	 */
+    /**
+     * Constructor for the Main class
+     *
+     * Sets up all the appropriate hooks and actions
+     * within our plugin.
+     *
+     * @param string $filepath the plugin file path
+     * @param string $version Plugin version.
+     */
     private function __construct($filepath, $version = '1.0.0')
     {
         self::$PLUGINFILE = $filepath;
         self::$PLUGINDIR  = dirname($filepath);
-        $this->_version  = $version;
+        $this->_version   = $version;
     }
 
-	/**
-	 * Get a singleton instance of this plugin.
-	 *
-	 * Usage: Main::get_instance()
-	 *
-	 * @param string $filepath the plugin file path
-	 * @param string $version Plugin version.
-	 *
-	 * @return Main the singleton instance
-	 */
-	public static function get_instance($filepath, $version = '1.0.0')
-	{
-		if (is_null(self::$_instance)) {
-        	self::$_instance = new self($filepath, $version);
-		}
+    /**
+     * Get a singleton instance of this plugin.
+     *
+     * Usage: Main::get_instance()
+     *
+     * @param string $filepath the plugin file path
+     * @param string $version Plugin version.
+     *
+     * @return Main the singleton instance
+     */
+    public static function get_instance($filepath, $version = '1.0.0')
+    {
+        if (is_null(self::$_instance)) {
+            self::$_instance = new self($filepath, $version);
+        }
 
-    	return self::$_instance;
-	}
+        return self::$_instance;
+    }
 
-	/**
-	 * Do stuff during plugin uninstall.
-	 *
-	 */
-	public static function uninstall_plugin()
-	{
-		flush_rewrite_rules();
+    /**
+     * Do stuff during plugin uninstall.
+     *
+     */
+    public static function uninstall_plugin()
+    {
+        flush_rewrite_rules();
 
-		$setting_key = self::PREFIX . '_settings';
-		$settings    = get_option($setting_key, []);
-		(new \Baseapp\Migrations())->cleanUp(self::PREFIX, $settings);
-	}
+        $setting_key = self::PREFIX . '_settings';
+        $settings    = get_option($setting_key, []);
+        (new \Baseapp\Migrations())->cleanUp(self::PREFIX, $settings);
+    }
 
-	/**
-	 * Activate and initialize the plugin.
-	 *
-	 */
-	public function run()
-	{
-		// set base url from plugin file name
+    /**
+     * Activate and initialize the plugin.
+     *
+     */
+    public function run()
+    {
+        // set base url from plugin file name
         self::$BASEURL = plugins_url('', self::$PLUGINFILE);
 
-		register_activation_hook(self::$PLUGINFILE, array($this, 'activate_plugin'));
-		register_deactivation_hook(self::$PLUGINFILE, array($this, 'deactivate_plugin'));
-		register_uninstall_hook(self::$PLUGINFILE, array(__CLASS__, 'uninstall_plugin'));
+        register_activation_hook(self::$PLUGINFILE, array($this, 'activate_plugin'));
+        register_deactivation_hook(self::$PLUGINFILE, array($this, 'deactivate_plugin'));
+        register_uninstall_hook(self::$PLUGINFILE, array(__CLASS__, 'uninstall_plugin'));
 
-		add_action('plugins_loaded', array($this, 'plugins_loaded'));
+        add_action('plugins_loaded', array($this, 'plugins_loaded'));
 
-		// setup cli
-		if (defined('WP_CLI') && \WP_CLI) {
-			$this->container['cli'] = new \Baseapp\CliLoader(self::PREFIX);
-		}
+        // setup cli
+        if (defined('WP_CLI') && \WP_CLI) {
+            $this->container['cli'] = new \Baseapp\CliLoader(self::PREFIX);
+        }
 
         $plugin = plugin_basename(self::$PLUGINFILE);
-		add_filter("plugin_action_links_$plugin", array($this, 'register_settings_link'));
+        add_filter("plugin_action_links_$plugin", array($this, 'register_settings_link'));
 
-		// Additional thing you can do: register post type, taxonomy, etc...
-		return $this;
-	}
+        // Additional thing you can do: register post type, taxonomy, etc...
+        return $this;
+    }
 
-	/**
-	 * Magic getter to bypass referencing plugin.
-	 *
-	 * @param $prop
-	 *
-	 * @return mixed
-	 */
-	public function __get( $prop )
-	{
-		if (array_key_exists($prop, $this->container))
-		{
-			return $this->container[$prop];
-		}
+    /**
+     * Magic getter to bypass referencing plugin.
+     *
+     * @param $prop
+     *
+     * @return mixed
+     */
+    public function __get($prop)
+    {
+        if (array_key_exists($prop, $this->container)) {
+            return $this->container[$prop];
+        }
 
-		return $this->{$prop};
-	}
+        return $this->{$prop};
+    }
 
-	/**
-	 * Magic isset to bypass referencing plugin.
-	 *
-	 * @param $prop
-	 *
-	 * @return mixed
-	 */
-	public function __isset($prop)
-	{
-		return isset($this->{$prop}) || isset($this->container[ $prop ]);
-	}
+    /**
+     * Magic isset to bypass referencing plugin.
+     *
+     * @param $prop
+     *
+     * @return mixed
+     */
+    public function __isset($prop)
+    {
+        return isset($this->{$prop}) || isset($this->container[$prop]);
+    }
 
-	/**
-	 * Register hooks after all plugins are loaded
-	 *
-	 * @return void
-	 */
-	public function plugins_loaded()
-	{
-		add_action('init', array($this, 'init_hook_handler'));
-	}
+    /**
+     * Register hooks after all plugins are loaded
+     *
+     * @return void
+     */
+    public function plugins_loaded()
+    {
+        add_action('init', array($this, 'init_hook_handler'));
+    }
 
-	/**
-	 * Plugin activation function.
-	 *
-	 */
-	public function activate_plugin()
-	{
-		(new \Baseapp\Migrations())->run(self::PREFIX, $this->_version);
+    /**
+     * Plugin activation function.
+     *
+     */
+    public function activate_plugin()
+    {
+        (new \Baseapp\Migrations())->run(self::PREFIX, $this->_version);
 
-		// set the current version to activate plugin
-		update_option(self::PREFIX . '_version', $this->_version);
-	}
+        // set the current version to activate plugin
+        update_option(self::PREFIX . '_version', $this->_version);
+    }
 
-	/**
-	 * Do stuff during plugin deactivation.
-	 *
-	 */
-	public function deactivate_plugin()
-	{
-		flush_rewrite_rules();
+    /**
+     * Do stuff during plugin deactivation.
+     *
+     */
+    public function deactivate_plugin()
+    {
+        flush_rewrite_rules();
 
-		// do stuff such as: shut off cron tasks, etc...
+        // do stuff such as: shut off cron tasks, etc...
 
-		// remove version number to deactivate plugin
-		delete_option($this->$_prefix . '_version');
-	}
+        // remove version number to deactivate plugin
+        delete_option($this->$_prefix . '_version');
+    }
 
-	/**
-	 * Register settings link that display on the plugins listing page.
-	 *
-	 * @param  array $links
-	 * @return array
-	 */
-	public function register_settings_link($links)
-	{
-		$settings_link = '<a href="admin.php?page=' . $this->prefix . '#/settings">Settings</a>';
-    	array_unshift($links, $settings_link);
+    /**
+     * Register settings link that display on the plugins listing page.
+     *
+     * @param  array $links
+     * @return array
+     */
+    public function register_settings_link($links)
+    {
+        $settings_link = '<a href="admin.php?page=' . $this->prefix . '#/settings">Settings</a>';
+        array_unshift($links, $settings_link);
 
-    	return $links;
-	}
+        return $links;
+    }
 
-	/**
-	 * Handler for init_hook
-	 *
-	 * @return void
-	 */
-	public function init_hook_handler()
-	{
-		// initialize assets
-		$this->container['assets'] = new \Baseapp\Assets(self::PREFIX);
+    /**
+     * Handler for init_hook
+     *
+     * @return void
+     */
+    public function init_hook_handler()
+    {
+        // initialize assets
+        $this->container['assets'] = new \Baseapp\Assets(self::PREFIX);
 
-		// initialize the various loader classes
-		if ($this->is_request('admin' ))
-		{
-			$ctx = new \Baseapp\AdminLoader(self::PREFIX);
-			$this->container['admin'] = $ctx;
-		}
+        // initialize the various loader classes
+        if ($this->is_request('admin')) {
+            $ctx                      = new \Baseapp\AdminLoader(self::PREFIX);
+            $this->container['admin'] = $ctx;
+        }
 
-		if ($this->is_request('frontend'))
-		{
-			$this->container['frontend'] = new \Baseapp\FrontendLoader(self::PREFIX);
-		}
+        if ($this->is_request('frontend')) {
+            $this->container['frontend'] = new \Baseapp\FrontendLoader(self::PREFIX);
+        }
 
-		if ($this->is_request('ajax'))
-		{
-			// $this->container['ajax'] =  new \Baseapp\AjaxLoader(self::PREFIX);
-		}
+        if ($this->is_request('ajax')) {
+            // $this->container['ajax'] =  new \Baseapp\AjaxLoader(self::PREFIX);
+        }
 
-		// finally load api routes
-		$this->container['api'] = new \Baseapp\ApiRoutes(self::PREFIX);
-	}
+        // finally load api routes
+        $this->container['api'] = new \Baseapp\ApiRoutes(self::PREFIX);
+    }
 
-	/**
-	 * Initialize plugin for localization.
-	 *
-	 * @uses load_plugin_textdomain()
-	 */
-	public function localization_setup()
-	{
-		load_plugin_textdomain(self::PREFIX,
-			false, dirname(plugin_basename(self::PLUGINFILE)) . '/languages/');
-	}
+    /**
+     * Initialize plugin for localization.
+     *
+     * @uses load_plugin_textdomain()
+     */
+    public function localization_setup()
+    {
+        load_plugin_textdomain(self::PREFIX,
+            false, dirname(plugin_basename(self::PLUGINFILE)) . '/languages/');
+    }
 
-	/**
-	 * What type of request is this?
-	 *
-	 * @param  string $type admin, ajax, cron or frontend.
-	 *
-	 * @return bool
-	 */
-	private function is_request($type)
-	{
-		switch ($type) {
-			case 'admin':
-				return is_admin();
+    /**
+     * What type of request is this?
+     *
+     * @param  string $type admin, ajax, cron or frontend.
+     *
+     * @return bool
+     */
+    private function is_request($type)
+    {
+        switch ($type) {
+            case 'admin':
+                return is_admin();
 
-			case 'ajax':
-				return defined('DOING_AJAX');
+            case 'ajax':
+                return defined('DOING_AJAX');
 
-			case 'rest':
-				return defined('REST_REQUEST');
+            case 'rest':
+                return defined('REST_REQUEST');
 
-			case 'cron':
-				return defined('DOING_CRON');
+            case 'cron':
+                return defined('DOING_CRON');
 
-			case 'frontend':
-				return (! is_admin() || defined('DOING_AJAX' )) && ! defined('DOING_CRON');
-		}
-	}
+            case 'frontend':
+                return (!is_admin() || defined('DOING_AJAX')) && !defined('DOING_CRON');
+        }
+    }
 
-	/**
-	 * Cloning is forbidden.
-	 *
-	 * @since 1.0.0
-	 */
-	public function __clone() {
-		_doing_it_wrong( __FUNCTION__, esc_html( __( 'Cloning of Main is forbidden' ) ), esc_attr( $this->_version ) );
+    /**
+     * Cloning is forbidden.
+     *
+     * @since 1.0.0
+     */
+    public function __clone()
+    {
+        _doing_it_wrong(__FUNCTION__, esc_html(__('Cloning of Main is forbidden')), esc_attr($this->_version));
 
-	} // End __clone ()
+    } // End __clone ()
 
-	/**
-	 * Unserializing instances of this class is forbidden.
-	 *
-	 * @since 1.0.0
-	 */
-	public function __wakeup() {
-		_doing_it_wrong( __FUNCTION__, esc_html( __( 'Unserializing instances of Main is forbidden' ) ), esc_attr( $this->_version ) );
-	} // End __wakeup ()
+    /**
+     * Unserializing instances of this class is forbidden.
+     *
+     * @since 1.0.0
+     */
+    public function __wakeup()
+    {
+        _doing_it_wrong(__FUNCTION__, esc_html(__('Unserializing instances of Main is forbidden')), esc_attr($this->_version));
+    } // End __wakeup ()
 }

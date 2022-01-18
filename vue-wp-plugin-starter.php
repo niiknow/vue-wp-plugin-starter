@@ -10,15 +10,16 @@
  * Tested up to: 5.8.3
  *
  * Text Domain: baseapp
- * Domain Path: /languages
+ * Domain Path: /languages/
  *
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 
-
 // don't call the file directly
-if (! defined( 'ABSPATH' )) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,7 @@ if (! defined( 'ABSPATH' )) exit;
 | this application. We just need to utilize it! We'll simply require it
 | into the script here so we don't need to manually load our classes.
 |
-*/
+ */
 
 require __DIR__ . '/vendor/autoload.php';
 
