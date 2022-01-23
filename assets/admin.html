@@ -73,7 +73,7 @@
       },
       rest: {
         endpoints: {
-          settings: '/wp-json/slsgrid/v1/settings'
+          settings: '/wp-json/baseapp/v1/settings'
         }
       },
       settingStructure: {"sections":{"general":"General","advanced":"Advanced","debugging":"Debugging"},"options":{"input":{"name":"Input","description":"Simple text input","section":"general","type":"text","default":""},"email":{"name":"Email","description":"Email type input","section":"general","type":"email","default":""},"url":{"name":"URL","description":"URL input","section":"general","type":"url","default":""},"color":{"name":"Color","description":"Color picker","section":"general","type":"color","default":""},"textarea":{"name":"Textarea","description":"Simple textarea","section":"general","type":"textarea","default":""},"dropdown":{"name":"Select one","description":"Single select dropdown","section":"general","type":"dropdown","default":"option1","options":["option1","option2","option3"]},"additional_css":{"name":"Additional CSS","description":"Add additional CSS to page","section":"advanced","type":"code","default":""},"enable_debug_messages":{"name":"Enable Debug Messages","description":"When enabled the plugin will output debug messages in the JavaScript console.","section":"debugging","type":"toggle","default":false},"cleanup_db_on_plugin_uninstall":{"name":"Cleanup database upon plugin uninstall","description":"When enabled the plugin will remove any database data upon plugin uninstall.","section":"advanced","type":"toggle","default":false},"include_post_types":{"name":"Post Types","description":"Demo multi-select dropdown","section":"general","type":"dropdownMultiselect","optionsCallback":{},"default":["post","page"],"options":["post","page"]}}}
