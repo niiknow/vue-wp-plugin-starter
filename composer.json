@@ -33,7 +33,7 @@
       "composer update",
       "composer install --no-dev --optimize-autoloader",
       "rm -f dist.zip",
-      "deployStash=`git stash create`; git archive --worktree-attributes --format=zip -o dist.zip ${deployStash:-HEAD}",
+      "git archive --worktree-attributes --format=zip -o dist.zip $(git stash create)",
       "zip -ur dist.zip ./vendor",
       "composer update"
     ],
