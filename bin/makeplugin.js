@@ -51,7 +51,6 @@ rl.on('close', async () => {
         'node_modules/**',
         'public/**',
         'src/**',
-        'tests/**',
         'vendor/**'
       ]
     });

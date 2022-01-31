@@ -16,6 +16,7 @@
     "lint-fix": "tslint --project ./tsconfig.json --fix src/**/*.ts && eslint --fix src/**/*.vue && stylelint --fix 'assets/*.css'",
     "test": "jest",
     "make-archive": "node ./bin/makearchive.js",
+    "make-plugin": "node ./bin/makeplugin.js",
     "make-pot": "node ./bin/makepot.js"
   },
   "browserslist": [

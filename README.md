@@ -9,11 +9,9 @@ Preview online: https://niiknow.github.io/vue-wp-plugin-starter/
 
 **Scaffolding**
 
-As this is a template project, simply click the "Use this template" button and run the [init-plugin.sh](init-plugin.sh) bash script to scaffold a new plugin.
-
-Run:
+As this is a template project, simply click the "Use this template" button and run:
 ```shell
-bash init-plugin.sh
+npm run make-plugin
 ```
 
 Use `composer install` to install php dependencies, and use `npm install` for front-end dependencies.
@@ -60,6 +58,10 @@ vue-wp-plugin-starter/
     │   frontend.html                - front-end demo html template
     │   frontview.css                - postcss for front-end allow dynamic vue view/page
     │   frontview.html               - demo of dynamic vue view/page html template
+└───bin/
+    │   makearchive.js               - zip up the plugin for deployment
+    │   makeplugin.js                - init plugin
+    │   makepot.js                   - make php translate file
 └───config/
     │   settings.php                 - plugin config file for admin settings page
 └───includes/
@@ -136,7 +138,3 @@ vue-wp-plugin-starter/
 
 # LICENSE
 GPLv2 or later, see LICENSE file.
-
-# TODO
-[] Rewrite init-plugin.sh in as bin/makeplugin.js so it'll work in all systems.
-
