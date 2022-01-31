@@ -1,6 +1,6 @@
 const fs = require('fs')
-const mix = require('laravel-mix')
 const path = require('path')
+const mix = require('laravel-mix')
 const webpack = require('webpack')
 const StylelintPlugin = require('stylelint-webpack-plugin')
 

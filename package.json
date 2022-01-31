@@ -58,7 +58,7 @@
     "postcss": "^8.4.5",
     "postcss-import": "^14.0.2",
     "postcss-loader": "^6.2.1",
-    "postcss-preset-env": "^7.2.3",
+    "postcss-preset-env": "^7.3.0",
     "postcss-pxtorem": "^6.0.0",
     "purecss-sass": "^2.0.6",
     "resolve-url-loader": "^5.0.0",
@@ -82,6 +82,6 @@
     "vue-router": "^4.0.10",
     "vue3-ace-editor": "^2.2.2",
     "vue3-scroll-spy": "^1.0.8",
-    "webpack": "^5.67.0"
+    "webpack": "^5.68.0"
   }
 }
