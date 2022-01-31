@@ -682,6 +682,10 @@ var _hoisted_25 = {
 var _hoisted_26 = {
   key: 5
 };
+var _hoisted_27 = ["onUpdate:modelValue", "type"];
+var _hoisted_28 = {
+  key: 6
+};
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_t_button = (0, _vue.resolveComponent)("t-button");
@@ -802,7 +806,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onUpdate:modelValue"])])) : ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_26, [(0, _vue.createVNode)(_component_t_input, {
+      , ["modelValue", "onUpdate:modelValue"])])) : item.type === 'color' ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_26, [(0, _vue.withDirectives)((0, _vue.createElementVNode)("input", {
+        class: "block transition duration-100 ease-in-out bg-white border border-gray-300 rounded shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer",
+        "onUpdate:modelValue": function onUpdateModelValue($event) {
+          return _ctx.settings[item.id] = $event;
+        },
+        type: item.type
+      }, null, 8
+      /* PROPS */
+      , _hoisted_27), [[_vue.vModelDynamic, _ctx.settings[item.id]]])])) : ((0, _vue.openBlock)(), (0, _vue.createElementBlock)("div", _hoisted_28, [(0, _vue.createVNode)(_component_t_input, {
         modelValue: _ctx.settings[item.id],
         "onUpdate:modelValue": function onUpdateModelValue($event) {
           return _ctx.settings[item.id] = $event;

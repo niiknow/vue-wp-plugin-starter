@@ -1399,6 +1399,9 @@ select {
   font-weight: 600;
   border-bottom-width: 0.25rem;
 }
+.hover\:cursor-pointer:hover {
+  cursor: pointer;
+}
 .hover\:bg-blue-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(37, 99, 235, var(--tw-bg-opacity));

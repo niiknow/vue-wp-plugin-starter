@@ -86,6 +86,13 @@
                     theme="chrome"
                     style="height: 300px" />
                 </div>
+                <div v-else-if="item.type === 'color'">
+                  <input
+                    class="block transition duration-100 ease-in-out bg-white border border-gray-300 rounded shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
+                    v-model="settings[item.id]"
+                    :type="item.type"
+                  />
+                </div>
                 <div v-else>
                   <t-input
                     v-model="settings[item.id]"
