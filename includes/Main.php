@@ -210,7 +210,7 @@ final class Main
      */
     public function register_settings_link($links)
     {
-        $settings_link = '<a href="admin.php?page=' . $this->prefix . '#/settings">Settings</a>';
+        $settings_link = '<a href="admin.php?page=' . self::PREFIX . '#/settings">Settings</a>';
         array_unshift($links, $settings_link);
 
         return $links;
