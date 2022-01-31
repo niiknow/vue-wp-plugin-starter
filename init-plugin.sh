@@ -66,25 +66,25 @@ fi
 echo 'Initializing $pluginfile.php'
 rm "$pluginfile.php"
 cp "$templatefile" "$pluginfile.php"
-sed -e "s/PLUGIN_NAME/$name/g" "$pluginfile.php" > "$pluginfile.php"-e
+sed -e "s/PluginName/$name/g" "$pluginfile.php" > "$pluginfile.php"-e
 rm "$pluginfile.php"
 mv "$pluginfile.php"-e "$pluginfile.php"
 
 echo 'Initializing package.json'
-sed -e "s/PLUGIN_FILE_NAME/$pluginfile/g" package.json > package.json-e
+sed -e "s/PluginFileName/$pluginfile/g" package.json > package.json-e
 rm package.json
 mv package.json-e package.json
 
 echo 'Initializing composer.json'
-sed -e "s/Baseapp/$namespace/g" composer.json > composer.json-e
+sed -e "s/PluginNamespace/$namespace/g" composer.json > composer.json-e
 rm composer.json
 mv composer.json-e composer.json
 
 echo 'Initializing *.php namespace'
 while read -d '' filename; do
-  sed -e "s/Baseapp/$namespace/g" "${filename}" > "${filename}"-e
-  sed -e "s/baseapp/$prefix/g" "${filename}"-e > "${filename}"
-  sed -e "s/PLUGIN_NAME/$name/g" "${filename}" > "${filename}"-e
+  sed -e "s/PluginNamespace/$namespace/g" "${filename}" > "${filename}"-e
+  sed -e "s/PluginPrefix/$prefix/g" "${filename}"-e > "${filename}"
+  sed -e "s/PluginName/$name/g" "${filename}" > "${filename}"-e
   rm ${filename}
   mv "${filename}"-e ${filename}
   # rm "${filename}"-e
@@ -94,7 +94,7 @@ done < <(find . -type d \( -path ./node_modules -o -path ./vendor -o -path ./.gi
 rm "$templatefile" composer.lock package-lock.json
 
 echo 'Initializing readme.txt'
-sed -e "s/PLUGIN_NAME/$name/g" readme.txt > readme.txt-e
+sed -e "s/PluginName/$name/g" readme.txt > readme.txt-e
 rm readme.txt
 mv readme.txt-e readme.txt
 

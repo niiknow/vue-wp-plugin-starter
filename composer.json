@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Baseapp\\": "includes/"
+      "PluginNamespace\\": "includes/"
     }
   },
   "autoload-dev": {

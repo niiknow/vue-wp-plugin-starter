@@ -1,4 +1,4 @@
-=== PLUGIN_NAME ===
+=== PluginName ===
 Contributors: noogen
 Donate link: https://www.redcross.org/donate/donation.html/
 Tags: wordpress, plugin, template, vue

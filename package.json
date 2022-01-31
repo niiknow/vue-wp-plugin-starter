@@ -1,10 +1,10 @@
 {
-  "name": "PLUGIN_FILE_NAME",
+  "name": "PluginFileName",
   "version": "1.0.0",
   "description": "A WordPress Vue.js starter plugin",
   "author": "Tom Noogen",
   "license": "GPLv2",
-  "textdomain": "baseapp",
+  "textdomain": "PluginPrefix",
   "scripts": {
     "dev": "npm run development",
     "development": "mix",

@@ -12,7 +12,7 @@ class PluginTestCase extends TestCase
     {
         parent::setUp();
         Monkey\setUp();
-        \Baseapp\Main::get_instance(realpath(__DIR__ . '/../../../index.php'));
+        \PluginNamespace\Main::get_instance(realpath(__DIR__ . '/../../../index.php'));
     }
 
     protected function tearDown(): void

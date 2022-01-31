@@ -1,5 +1,5 @@
 <?php
-namespace Baseapp;
+namespace PluginNamespace;
 
 /**
  * Frontend pages loader

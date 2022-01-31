@@ -1,5 +1,5 @@
 <?php
-namespace Baseapp;
+namespace PluginNamespace;
 
 /**
  * Main class
@@ -14,7 +14,7 @@ final class Main
      *
      * @var string
      */
-    const PREFIX = 'baseapp';
+    const PREFIX = 'PluginPrefix';
 
     /**
      * Holds various class instances.
@@ -108,7 +108,7 @@ final class Main
 
         $setting_key = self::PREFIX . '_settings';
         $settings    = get_option($setting_key, []);
-        (new \Baseapp\Migrations())->cleanUp(self::PREFIX, $settings);
+        (new \PluginNamespace\Migrations())->cleanUp(self::PREFIX, $settings);
     }
 
     /**
@@ -128,7 +128,7 @@ final class Main
 
         // setup cli
         if (defined('WP_CLI') && \WP_CLI) {
-            $this->container['cli'] = new \Baseapp\CliLoader(self::PREFIX);
+            $this->container['cli'] = new \PluginNamespace\CliLoader(self::PREFIX);
         }
 
         $plugin = plugin_basename(self::$PLUGINFILE);
@@ -182,7 +182,7 @@ final class Main
      */
     public function activate_plugin()
     {
-        (new \Baseapp\Migrations())->run(self::PREFIX, $this->_version);
+        (new \PluginNamespace\Migrations())->run(self::PREFIX, $this->_version);
 
         // set the current version to activate plugin
         update_option(self::PREFIX . '_version', $this->_version);
@@ -224,24 +224,24 @@ final class Main
     public function init_hook_handler()
     {
         // initialize assets
-        $this->container['assets'] = new \Baseapp\Assets(self::PREFIX);
+        $this->container['assets'] = new \PluginNamespace\Assets(self::PREFIX);
 
         // initialize the various loader classes
         if ($this->is_request('admin')) {
-            $ctx                      = new \Baseapp\AdminLoader(self::PREFIX);
+            $ctx                      = new \PluginNamespace\AdminLoader(self::PREFIX);
             $this->container['admin'] = $ctx;
         }
 
         if ($this->is_request('frontend')) {
-            $this->container['frontend'] = new \Baseapp\FrontendLoader(self::PREFIX);
+            $this->container['frontend'] = new \PluginNamespace\FrontendLoader(self::PREFIX);
         }
 
         if ($this->is_request('ajax')) {
-            // $this->container['ajax'] =  new \Baseapp\AjaxLoader(self::PREFIX);
+            // $this->container['ajax'] =  new \PluginNamespace\AjaxLoader(self::PREFIX);
         }
 
         // finally load api routes
-        $this->container['api'] = new \Baseapp\ApiRoutes(self::PREFIX);
+        $this->container['api'] = new \PluginNamespace\ApiRoutes(self::PREFIX);
     }
 
     /**

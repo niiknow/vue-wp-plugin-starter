@@ -1,15 +1,15 @@
 <?php
 /**
- * Plugin Name: PLUGIN_NAME
+ * Plugin Name: PluginName
  * Version: 1.0.0
  * Plugin URI:
- * Description: PLUGIN_NAME
+ * Description: PluginName
  * Author: noogen
  * Author URI:
  * Requires at least: 5.6
  * Tested up to: 5.8.3
  *
- * Text Domain: baseapp
+ * Text Domain: PluginPrefix
  * Domain Path: /languages/
  *
  * License: GPLv2 or later
@@ -37,7 +37,7 @@ require __DIR__ . '/vendor/autoload.php';
 /**
  * Returns the main instance to prevent the need to use globals.
  */
-$instance = \Baseapp\Main::get_instance(__FILE__, '1.0.0');
+$instance = \PluginNamespace\Main::get_instance(__FILE__, '1.0.0');
 $instance->run();
 
 return $instance;

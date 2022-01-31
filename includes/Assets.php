@@ -1,5 +1,5 @@
 <?php
-namespace Baseapp;
+namespace PluginNamespace;
 
 /**
  * Scripts and styles helper.
@@ -76,8 +76,8 @@ class Assets
      */
     public function get_scripts()
     {
-        $assets_url = \Baseapp\Main::$BASEURL . '/public';
-        $plugin_dir = \Baseapp\Main::$PLUGINDIR . '/public';
+        $assets_url = \PluginNamespace\Main::$BASEURL . '/public';
+        $plugin_dir = \PluginNamespace\Main::$PLUGINDIR . '/public';
         $prefix     = ''; // defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.min' : '';
 
         $scripts = [
@@ -125,7 +125,7 @@ class Assets
      */
     public function get_styles()
     {
-        $assets_url = \Baseapp\Main::$BASEURL . '/public';
+        $assets_url = \PluginNamespace\Main::$BASEURL . '/public';
 
         $styles = [
             $this->prefix . '-bootstrap' => [
@@ -157,7 +157,7 @@ class Assets
         static $manifests = [];
 
         if (empty($manifestDirectory)) {
-            $manifestDirectory = \Baseapp\Main::$PLUGINDIR . '/public';
+            $manifestDirectory = \PluginNamespace\Main::$PLUGINDIR . '/public';
         }
 
         $manifestPath = $manifestDirectory . '/mix-manifest.json';
