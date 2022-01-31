@@ -134,4 +134,9 @@ vue-wp-plugin-starter/
 
 ... more TBD
 
-# GPLv2 or later
+# LICENSE
+GPLv2 or later, see LICENSE file.
+
+# TODO
+[] Rewrite init-plugin.sh in as bin/makeplugin.js so it'll work in all systems.
+

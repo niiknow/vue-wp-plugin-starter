@@ -26,7 +26,11 @@ const loadIgnoreFile = () => {
   }
 }
 
-const archive = archiver('zip', {});
+const archive = archiver('zip', {
+    zlib: {
+      level: 9
+    }
+  });
 const dirName = path.basename(CURRENT_PATH);
 const outFile = './' + dirName + '.zip';
 
