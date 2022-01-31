@@ -18,19 +18,17 @@ bash init-plugin.sh
 
 Use `composer install` to install php dependencies, and use `npm install` for front-end dependencies.
 
-To build `dist.zip` for deployment:
+To build `wp-your-plugin-name.zip` for deployment:
 ```shell
 composer app:package
 ```
 
-Deploy `dist.zip` to a wordpress website:
+Deploy `wp-your-plugin-name.zip` to a wordpress website:
 ```shell
-cd your-wp-site-root
-cd wp-content/plugins
-unzip dist.zip -d wp-your-plugin-folder-name
+unzip wp-your-plugin-name.zip
 ```
 
-To make plugin translation, run `npm run makepot`. For vuejs translation, use `i18next-scanner` to scan and generate json translation file, see config https://github.com/i18next/i18next-scanner/issues/208#issuecomment-912501468
+To make plugin translation, run `npm run make-pot`. For vuejs translation, use `i18next-scanner` to scan and generate json translation file, see config https://github.com/i18next/i18next-scanner/issues/208#issuecomment-912501468
 
 Also, don't forget to update [readme.txt](readme.txt) file appropriately since it is one of wordpress plugin required file.
 

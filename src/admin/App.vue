@@ -11,9 +11,10 @@ import menuFix from './admin-menu-fix'
 export default defineComponent({
   mounted() {
     const that = this
-    // @ts-ignore
+
     setTimeout(() => {
       // fix the admin menu for the prefix slug or 'vue-app' if none is defined
+      // @ts-ignore
       menuFix(that.$win.vue_wp_plugin_config_admin.prefix || 'vue-app')
     }, 1000)
   }
