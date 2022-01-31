@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 const wpi18n = require('node-wp-i18n')
-const pkg = require('../package.json');
+const pkg = require('../package.json')
 
 const headers = {
   poedit: true,
-  "x-poedit-basepath": "..",
+  'x-poedit-basepath': '..',
   'x-generator': 'node-wp-i18n ' + pkg.version
-};
+}
 
 // update options below appropriately
 const options = {
@@ -18,7 +18,7 @@ const options = {
   },
   type: 'wp-plugin',
   updateTimestamp: false,
-  domainPath: "languages",
+  domainPath: 'languages',
   potHeaders: headers,
 }
 
