@@ -36,8 +36,8 @@ class AdminLoader
         $slug       = $this->prefix;
 
         $hook = add_menu_page(
-            esc_html__('PluginName', $this->prefix),
-            esc_html__('PluginName', $this->prefix),
+            esc_html(__('PluginName', $this->prefix)),
+            esc_html(__('PluginName', $this->prefix)),
             $capability,
             $slug,
             [$this, 'plugin_page'],
@@ -46,15 +46,15 @@ class AdminLoader
 
         if (current_user_can($capability)) {
             add_submenu_page($slug,
-                esc_html__('Dashboard', $this->prefix),
-                esc_html__('Dashboard', $this->prefix),
+                esc_html(__('Dashboard', $this->prefix)),
+                esc_html(__('Dashboard', $this->prefix)),
                 $capability,
                 $slug,
                 [$this, 'plugin_page']
             );
             add_submenu_page($slug,
-                esc_html__('Settings', $this->prefix),
-                esc_html__('Settings', $this->prefix),
+                esc_html(__('Settings', $this->prefix)),
+                esc_html(__('Settings', $this->prefix)),
                 $capability,
                 "admin.php?page={$slug}#/settings"
             );

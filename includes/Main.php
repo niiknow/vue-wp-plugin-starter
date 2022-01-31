@@ -211,7 +211,8 @@ final class Main
      */
     public function register_settings_link($links)
     {
-        $settings_link = '<a href="admin.php?page=' . self::PREFIX . '#/settings">Settings</a>';
+        $settings_link = '<a href="admin.php?page=' . self::PREFIX . '#/settings">';
+        $settings_link .= esc_html(__('Settings', self::PREFIX)) . '</a>';
         array_unshift($links, $settings_link);
 
         return $links;
