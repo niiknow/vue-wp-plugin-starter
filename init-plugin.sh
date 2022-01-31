@@ -76,13 +76,13 @@ rm package.json
 mv package.json-e package.json
 
 echo 'Initializing composer.json'
-sed -e "s/PluginNamespace/$namespace/g" composer.json > composer.json-e
+sed -e "s/PluginSpace/$namespace/g" composer.json > composer.json-e
 rm composer.json
 mv composer.json-e composer.json
 
 echo 'Initializing *.php namespace'
 while read -d '' filename; do
-  sed -e "s/PluginNamespace/$namespace/g" "${filename}" > "${filename}"-e
+  sed -e "s/PluginSpace/$namespace/g" "${filename}" > "${filename}"-e
   sed -e "s/PluginPrefix/$prefix/g" "${filename}"-e > "${filename}"
   sed -e "s/PluginName/$name/g" "${filename}" > "${filename}"-e
   rm ${filename}

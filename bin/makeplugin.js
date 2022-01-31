@@ -18,7 +18,7 @@ const options = {
   PluginName: '',
   PluginSlug: '',
   PluginPrefix: '',
-  PluginNamespace: '',
+  PluginSpace: '',
   PluginFileName: ''
 };
 
@@ -69,7 +69,7 @@ rl.on('close', async () => {
   console.log('Removing template files');
   fs.unlinkSync(template_file);
   fs.unlinkSync('composer.lock');
-  fs.unlinkSync('package-json.lock');
+  fs.unlinkSync('package-lock.json');
   process.exit(0);
 });
 
@@ -80,7 +80,8 @@ function apply_options(options, files) {
     let data = fs.readFileSync(file_path, 'utf8');
 
     for (const [key, value] of Object.entries(options)) {
-      let find = '\\$\\{' + key + '\\}';
+      // let find = '\\$\\{' + key + '\\}';
+      const find = key;
       let re = new RegExp(find, 'g');
 
       data = data.replace(re, value);
@@ -117,7 +118,7 @@ function create_namespace(str) {
 
   options.PluginSlug = create_slug(options.PluginName);
   options.PluginPrefix = create_prefix(options.PluginName);
-  options.PluginNamespace = create_namespace(options.PluginName);
+  options.PluginSpace = create_namespace(options.PluginName);
   options.PluginFileName = options.PluginSlug;
   const prepend = await rl.question('Do you want to prepend \'wp-\' to your plugin file name? [y/n]: ');
   if (prepend.toLowerCase() === 'y') {

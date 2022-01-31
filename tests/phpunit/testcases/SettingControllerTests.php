@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use PluginNamespace\Api;
+use PluginSpace\Api;
 
 defined('ABSPATH') or die();
 
@@ -11,10 +11,10 @@ class SettingControllerTests extends PluginTestCase
 
     public function test_construct()
     {
-        $controller = new \PluginNamespace\Api\SettingController();
+        $controller = new \PluginSpace\Api\SettingController();
 
         $actual   = $this->accessNonPublicProperty($controller, 'namespace');
-        $expected = \PluginNamespace\Main::PREFIX . '/v1';
+        $expected = \PluginSpace\Main::PREFIX . '/v1';
         $this->assertEquals($expected, $actual);
 
         $actual   = $this->accessNonPublicProperty($controller, 'rest_base');

@@ -37,7 +37,7 @@ require __DIR__ . '/vendor/autoload.php';
 /**
  * Returns the main instance to prevent the need to use globals.
  */
-$instance = \PluginNamespace\Main::get_instance(__FILE__, '1.0.0');
+$instance = \PluginSpace\Main::get_instance(__FILE__, '1.0.0');
 $instance->run();
 
 return $instance;

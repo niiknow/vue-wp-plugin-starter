@@ -10,11 +10,11 @@ class ApiTests extends PluginTestCase
     public function test_construct()
     {
         //echo PLUGIN_DIR;
-        //$plug = new \PluginNamespace\MyPlugin();
+        //$plug = new \PluginSpace\MyPlugin();
 
         //$this->assertTrue(true);
 
-        //$isthere = has_action( 'admin_menu', ['PluginNamespace\MyPlugin', 'createMenuItem'] );
+        //$isthere = has_action( 'admin_menu', ['PluginSpace\MyPlugin', 'createMenuItem'] );
         //echo $isthere;
 
         $this->assertTrue(true);

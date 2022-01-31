@@ -1,5 +1,5 @@
 <?php
-namespace PluginNamespace\Api;
+namespace PluginSpace\Api;
 
 /**
  * Backend settings controller
@@ -20,7 +20,7 @@ class SettingController extends \WP_REST_Controller
      */
     public function __construct()
     {
-        $this->prefix    = \PluginNamespace\Main::PREFIX;
+        $this->prefix    = \PluginSpace\Main::PREFIX;
         $this->namespace = $this->prefix . '/v1';
         $this->rest_base = 'settings';
     }
@@ -172,7 +172,7 @@ class SettingController extends \WP_REST_Controller
      */
     public function get_settings_structure($runOptionsCallback = false)
     {
-        $options = include \PluginNamespace\Main::$PLUGINDIR . '/config/settings.php';
+        $options = include \PluginSpace\Main::$PLUGINDIR . '/config/settings.php';
 
         if ($runOptionsCallback) {
 
@@ -196,7 +196,7 @@ class SettingController extends \WP_REST_Controller
      */
     public function get_setting_defaults()
     {
-        $options = include \PluginNamespace\Main::$PLUGINDIR . '/config/settings.php';
+        $options = include \PluginSpace\Main::$PLUGINDIR . '/config/settings.php';
         $result  = [];
 
         $settings_details = $options['options'];
