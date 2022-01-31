@@ -6,7 +6,6 @@ defined('ABSPATH') or die();
 
 class ApiTests extends PluginTestCase
 {
-
     public function test_construct()
     {
         //echo PLUGIN_DIR;

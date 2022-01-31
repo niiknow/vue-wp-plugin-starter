@@ -14,7 +14,6 @@
  */
 abstract class WP_REST_Controller
 {
-
     /**
      * The namespace of this controller's route.
      *

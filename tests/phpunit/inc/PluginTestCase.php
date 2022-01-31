@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class PluginTestCase extends TestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();
         Monkey\setUp();
-        \PluginSpace\Main::get_instance(realpath(__DIR__ . '/../../../index.php'));
+        $instance = \PluginSpace\Main::get_instance(realpath(__DIR__ . '/../../../index.php'), '1.0.0');
     }
 
     protected function tearDown(): void

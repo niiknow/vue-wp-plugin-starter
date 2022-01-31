@@ -8,7 +8,6 @@ defined('ABSPATH') or die();
 
 class SettingControllerTests extends PluginTestCase
 {
-
     public function test_construct()
     {
         $controller = new \PluginSpace\Api\SettingController();

@@ -6,7 +6,6 @@ defined('ABSPATH') or die();
 
 class AssetsTests extends PluginTestCase
 {
-
     public function test_construct()
     {
         //echo PLUGIN_DIR;
