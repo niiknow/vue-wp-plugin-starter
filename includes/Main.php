@@ -131,6 +131,7 @@ final class Main
             $this->container['cli'] = new \PluginSpace\CliLoader(self::PREFIX);
         }
 
+        // this is to register an action link from the Plugin manager page to our settings page
         $plugin = plugin_basename(self::$PLUGINFILE);
         add_filter("plugin_action_links_$plugin", array($this, 'register_settings_link'));
 
