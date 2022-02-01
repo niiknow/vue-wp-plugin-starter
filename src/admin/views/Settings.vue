@@ -87,11 +87,7 @@
                     style="height: 300px" />
                 </div>
                 <div v-else-if="item.type === 'color'">
-                  <input
-                    class="block transition duration-100 ease-in-out bg-white border border-gray-300 rounded shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
-                    v-model="settings[item.id]"
-                    :type="item.type"
-                  />
+                  <color-input v-model="settings[item.id]" format="hex" />
                 </div>
                 <div v-else>
                   <t-input
@@ -113,7 +109,8 @@
 <script>
 import { defineComponent, reactive, computed, ref, nextTick, toRaw } from 'vue'
 import { TToggle, TButton, TRichSelect, TTextarea, TInput, TSelect } from '@variantjs/vue'
-import { VAceEditor } from 'vue3-ace-editor';
+import { VAceEditor } from 'vue3-ace-editor'
+import ColorInput from 'vue-color-input'
 import ace from 'ace-builds'
 ace.config.set(
   'basePath',
@@ -122,7 +119,7 @@ ace.config.set(
 
 export default defineComponent({
   components: {
-    TToggle, TButton, TRichSelect, TTextarea, TInput, TSelect, VAceEditor
+    TToggle, TButton, TRichSelect, TTextarea, TInput, TSelect, VAceEditor, ColorInput
   },
   name: 'Settings',
   setup () {
