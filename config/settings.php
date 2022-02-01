@@ -38,7 +38,7 @@ return array(
             'description' => __('Color picker', \PluginSpace\Main::PREFIX),
             'section'     => 'general',
             'type'        => 'color',
-            'default'     => '',
+            'default'     => '#000', // empty text means #000 by default anyway so might as well set it
         ),
         'textarea'                       => array(
             'name'        => __('Textarea', \PluginSpace\Main::PREFIX),

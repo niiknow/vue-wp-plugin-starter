@@ -55,7 +55,7 @@
     "laravel-mix-tailwind": "^0.1.2",
     "lodash": "^4.17.21",
     "node-wp-i18n": "^1.2.6",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.6",
     "postcss-import": "^14.0.2",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.3.0",
