@@ -15,11 +15,13 @@ const base_path = path.resolve(process.cwd())
 const template_file = 'vue-wp-plugin-starter.php'
 
 const options = {
-  PluginName: '',
-  PluginSlug: '',
-  PluginPrefix: '',
-  PluginSpace: '',
-  PluginFileName: ''
+  PluginName: '',    // the name, example: Hello World
+  PluginPrefix: '',  // plugin prefix, which can be use like so:
+// language domain: hello_world
+// admin url:       admin.php?page=hello_world#/settings
+
+  PluginSpace: '',   // the namespace: HelloWorld
+  PluginFileName: '' // the file name: wp-hello-world.php
 }
 
 if (!fs.existsSync(template_file)) {
@@ -66,7 +68,7 @@ rl.on('close', async () => {
 
 
   console.log('Removing template files')
-  rename(template_file, `${PluginFileName}.php`)
+  rename(template_file, `${options.PluginFileName}.php`)
   fs.unlinkSync('composer.lock')
   fs.unlinkSync('package-lock.json')
   process.exit(0)
@@ -97,31 +99,23 @@ function rename(from_path, to_path) {
   )
 }
 
-function createSlug(str) {
-  str = str.replace(/['\.]/g, '')
-  return str.toLowerCase().split(' ').join('-')
-}
-
 function createPrefix(str) {
-  str = str.replace(/['\.]/g, '')
-  return str.toLowerCase().split(' ').join('_')
+  return (str || '').toLowerCase().replace(/\s+/g, ' ').replace(/[^0-9a-z_]+/g,'_')
 }
 
 function createNamespace(str) {
-  str = str.replace(/['\.]/g, '')
-  return str.replace(/\s+/g, '')
+  return (str || '').replace(/['\.\s]/g, '')
 }
 
 (async () => {
   await getPluginName()
-
-  options.PluginSlug = createSlug(options.PluginName)
-  options.PluginPrefix = createPrefix(options.PluginName)
   options.PluginSpace = createNamespace(options.PluginName)
-  options.PluginFileName = options.PluginSlug
+  options.PluginPrefix = createPrefix(options.PluginName)
+  options.PluginFileName = options.PluginPrefix.replace(/_/g, '-')
+
   const prepend = await rl.question('Do you want to prepend \'wp-\' to your plugin file name? [y/n]: ')
   if (prepend.toLowerCase() === 'y') {
-    options.PluginFileName = 'wp-' + options.PluginSlug
+    options.PluginFileName = 'wp-' + options.PluginFileName
   }
 
   rl.close()
