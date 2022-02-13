@@ -3,6 +3,7 @@
 namespace Tests;
 
 use PluginSpace\Api;
+use \Brain\Monkey\Functions;
 
 defined('ABSPATH') or die();
 
@@ -10,6 +11,12 @@ class SettingControllerTests extends PluginTestCase
 {
     public function test_construct()
     {
+        // We expect get_post_types to be called
+        Functions\expect('get_post_types')
+            ->once()
+            ->with('', 'names')
+            ->andReturn(['post', 'page']);
+
         $controller = new \PluginSpace\Api\SettingController();
 
         $actual   = $this->accessNonPublicProperty($controller, 'namespace');

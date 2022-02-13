@@ -11,7 +11,20 @@ class PluginTestCase extends TestCase
     {
         parent::setUp();
         Monkey\setUp();
-        $instance = \PluginSpace\Main::get_instance(realpath(__DIR__ . '/../../../index.php'), '1.0.0');
+        // A few common passthrough
+        // 1. WordPress i18n functions
+        Monkey\Functions\when('__')
+            ->returnArg(1);
+        Monkey\Functions\when('_e')
+            ->returnArg(1);
+        Monkey\Functions\when('_n')
+            ->returnArg(1);
+
+        // 2. escaping
+        Monkey\Functions\when('esc_html')
+            ->returnArg(1);
+
+        $instance = \PluginSpace\Main::get_instance(realpath(__DIR__ . '/../../index.php'), '1.0.0');
     }
 
     protected function tearDown(): void

@@ -26,17 +26,6 @@ class SettingController extends \WP_REST_Controller
     }
 
     /**
-     * get the endpoint
-     *
-     * @return string the full endpoint
-     */
-    public function get_endpoint()
-    {
-        // example: myplugin/v1/settings
-        return $this->namespace . '/' . $this->rest_base;
-    }
-
-    /**
      * Register the routes
      *
      * @return void
@@ -62,6 +51,17 @@ class SettingController extends \WP_REST_Controller
                 ),
             )
         );
+    }
+
+    /**
+     * get the endpoint
+     *
+     * @return string the full endpoint
+     */
+    public function get_endpoint()
+    {
+        // example: myplugin/v1/settings
+        return $this->namespace . '/' . $this->rest_base;
     }
 
     /**
