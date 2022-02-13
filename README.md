@@ -109,16 +109,13 @@ vue-wp-plugin-starter/
     │   │   └───views/
     │   |   |   Dashboard.spec.ts    - Demo jest/javascript unit testing
     └───phpunit/
-    │   └───inc/                     - mocking/fake and base files
-    │   |   |   class-wp-rest-controller.php
-    │   |   |   PluginTestCase.php
-    │   └───testcases/               - PHP unit testing files
-    │   |   AdminTests.php
-    │   |   ApiTests.php
-    │   |   AssetsTests.php
-    │   |   FrontendTests.php
-    │   |   SettingControllerTests.php
-    │   bootstrap.php                - loader file, act like (fake) plugin file in main folder
+    │   └───Api/
+    │   |   |    SettingControllerTests.php
+    │   |   AdminLoaderTests.php
+    │   |   PluginTestCase.php       - TestCase base class
+    |   bootstrap.php                - loader file, act like (fake) plugin file in main folder
+    |   class-wp-rest-controller.php - mock wordpress rest controller for testing
+    |   jest.setup.ts
 -----
 .... root files can be seen above so it's not listed.  Above listing is
 .... to provide overview of our project structure so not all files are listed here.
