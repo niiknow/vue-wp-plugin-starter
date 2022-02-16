@@ -1,20 +1,28 @@
-import { createI18n } from 'vue-i18n'
 import type { App } from 'vue'
+import { createGettext } from 'vue3-gettext';
+import { createApp } from 'vue';
+import translations from '@src/../languages/translations.json';
 
-// import i18n resources
-import en from '@src/../languages/en.json'
-import zhCN from '@src/../languages/zh-CN.json'
-import vi from '@src/../languages/vi.json'
+/*
+Examples:
+
+import gettext from "./gettext";
+
+const { $gettext } = gettext;
+
+const myTest = $gettext("My translation message");
+*/
 
 export default (app: App) => {
-  const i18n = createI18n({
-    locale: 'en',
-    messages: {
-      en,
-      'zh-CN': zhCN,
-      vi
-    }
-  })
+  const gettext = createGettext({
+    availableLanguages: {
+      en: 'English',
+      vi: 'Vietnamese',
+      'zh-CN': '中文'
+    },
+    defaultLanguage: 'en',
+    translations,
+  });
 
-  app.use(i18n)
+  app.use(gettext)
 }

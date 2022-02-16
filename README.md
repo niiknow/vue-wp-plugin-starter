@@ -26,7 +26,13 @@ Deploy `wp-your-plugin-name.zip` to a wordpress website:
 unzip wp-your-plugin-name.zip
 ```
 
-To make plugin translation, run `npm run make-pot`. For vuejs translation, use `i18next-scanner` to scan and generate json translation file, see config https://github.com/i18next/i18next-scanner/issues/208#issuecomment-912501468
+To make plugin translation, run `npm run make-pot`.  This will scan `includes/*.php` and `src/*.vue` to generate `pot` files to `languages/` folder.  Then run `npm run compile-vue-translation` to create `languages/translation.json` to use with vue front-end.  Again, the process is:
+
+```shell
+npm run make-pot
+# use https://poedit.net/ to edit your *.po files under languages/ folder
+npm run compile-vue-translation
+```
 
 Also, don't forget to update [readme.txt](readme.txt) file appropriately since it is one of wordpress plugin required file.
 

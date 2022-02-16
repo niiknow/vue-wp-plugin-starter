@@ -12,12 +12,13 @@
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "prod": "npm run production",
     "production": "mix --production",
-    "lint": "tslint --project ./tsconfig.json src/**/*.ts && eslint src/**/*.vue && stylelint 'assets/*.css'",
-    "lint-fix": "tslint --project ./tsconfig.json --fix src/**/*.ts && eslint --fix src/**/*.vue && stylelint --fix 'assets/*.css'",
+    "lint": "tslint --project ./tsconfig.json src/**/*.ts && eslint bin/*.js src/**/*.vue && stylelint 'assets/*.css'",
+    "lint-fix": "tslint --project ./tsconfig.json --fix src/**/*.ts && eslint --fix bin/*.js src/**/*.vue && stylelint --fix 'assets/*.css'",
     "test": "jest",
     "make-archive": "node ./bin/makearchive.js",
     "make-plugin": "node ./bin/makeplugin.js",
-    "make-pot": "node ./bin/makepot.js"
+    "make-pot": "node ./bin/makepot.js && vue-gettext-extract",
+    "compile-vue-translation": "vue-gettext-compile"
   },
   "browserslist": [
     "> 1%",
@@ -28,7 +29,7 @@
     "@babel/eslint-parser": "^7.17.0",
     "@popperjs/core": "^2.11.2",
     "@tailwindcss/forms": "^0.4.0",
-    "@tailwindcss/typography": "^0.5.1",
+    "@tailwindcss/typography": "^0.5.2",
     "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
     "@variantjs/core": "^0.0.87",
@@ -63,7 +64,7 @@
     "purecss-sass": "^2.0.6",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.49.7",
-    "sass-loader": "^12.4.0",
+    "sass-loader": "^12.6.0",
     "stylelint": "^14.5.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^25.0.0",
@@ -79,11 +80,11 @@
     "vue": "^3.2.31",
     "vue-axios": "^3.4.1",
     "vue-color-input": "^1.0.6",
-    "vue-i18n": "^9.1.9",
     "vue-loader": "^17.0.0",
     "vue-router": "^4.0.12",
     "vue3-ace-editor": "^2.2.2",
+    "vue3-gettext": "^2.0.0",
     "vue3-scroll-spy": "^1.0.8",
-    "webpack": "^5.68.0"
+    "webpack": "^5.69.0"
   }
 }
