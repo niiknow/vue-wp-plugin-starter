@@ -235,7 +235,7 @@ var vue_router_1 = __webpack_require__(/*! vue-router */ "./node_modules/vue-rou
 var Home_vue_1 = __importDefault(__webpack_require__(/*! @src/frontend/views/Home.vue */ "./src/frontend/views/Home.vue"));
 
 var routes = [{
-  path: "/",
+  path: '/',
   component: Home_vue_1.default
 }];
 var router = (0, vue_router_1.createRouter)({
@@ -265,25 +265,33 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var vue_i18n_1 = __webpack_require__(/*! vue-i18n */ "./node_modules/vue-i18n/dist/vue-i18n.esm-bundler.js"); // import i18n resources
+var vue3_gettext_1 = __webpack_require__(/*! vue3-gettext */ "./node_modules/vue3-gettext/dist/cjs/index.js");
 
+var translations_json_1 = __importDefault(__webpack_require__(/*! @src/../languages/translations.json */ "./languages/translations.json"));
+/*
+Examples:
 
-var en_json_1 = __importDefault(__webpack_require__(/*! @src/../languages/en.json */ "./languages/en.json"));
+import gettext from "./gettext"
 
-var zh_CN_json_1 = __importDefault(__webpack_require__(/*! @src/../languages/zh-CN.json */ "./languages/zh-CN.json"));
+const { $gettext } = gettext
 
-var vi_json_1 = __importDefault(__webpack_require__(/*! @src/../languages/vi.json */ "./languages/vi.json"));
+const myTest = $gettext("My translation message")
+
+// use in *.vue template: {{ $gettext("Message to translate") }}
+*/
+
 
 exports["default"] = function (app) {
-  var i18n = (0, vue_i18n_1.createI18n)({
-    locale: 'en',
-    messages: {
-      en: en_json_1.default,
-      'zh-CN': zh_CN_json_1.default,
-      vi: vi_json_1.default
-    }
+  var gettext = (0, vue3_gettext_1.createGettext)({
+    availableLanguages: {
+      en: 'English',
+      vi: 'Vietnamese',
+      'zh-CN': '中文'
+    },
+    defaultLanguage: 'en',
+    translations: translations_json_1.default
   });
-  app.use(i18n);
+  app.use(gettext);
 };
 
 /***/ }),
@@ -804,36 +812,14 @@ module.exports = Vue;
 
 /***/ }),
 
-/***/ "./languages/en.json":
-/*!***************************!*\
-  !*** ./languages/en.json ***!
-  \***************************/
+/***/ "./languages/translations.json":
+/*!*************************************!*\
+  !*** ./languages/translations.json ***!
+  \*************************************/
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"button":{"about":"About","back":"Back","go":"GO","home":"Home","toggle_dark":"Toggle dark mode","toggle_langs":"Change languages"},"intro":{"desc":"Vue Wordpress Plugin Starter Template","dynamic-route":"Demo of dynamic route","hi":"Hi, {name}!","whats-your-name":"What\'s your name?"},"not-found":"Not found"}');
-
-/***/ }),
-
-/***/ "./languages/vi.json":
-/*!***************************!*\
-  !*** ./languages/vi.json ***!
-  \***************************/
-/***/ (function(module) {
-
-"use strict";
-module.exports = JSON.parse('{"button":{"back":"Quay lại","go":"Đi"},"intro":{"desc":"Ý kiến cá nhân Vue Wordpress Template để bắt đầu","dynamic-route":"Bản giới thiệu về dynamic route","hi":"Hi, {name}!","whats-your-name":"Tên bạn là gì?"},"not-found":"Không tìm thấy"}');
-
-/***/ }),
-
-/***/ "./languages/zh-CN.json":
-/*!******************************!*\
-  !*** ./languages/zh-CN.json ***!
-  \******************************/
-/***/ (function(module) {
-
-"use strict";
-module.exports = JSON.parse('{"button":{"back":"返回","go":"确定"},"intro":{"desc":"固执己见的 Vue Wordpress Vite 项目模板","dynamic-route":"动态路由演示","hi":"你好，{name}！","whats-your-name":"输入你的名字"},"not-found":"未找到页面"}');
+module.exports = JSON.parse('{"en":{},"zh-CN":{},"vi":{}}');
 
 /***/ })
 

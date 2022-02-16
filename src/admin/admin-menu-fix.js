@@ -8,10 +8,10 @@ function menuFix(slug) {
 
   if (menuRoot) {
     menuRoot.addEventListener('click', function (e) {
-      const target = e.target
-      const items  = this.querySelectorAll('li')
-      for (let i = 0; i < items.length; i++) {
-        let  node = items[i];
+      var target  = e.target
+      var myItems = this.querySelectorAll('li')
+      for (let i = 0; i < myItems.length; i++) {
+        let  node = myItems[i];
         if (node !== e.target.parentElement) {
           node.classList.remove('current')
         } else {
