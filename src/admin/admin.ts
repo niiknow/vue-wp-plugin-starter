@@ -1,26 +1,15 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router/index'
-import VueAxios from 'vue-axios'
+import router from './router'
 import { registerScrollSpy } from 'vue3-scroll-spy'
 import { variantJS, VariantJSConfiguration } from '@variantjs/vue'
-import swal from 'sweetalert2'
+import installShared from '../shared'
 
-// @ts-ignore
-import config from '@src/shared/config'
-const win: any = config(window)
 const app = createApp(App)
 
-// Using default options
-registerScrollSpy(app)
-
-// allow for using this.$win/axios inside of a component
-app.config.globalProperties.$win  = win;
-app.config.globalProperties.axios = win.$appConfig.axios
-app.config.globalProperties.$swal = swal
-
 app.use(router)
-  .use(VueAxios, win.$appConfig.axios)
+registerScrollSpy(app)
+installShared(app)
 
 const configuration: VariantJSConfiguration = {
   TButton: {
