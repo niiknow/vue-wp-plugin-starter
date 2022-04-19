@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import Dashboard from '@/src/admin/views/Dashboard.vue';
+import Dashboard from '@src/admin/views/Dashboard.vue';
 
 describe('Dashboard.vue', () => {
   it('renders props.msg when passed', () => {

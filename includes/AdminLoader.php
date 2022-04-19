@@ -86,17 +86,22 @@ class AdminLoader
 
         // output data for use on client-side
         // https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
-        wp_localize_script($this->prefix . '-admin', 'vue_wp_plugin_config_admin', [
+        $appVars = apply_filters('PluginPrefix/admin_app_vars', array(
             'rest'             => [
                 'endpoints' => [
                     'settings' => esc_url_raw(rest_url($settingController->get_endpoint())),
                 ],
                 'nonce'     => wp_create_nonce('wp_rest'),
             ],
+            'nonce'            => wp_create_nonce('wp_rest'),
             'settings'         => $settingController->get_settings_raw(),
             'settingStructure' => $settingController->get_settings_structure(true),
             'prefix'           => $this->prefix,
-        ]);
+            'adminUrl'         => admin_url( '/' ),
+            'pluginUrl'        => \PluginSpace\Main::$BASEURL
+        ));
+
+        wp_localize_script($this->prefix . '-admin', 'vue_wp_plugin_config_admin', $appVars);
 
         $content = '<div class="admin-app-wrapper"><div id="vue-admin-app"></div></div>';
         echo $content;

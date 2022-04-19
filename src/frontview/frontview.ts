@@ -4,7 +4,10 @@ import router from './router'
 import installShared from '../shared'
 
 const app = createApp(App)
-installShared(app)
-
 app.use(router)
-app.mount('#vue-frontview-app')
+
+// delay mount so we can load configuration
+setTimeout(() => {
+  installShared(app, 'vue_wp_plugin_config_frontview')
+  app.mount('#vue-frontend-app')
+}, 200)

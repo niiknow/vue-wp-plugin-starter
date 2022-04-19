@@ -3,13 +3,12 @@ import App from './App.vue'
 import router from './router'
 import { registerScrollSpy } from 'vue3-scroll-spy'
 import { variantJS, VariantJSConfiguration } from '@variantjs/vue'
-import installShared from '../shared'
+import installShared from '@src/shared'
 
 const app = createApp(App)
 
 app.use(router)
 registerScrollSpy(app)
-installShared(app)
 
 const configuration: VariantJSConfiguration = {
   TButton: {
@@ -34,4 +33,8 @@ const configuration: VariantJSConfiguration = {
 
 app.use(variantJS, configuration)
 
-app.mount('#vue-admin-app')
+// delay mount so we can load configuration
+setTimeout(() => {
+  installShared(app, 'vue_wp_plugin_config_admin')
+  app.mount('#vue-admin-app')
+}, 200)

@@ -62,17 +62,20 @@ class FrontendLoader
         if ($postfix === 'frontend') {
             // output data for use on client-side
             // https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
-            wp_localize_script($this->prefix . '-' . $postfix, 'vue_wp_plugin_config_' . $postfix, [
-                // todo: add config output here
-            ]);
+            $appVars = apply_filters('PluginPrefix/frontend_app_vars', array(
+                'pluginUrl'        => \PluginSpace\Main::$BASEURL
+            ));
+            wp_localize_script($this->prefix . '-' . $postfix, 'vue_wp_plugin_config_' . $postfix, $appVars);
 
             $content .= '<div id="vue-frontend-app" ></div>';
         } else if ($postfix === 'frontview') {
             // output data for use on client-side
             // https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
-            wp_localize_script($this->prefix . '-' . $postfix, 'vue_wp_plugin_config_' . $postfix, [
+            $appVars = apply_filters('PluginPrefix/frontview_app_vars', array(
                 'viewComponent' => esc_attr($a['view']),
-            ]);
+                'pluginUrl'        => \PluginSpace\Main::$BASEURL
+            ));
+            wp_localize_script($this->prefix . '-' . $postfix, 'vue_wp_plugin_config_' . $postfix, $appVars);
 
             $content .= '<div id="vue-frontview-app" ></div>';
         }

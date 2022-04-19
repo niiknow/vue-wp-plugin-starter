@@ -1,13 +1,15 @@
 <template>
   <div class="app-home">
     <section class="w-full text-center">
-      {{ msg }}
+      {{ msg }} <br />
+      Plugin Url: {{ getPluginUrl() }}
     </section>
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
+import { getPluginUrl } from '@src/shared/pluginHelpers'
 
 export default defineComponent({
   name: 'Home',
@@ -15,6 +17,9 @@ export default defineComponent({
     return {
       msg: 'Welcome to Your Vue.js Frontend App'
     }
+  },
+  methods: {
+    getPluginUrl: getPluginUrl
   }
 })
 </script>
