@@ -372,7 +372,7 @@ var vue_1 = __webpack_require__(/*! vue */ "vue");
 function getPluginUrl() {
   // @ts-ignore
   var pluginConfig = (0, vue_1.inject)('pluginConfig', {});
-  return pluginConfig.pluginUrl || '/';
+  return pluginConfig.pluginUrl || '';
 }
 
 exports.getPluginUrl = getPluginUrl;

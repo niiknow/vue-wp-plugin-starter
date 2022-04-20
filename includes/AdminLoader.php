@@ -98,7 +98,7 @@ class AdminLoader
             'settingStructure' => $settingController->get_settings_structure(true),
             'prefix'           => $this->prefix,
             'adminUrl'         => admin_url( '/' ),
-            'pluginUrl'        => \PluginSpace\Main::$BASEURL
+            'pluginUrl'        => rtrim(\PluginSpace\Main::$BASEURL, '/')
         ));
 
         wp_localize_script($this->prefix . '-admin', 'vue_wp_plugin_config_admin', $appVars);

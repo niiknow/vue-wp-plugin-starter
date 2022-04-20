@@ -4,5 +4,5 @@ export function getPluginUrl() {
   // @ts-ignore
   const pluginConfig: any = inject('pluginConfig', {})
 
-  return pluginConfig.pluginUrl || '/'
+  return pluginConfig.pluginUrl || ''
 }

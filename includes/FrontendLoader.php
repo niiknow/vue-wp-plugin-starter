@@ -63,7 +63,7 @@ class FrontendLoader
             // output data for use on client-side
             // https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
             $appVars = apply_filters('PluginPrefix/frontend_app_vars', array(
-                'pluginUrl'        => \PluginSpace\Main::$BASEURL
+                'pluginUrl'     => rtrim(\PluginSpace\Main::$BASEURL, '/')
             ));
             wp_localize_script($this->prefix . '-' . $postfix, 'vue_wp_plugin_config_' . $postfix, $appVars);
 
@@ -73,7 +73,7 @@ class FrontendLoader
             // https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
             $appVars = apply_filters('PluginPrefix/frontview_app_vars', array(
                 'viewComponent' => esc_attr($a['view']),
-                'pluginUrl'        => \PluginSpace\Main::$BASEURL
+                'pluginUrl'     => rtrim(\PluginSpace\Main::$BASEURL, '/')
             ));
             wp_localize_script($this->prefix . '-' . $postfix, 'vue_wp_plugin_config_' . $postfix, $appVars);
 
