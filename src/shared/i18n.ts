@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 import { createGettext } from 'vue3-gettext'
-import translations from '@src/../languages/translations.json'
+import translations from '~src/../languages/translations.json'
 
 /*
 Examples:

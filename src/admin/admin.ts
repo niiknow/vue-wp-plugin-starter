@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import { registerScrollSpy } from 'vue3-scroll-spy'
 import { variantJS, VariantJSConfiguration } from '@variantjs/vue'
-import installShared from '@src/shared'
+import installShared from '~src/shared'
 
 const app = createApp(App)
 

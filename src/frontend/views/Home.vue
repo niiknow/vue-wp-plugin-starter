@@ -9,7 +9,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { getPluginUrl } from '@src/shared/pluginHelpers'
+import { getPluginUrl } from '~src/shared/pluginHelpers'
 
 export default defineComponent({
   name: 'Home',

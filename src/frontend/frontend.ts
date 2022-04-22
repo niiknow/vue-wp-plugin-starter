@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import installShared from '@src/shared'
+import installShared from '~src/shared'
 
 const app = createApp(App)
 app.use(router)
