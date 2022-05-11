@@ -6,7 +6,7 @@
     </include>
   </coverage>
   <testsuites>
-    <testsuite name="Base_Plugin Tests">
+    <testsuite name="PluginTestSuite">
       <directory suffix="Tests.php">./tests/phpunit</directory>
     </testsuite>
   </testsuites>

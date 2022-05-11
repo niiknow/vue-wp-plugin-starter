@@ -2,16 +2,30 @@
   "type": "wordpress-plugin",
   "license": "GPL-2.0",
   "require": {
-    "php": "^7.4|^8.0"
+    "php": ">=7.4"
   },
   "require-dev": {
     "brain/monkey": "^2.6",
-    "phpunit/phpunit": "^9.5"
+    "dangoodman/composer-for-wordpress": "^2.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+    "humbug/php-scoper": "^0.17",
+    "phpunit/phpunit": "^9.5",
+    "sniccowp/php-scoper-wordpress-excludes": "^5.9"
   },
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
-    "sort-packages": true
+    "sort-packages": true,
+    "classmap-authoritative": false,
+    "classloader-suffix": "PluginSpace",
+    "autoloader-suffix": "PluginSpace",
+    "process-timeout": 0,
+    "vendor-dir": "vendor",
+    "platform-check": false,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "dangoodman/composer-for-wordpress": true
+    }
   },
   "autoload": {
     "psr-4": {
@@ -26,17 +40,32 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
-    "phpcs": "phpcs",
+    "phpcs": [
+      "phpcs -p -s includes/ public/ --extensions=php"
+    ],
     "phpcs:fix": "phpcbf -w",
+    "test": [
+      "npm run test",
+      "composer install",
+      "phpunit --testsuite PluginTestSuite"
+    ],
+    "coverage": [
+      "XDEBUG_MODE=coverage phpunit --testsuite PluginTestSuite --coverage-html tests/coverage"
+    ],
+    "phpstan": [
+      "phpstan analyze"
+    ],
+    "phpstan-clean": [
+      "phpstan clear-result-cache && phpstan analyze"
+    ],
+    "scope-dependencies": [
+      "@php vendor/bin/php-scoper add-prefix --config=.scoper.inc.php --force --quiet"
+    ],
     "app:package": [
       "npm run production",
-      "composer update",
-      "composer install --no-dev --optimize-autoloader",
-      "npm run make-archive",
-      "composer update"
-    ],
-    "test": [
-      "phpunit tests/*.php"
+      "@composer update --no-dev",
+      "@composer dump-autoload --classmap-authoritative --no-dev",
+      "npm run make-archive"
     ]
   }
 }
