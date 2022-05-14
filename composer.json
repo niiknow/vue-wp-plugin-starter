@@ -8,6 +8,7 @@
     "brain/monkey": "^2.6",
     "dangoodman/composer-for-wordpress": "^2.0",
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+    "friendsofphp/php-cs-fixer": "^3.8.0",
     "humbug/php-scoper": "^0.17",
     "phpunit/phpunit": "^9.5",
     "sniccowp/php-scoper-wordpress-excludes": "^5.9"
@@ -42,6 +43,7 @@
   "scripts": {
     "phpcs": "phpcs -s --report=full --report=source",
     "phpcs:fix": "phpcbf -w",
+    "format": "./vendor/bin/php-cs-fixer fix --using-cache=no",
     "test": [
       "npm run test",
       "composer install",

@@ -1,21 +1,21 @@
 <?php
+
 namespace PluginSpace;
 
 /**
- * Admin pages loader
- *
+ * Admin pages loader.
  */
 class AdminLoader
 {
     /**
-     * The application domain
+     * The application domain.
      *
      * @var string
      */
     protected $prefix;
 
     /**
-     * Initialize this class
+     * Initialize this class.
      */
     public function __construct($prefix)
     {
@@ -24,7 +24,7 @@ class AdminLoader
     }
 
     /**
-     * Register our menu page
+     * Register our menu page.
      *
      * @return void
      */
@@ -33,7 +33,7 @@ class AdminLoader
         global $submenu;
 
         $capability = 'manage_options';
-        $slug       = $this->prefix;
+        $slug = $this->prefix;
 
         $hook = add_menu_page(
             esc_html(__('PluginName', $this->prefix)),
@@ -45,14 +45,16 @@ class AdminLoader
         );
 
         if (current_user_can($capability)) {
-            add_submenu_page($slug,
+            add_submenu_page(
+                $slug,
                 esc_html(__('Dashboard', $this->prefix)),
                 esc_html(__('Dashboard', $this->prefix)),
                 $capability,
                 $slug,
                 [$this, 'plugin_page']
             );
-            add_submenu_page($slug,
+            add_submenu_page(
+                $slug,
                 esc_html(__('Settings', $this->prefix)),
                 esc_html(__('Settings', $this->prefix)),
                 $capability,
@@ -62,19 +64,19 @@ class AdminLoader
     }
 
     /**
-     * Load scripts and styles for the app
+     * Load scripts and styles for the app.
      *
      * @return void
      */
     public function enqueue_scripts()
     {
-        wp_enqueue_style($this->prefix . '-bootstrap');
-        wp_enqueue_style($this->prefix . '-admin');
-        wp_enqueue_script($this->prefix . '-admin');
+        wp_enqueue_style($this->prefix.'-bootstrap');
+        wp_enqueue_style($this->prefix.'-admin');
+        wp_enqueue_script($this->prefix.'-admin');
     }
 
     /**
-     * Render our admin page
+     * Render our admin page.
      *
      * @return void
      */
@@ -86,7 +88,7 @@ class AdminLoader
 
         // output data for use on client-side
         // https://wordpress.stackexchange.com/questions/344537/authenticating-with-rest-api
-        $appVars = apply_filters('PluginPrefix/admin_app_vars', array(
+        $appVars = apply_filters('PluginPrefix/admin_app_vars', [
             'rest'             => [
                 'endpoints' => [
                     'settings' => esc_url_raw(rest_url($settingController->get_endpoint())),
@@ -97,11 +99,11 @@ class AdminLoader
             'settings'         => $settingController->get_settings_raw(),
             'settingStructure' => $settingController->get_settings_structure(true),
             'prefix'           => $this->prefix,
-            'adminUrl'         => admin_url( '/' ),
-            'pluginUrl'        => rtrim(\PluginSpace\Main::$BASEURL, '/')
-        ));
+            'adminUrl'         => admin_url('/'),
+            'pluginUrl'        => rtrim(\PluginSpace\Main::$BASEURL, '/'),
+        ]);
 
-        wp_localize_script($this->prefix . '-admin', 'vue_wp_plugin_config_admin', $appVars);
+        wp_localize_script($this->prefix.'-admin', 'vue_wp_plugin_config_admin', $appVars);
 
         $content = '<div class="admin-app-wrapper"><div id="vue-admin-app"></div></div>';
         echo $content;

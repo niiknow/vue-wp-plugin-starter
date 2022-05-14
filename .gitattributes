@@ -21,7 +21,7 @@ public/*.html export-ignore
 .gitignore export-ignore
 .gitkeep export-ignore
 .gitattributes export-ignore
-.php*.cache export-ignore
+.*.cache export-ignore
 .python-version export-ignore
 .scrutinizer.yml export-ignore
 .stylelintrc export-ignore

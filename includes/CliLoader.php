@@ -1,14 +1,14 @@
 <?php
+
 namespace PluginSpace;
 
 /**
  * Cli commands loader.
- *
  */
 class CliLoader
 {
     /**
-     * Initialize this class
+     * Initialize this class.
      */
     public function __construct($prefix)
     {

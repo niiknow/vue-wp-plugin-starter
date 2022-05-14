@@ -1,13 +1,12 @@
 <?php
+
 namespace PluginSpace;
 
 /**
  * Implements example command.
- *
  */
 class ExampleCommand
 {
-
     /**
      * Prints a greeting.
      *

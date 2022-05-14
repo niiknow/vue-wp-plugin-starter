@@ -1,14 +1,14 @@
 <?php
+
 namespace PluginSpace;
 
 /**
  * Scripts and styles helper.
- *
  */
 class Assets
 {
     /**
-     * The application domain
+     * The application domain.
      *
      * @var string
      */
@@ -46,7 +46,7 @@ class Assets
     private function register_scripts($scripts)
     {
         foreach ($scripts as $handle => $script) {
-            $deps      = isset($script['deps']) ? $script['deps'] : false;
+            $deps = isset($script['deps']) ? $script['deps'] : false;
             $in_footer = isset($script['in_footer']) ? $script['in_footer'] : false;
 
             wp_register_script($handle, $script['src'], $deps, null, $in_footer);
@@ -54,7 +54,7 @@ class Assets
     }
 
     /**
-     * Register styles
+     * Register styles.
      *
      * @param  array $styles
      *
@@ -70,15 +70,15 @@ class Assets
     }
 
     /**
-     * Get all registered scripts
+     * Get all registered scripts.
      *
      * @return array
      */
     public function get_scripts()
     {
-        $assets_url = \PluginSpace\Main::$BASEURL . '/public';
-        $plugin_dir = \PluginSpace\Main::$PLUGINDIR . '/public';
-        $prefix     = ''; // defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.min' : '';
+        $assets_url = \PluginSpace\Main::$BASEURL.'/public';
+        $plugin_dir = \PluginSpace\Main::$PLUGINDIR.'/public';
+        $prefix = ''; // defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.min' : '';
 
         $scripts = [
             'vuejs'                      => [
@@ -89,28 +89,28 @@ class Assets
                 'src'       => 'https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.min.js',
                 'in_footer' => true,
             ],
-            $this->prefix . '-manifest'  => [
-                'src'       => $assets_url . $this->mix('/js/manifest.js'),
+            $this->prefix.'-manifest'  => [
+                'src'       => $assets_url.$this->mix('/js/manifest.js'),
                 'in_footer' => true,
             ],
-            $this->prefix . '-vendor'    => [
-                'src'       => $assets_url . $this->mix('/js/vendor.js'),
-                'deps'      => ['vuejs', $this->prefix . '-manifest'],
+            $this->prefix.'-vendor'    => [
+                'src'       => $assets_url.$this->mix('/js/vendor.js'),
+                'deps'      => ['vuejs', $this->prefix.'-manifest'],
                 'in_footer' => true,
             ],
-            $this->prefix . '-frontend'  => [
-                'src'       => $assets_url . $this->mix('/js/frontend.js'),
-                'deps'      => ['bootstrap', $this->prefix . '-vendor'],
+            $this->prefix.'-frontend'  => [
+                'src'       => $assets_url.$this->mix('/js/frontend.js'),
+                'deps'      => ['bootstrap', $this->prefix.'-vendor'],
                 'in_footer' => true,
             ],
-            $this->prefix . '-frontview' => [
-                'src'       => $assets_url . $this->mix('/js/frontview.js'),
-                'deps'      => ['bootstrap', $this->prefix . '-vendor'],
+            $this->prefix.'-frontview' => [
+                'src'       => $assets_url.$this->mix('/js/frontview.js'),
+                'deps'      => ['bootstrap', $this->prefix.'-vendor'],
                 'in_footer' => true,
             ],
-            $this->prefix . '-admin'     => [
-                'src'       => $assets_url . $this->mix('/js/admin.js'),
-                'deps'      => [$this->prefix . '-vendor'],
+            $this->prefix.'-admin'     => [
+                'src'       => $assets_url.$this->mix('/js/admin.js'),
+                'deps'      => [$this->prefix.'-vendor'],
                 'in_footer' => true,
             ],
         ];
@@ -125,20 +125,20 @@ class Assets
      */
     public function get_styles()
     {
-        $assets_url = \PluginSpace\Main::$BASEURL . '/public';
+        $assets_url = \PluginSpace\Main::$BASEURL.'/public';
 
         $styles = [
-            $this->prefix . '-bootstrap' => [
+            $this->prefix.'-bootstrap' => [
                 'src' => 'https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css',
             ],
-            $this->prefix . '-frontend'  => [
-                'src' => $assets_url . $this->mix('/css/frontend.css'),
+            $this->prefix.'-frontend'  => [
+                'src' => $assets_url.$this->mix('/css/frontend.css'),
             ],
-            $this->prefix . '-frontview' => [
-                'src' => $assets_url . $this->mix('/css/frontview.css'),
+            $this->prefix.'-frontview' => [
+                'src' => $assets_url.$this->mix('/css/frontview.css'),
             ],
-            $this->prefix . '-admin'     => [
-                'src' => $assets_url . $this->mix('/css/admin.css'),
+            $this->prefix.'-admin'     => [
+                'src' => $assets_url.$this->mix('/css/admin.css'),
             ],
         ];
 
@@ -157,14 +157,14 @@ class Assets
         static $manifests = [];
 
         if (empty($manifestDirectory)) {
-            $manifestDirectory = \PluginSpace\Main::$PLUGINDIR . '/public';
+            $manifestDirectory = \PluginSpace\Main::$PLUGINDIR.'/public';
         }
 
-        $manifestPath = $manifestDirectory . '/mix-manifest.json';
+        $manifestPath = $manifestDirectory.'/mix-manifest.json';
 
-        if (!isset($manifests[$manifestPath])) {
-            if (!is_file($manifestPath)) {
-                throw new \Exception('The Mix manifest does not exist in: ' . $manifestPath);
+        if (! isset($manifests[$manifestPath])) {
+            if (! is_file($manifestPath)) {
+                throw new \Exception('The Mix manifest does not exist in: '.$manifestPath);
             }
 
             $manifests[$manifestPath] = json_decode(file_get_contents($manifestPath), true);
@@ -172,7 +172,7 @@ class Assets
 
         $manifest = $manifests[$manifestPath];
 
-        if (!isset($manifest[$path])) {
+        if (! isset($manifest[$path])) {
             throw new \Exception("Unable to locate Mix file: {$path}.");
         }
 

@@ -67,5 +67,5 @@ Thumbs.db
 *.sql
 *.sqlite
 
-.phpunit.result.cache
+.*.cache
 

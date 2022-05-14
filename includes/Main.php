@@ -1,8 +1,9 @@
 <?php
+
 namespace PluginSpace;
 
 /**
- * Main class
+ * Main class.
  *
  * @class Main The class that holds initialize this plugin
  */
@@ -14,22 +15,20 @@ final class Main
      *
      * @var string
      */
-    const PREFIX = 'PluginPrefix';
+    public const PREFIX = 'PluginPrefix';
 
     /**
      * Holds various class instances.
      *
      * @var array
-     * @access  private
      * @since   1.0.0
      */
-    private $container = array();
+    private $container = [];
 
     /**
      * The single instance of Main.
      *
      * @var     object
-     * @access  private
      * @since   1.0.0
      */
     private static $_instance = null; //phpcs:ignore
@@ -38,7 +37,6 @@ final class Main
      * The version number.
      *
      * @var     string
-     * @access  public
      * @since   1.0.0
      */
     public $VERSION;
@@ -51,20 +49,20 @@ final class Main
     public static $PLUGINFILE = '';
 
     /**
-     * The base url, default '.'
+     * The base url, default '.'.
      *
      * @var string
      */
     public static $BASEURL = '.';
 
     /**
-     * The plugin dir, default to empty string
+     * The plugin dir, default to empty string.
      * @var string
      */
     public static $PLUGINDIR = '';
 
     /**
-     * Constructor for the Main class
+     * Constructor for the Main class.
      *
      * Sets up all the appropriate hooks and actions
      * within our plugin.
@@ -75,8 +73,8 @@ final class Main
     private function __construct($filepath, $version = '1.0.0')
     {
         self::$PLUGINFILE = $filepath;
-        self::$PLUGINDIR  = dirname($filepath);
-        $this->VERSION    = $version;
+        self::$PLUGINDIR = dirname($filepath);
+        $this->VERSION = $version;
     }
 
     /**
@@ -100,31 +98,29 @@ final class Main
 
     /**
      * Do stuff during plugin uninstall.
-     *
      */
     public static function uninstall_plugin()
     {
         flush_rewrite_rules();
 
-        $setting_key = self::PREFIX . '_settings';
-        $settings    = get_option($setting_key, []);
+        $setting_key = self::PREFIX.'_settings';
+        $settings = get_option($setting_key, []);
         (new \PluginSpace\Migrations())->cleanUp(self::PREFIX, $settings);
     }
 
     /**
      * Activate and initialize the plugin.
-     *
      */
     public function run()
     {
         // set base url from plugin file name
         self::$BASEURL = plugins_url('', self::$PLUGINFILE);
 
-        register_activation_hook(self::$PLUGINFILE, array($this, 'activate_plugin'));
-        register_deactivation_hook(self::$PLUGINFILE, array($this, 'deactivate_plugin'));
-        register_uninstall_hook(self::$PLUGINFILE, array(__CLASS__, 'uninstall_plugin'));
+        register_activation_hook(self::$PLUGINFILE, [$this, 'activate_plugin']);
+        register_deactivation_hook(self::$PLUGINFILE, [$this, 'deactivate_plugin']);
+        register_uninstall_hook(self::$PLUGINFILE, [__CLASS__, 'uninstall_plugin']);
 
-        add_action('plugins_loaded', array($this, 'plugins_loaded'));
+        add_action('plugins_loaded', [$this, 'plugins_loaded']);
 
         // setup cli
         if (defined('WP_CLI') && \WP_CLI) {
@@ -133,7 +129,7 @@ final class Main
 
         // this is to register an action link from the Plugin manager page to our settings page
         $plugin = plugin_basename(self::$PLUGINFILE);
-        add_filter("plugin_action_links_$plugin", array($this, 'register_settings_link'));
+        add_filter("plugin_action_links_$plugin", [$this, 'register_settings_link']);
 
         // Additional thing you can do: register post type, taxonomy, etc...
         return $this;
@@ -168,30 +164,28 @@ final class Main
     }
 
     /**
-     * Register hooks after all plugins are loaded
+     * Register hooks after all plugins are loaded.
      *
      * @return void
      */
     public function plugins_loaded()
     {
-        add_action('init', array($this, 'init_hook_handler'));
+        add_action('init', [$this, 'init_hook_handler']);
     }
 
     /**
      * Plugin activation function.
-     *
      */
     public function activate_plugin()
     {
         (new \PluginSpace\Migrations())->run(self::PREFIX, $this->VERSION);
 
         // set the current version to activate plugin
-        update_option(self::PREFIX . '_version', $this->VERSION);
+        update_option(self::PREFIX.'_version', $this->VERSION);
     }
 
     /**
      * Do stuff during plugin deactivation.
-     *
      */
     public function deactivate_plugin()
     {
@@ -200,7 +194,7 @@ final class Main
         // do stuff such as: shut off cron tasks, etc...
 
         // remove version number to deactivate plugin
-        delete_option(self::PREFIX . '_version');
+        delete_option(self::PREFIX.'_version');
     }
 
     /**
@@ -211,15 +205,15 @@ final class Main
      */
     public function register_settings_link($links)
     {
-        $settings_link = '<a href="admin.php?page=' . self::PREFIX . '#/settings">';
-        $settings_link .= esc_html(__('Settings', self::PREFIX)) . '</a>';
+        $settings_link = '<a href="admin.php?page='.self::PREFIX.'#/settings">';
+        $settings_link .= esc_html(__('Settings', self::PREFIX)).'</a>';
         array_unshift($links, $settings_link);
 
         return $links;
     }
 
     /**
-     * Handler for init_hook
+     * Handler for init_hook.
      *
      * @return void
      */
@@ -230,7 +224,7 @@ final class Main
 
         // initialize the various loader classes
         if ($this->is_request('admin')) {
-            $ctx                      = new \PluginSpace\AdminLoader(self::PREFIX);
+            $ctx = new \PluginSpace\AdminLoader(self::PREFIX);
             $this->container['admin'] = $ctx;
         }
 
@@ -253,8 +247,11 @@ final class Main
      */
     public function localization_setup()
     {
-        load_plugin_textdomain(self::PREFIX,
-            false, dirname(plugin_basename(self::PLUGINFILE)) . '/languages/');
+        load_plugin_textdomain(
+            self::PREFIX,
+            false,
+            dirname(plugin_basename(self::PLUGINFILE)).'/languages/'
+        );
     }
 
     /**
@@ -280,7 +277,7 @@ final class Main
                 return defined('DOING_CRON');
 
             case 'frontend':
-                return (!is_admin() || defined('DOING_AJAX')) && !defined('DOING_CRON');
+                return (! is_admin() || defined('DOING_AJAX')) && ! defined('DOING_CRON');
         }
     }
 
@@ -292,7 +289,6 @@ final class Main
     public function __clone()
     {
         _doing_it_wrong(__FUNCTION__, esc_html(__('Cloning of Main is forbidden')), esc_attr($this->VERSION));
-
     } // End __clone ()
 
     /**

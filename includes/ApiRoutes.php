@@ -1,14 +1,14 @@
 <?php
+
 namespace PluginSpace;
 
 /**
- * API routes loader
- *
+ * API routes loader.
  */
 class ApiRoutes
 {
     /**
-     * [__construct description]
+     * [__construct description].
      */
     public function __construct()
     {
@@ -16,7 +16,7 @@ class ApiRoutes
     }
 
     /**
-     * Register the API routes
+     * Register the API routes.
      *
      * Keep register_routes in API separate so it's easier to test and
      * we have a single place/method to load all API routes
