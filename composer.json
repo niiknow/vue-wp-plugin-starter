@@ -40,9 +40,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
-    "phpcs": [
-      "phpcs -p -s includes/ public/ --extensions=php"
-    ],
+    "phpcs": "phpcs -s --report=full --report=source",
     "phpcs:fix": "phpcbf -w",
     "test": [
       "npm run test",
