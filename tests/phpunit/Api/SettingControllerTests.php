@@ -2,8 +2,7 @@
 
 namespace Tests;
 
-use PluginSpace\Api;
-use \Brain\Monkey\Functions;
+use Brain\Monkey\Functions;
 
 defined('ABSPATH') or die();
 
@@ -19,14 +18,14 @@ class SettingControllerTests extends PluginTestCase
 
         $controller = new \PluginSpace\Api\SettingController();
 
-        $actual   = $this->accessNonPublicProperty($controller, 'namespace');
-        $expected = \PluginSpace\Main::PREFIX . '/v1';
+        $actual = $this->accessNonPublicProperty($controller, 'namespace');
+        $expected = \PluginSpace\Main::PREFIX.'/v1';
         $this->assertEquals($expected, $actual);
 
-        $actual   = $this->accessNonPublicProperty($controller, 'rest_base');
+        $actual = $this->accessNonPublicProperty($controller, 'rest_base');
         $expected = 'settings';
         $this->assertEquals($expected, $actual);
 
-        echo (json_encode($controller->get_settings_structure(true), true));
+        echo json_encode($controller->get_settings_structure(true), true);
     }
 }
