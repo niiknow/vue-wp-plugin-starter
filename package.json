@@ -25,6 +25,11 @@
     "last 2 versions",
     "ie >= 11"
   ],
+  "eslintIgnore": [
+    "**/node_modules/*",
+    "public/*",
+    "vendor/*"
+  ],
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
     "@popperjs/core": "^2.11.5",
