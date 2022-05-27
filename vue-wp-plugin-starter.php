@@ -7,7 +7,7 @@
  * Author: noogen
  * Author URI:
  * Requires at least: 5.6
- * Tested up to: 5.8.3
+ * Tested up to: 6.0.0
  * Requires PHP: 7.4
  *
  * Text Domain: PluginPrefix
