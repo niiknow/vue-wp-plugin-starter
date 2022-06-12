@@ -21,8 +21,8 @@
     "compile-vue-translation": "vue-gettext-compile"
   },
   "engines" : {
-    "npm" : ">=8.0.0",
-    "node" : ">=17.0.0"
+    "npm" : "^8.0.0",
+    "node" : "^17.0.0"
   },
   "browserslist": [
     "> 1%",
