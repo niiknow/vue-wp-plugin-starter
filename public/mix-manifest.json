@@ -1,10 +1,10 @@
 {
-    "/js/admin.js": "/js/admin.js?id=159b9f2e2886b83ca2412b177467018e",
-    "/js/frontend.js": "/js/frontend.js?id=bd6342f15765348ab0274fed3c70f2bb",
-    "/js/frontview.js": "/js/frontview.js?id=852ea4bd60ac70c55bcc6460ba70bc62",
+    "/js/admin.js": "/js/admin.js?id=d8ff7a1b49f756b3499aa28b861bb68f",
+    "/js/frontend.js": "/js/frontend.js?id=4534e4926b19419f4a1b3ece4157b147",
+    "/js/frontview.js": "/js/frontview.js?id=38a2e2d7db49c46b1a11abcaf45615a1",
     "/js/manifest.js": "/js/manifest.js?id=69e5b2a3126a09845ad36097b2c10459",
-    "/css/frontview.css": "/css/frontview.css?id=ee6ae1fdee66bc058c6617a7f9d10d91",
-    "/css/frontend.css": "/css/frontend.css?id=ee6ae1fdee66bc058c6617a7f9d10d91",
-    "/css/admin.css": "/css/admin.css?id=7c602821de144f020402b2c31019d253",
-    "/js/vendor.js": "/js/vendor.js?id=072e730fd6baa2870b36db8b7486eba2"
+    "/css/frontview.css": "/css/frontview.css?id=e241044a3550f54edd9914ab13957d19",
+    "/css/frontend.css": "/css/frontend.css?id=e241044a3550f54edd9914ab13957d19",
+    "/css/admin.css": "/css/admin.css?id=f5bc4b6f986060c119906735b4cf9252",
+    "/js/vendor.js": "/js/vendor.js?id=73d7220801c34825ef53e29700581bea"
 }
