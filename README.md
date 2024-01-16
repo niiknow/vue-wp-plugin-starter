@@ -9,12 +9,16 @@ Preview online: https://niiknow.github.io/vue-wp-plugin-starter/
 
 **Scaffolding**
 
-As this is a template project, simply click the "Use this template" button and run:
+As this is a template project, simply pick from "Use this template" dropdown.
+
+To initialize your plugin, run:
+
 ```shell
+npm install
 npm run make-plugin
 ```
 
-Use `composer install` to install php dependencies, and use `npm install` for front-end dependencies.
+Use `composer install` to install php dependencies.
 
 To build `wp-your-plugin-name.zip` for deployment:
 ```shell
@@ -140,4 +144,4 @@ vue-wp-plugin-starter/
 ... more TBD
 
 # LICENSE
-GPLv2 or later, see LICENSE file.
+This can be MIT; but since we want to be compatible with Wordpress, we'll have to go with GPLv2 or later.  Also see LICENSE file.
