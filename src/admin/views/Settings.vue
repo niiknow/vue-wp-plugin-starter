@@ -111,6 +111,7 @@ import { defineComponent, reactive, computed, ref, nextTick, toRaw } from 'vue'
 import { TToggle, TButton, TRichSelect, TTextarea, TInput, TSelect } from '@variantjs/vue'
 import { VAceEditor } from 'vue3-ace-editor'
 import ColorInput from 'vue-color-input'
+import axios from '~src/shared/axios'
 import ace from 'ace-builds'
 ace.config.set(
   'basePath',
@@ -151,7 +152,7 @@ export default defineComponent({
     async doSave() {
       try {
         let data = toRaw(this.settings)
-        const rst = await this.axios.post(this.endpoints.settings, data)
+        const rst = await axios.post(this.endpoints.settings, data)
         // const rst = { success: true }
         if (rst.status == 200) {
           this.$swal.fire({
