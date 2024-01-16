@@ -9,5 +9,5 @@ app.use(router)
 // delay mount so we can load configuration
 setTimeout(() => {
   installShared(app, 'vue_wp_plugin_config_frontview')
-  app.mount('#vue-frontend-app')
+  app.mount('#vue-frontview-app')
 }, 200)

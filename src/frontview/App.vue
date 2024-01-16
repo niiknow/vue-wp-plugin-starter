@@ -13,10 +13,20 @@ export default defineComponent({
   setup () {
     const hasLoaded = ref(false)
     const componentName = ref('')
+    const myComponents : any = {
+      'Home': defineAsyncComponent(() => import(
+        /* webpackChunkName: 'Home' */
+        './views/Home.vue'
+      )),
+      'Comp2': defineAsyncComponent(() => import(
+        /* webpackChunkName: 'Comp2' */
+        './views/Comp2.vue'
+      ))
+    }
 
     const comp = computed(() => {
       // compare two objects
-      return defineAsyncComponent(() => import(`./views/${componentName.value}.vue`))
+      return myComponents[componentName.value]
     })
 
     return {

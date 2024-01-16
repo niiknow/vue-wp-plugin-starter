@@ -21,7 +21,7 @@
     "compile-vue-translation": "vue-gettext-compile"
   },
   "engines": {
-    "node": ">=17"
+    "node": ">=18"
   },
   "browserslist": [
     "> 1%",
@@ -41,6 +41,7 @@
     "@types/jest": "^27.5.1",
     "@variantjs/core": "^0.0.90",
     "@variantjs/vue": "^0.0.22",
+    "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-plugin-unit-jest": "^5.0.8",
     "@vue/compiler-sfc": "^3.4.14",
     "@vue/test-utils": "^2.4.3",
